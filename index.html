@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>oondraa | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --g1: #0a0a14;
+            --g2: #0d0d1f;
+            --glass: rgba(255,255,255,0.04);
+            --glass-border: rgba(255,255,255,0.09);
+            --glass-hover: rgba(255,255,255,0.07);
+            --accent: #7c6df5;
+            --accent2: #4fc3f7;
+            --accent3: #f06292;
+            --text: #e8e8f0;
+            --muted: rgba(232,232,240,0.45);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Mono', monospace;
+            background: var(--g1);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── Animated mesh background ── */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.18;
+            animation: drift linear infinite;
+        }
+
+        .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -150px; animation-duration: 25s; }
+        .orb-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -100px; right: -100px; animation-duration: 30s; animation-direction: reverse; }
+        .orb-3 { width: 350px; height: 350px; background: var(--accent3); top: 40%; left: 50%; animation-duration: 20s; animation-delay: -10s; }
+
+        @keyframes drift {
+            0%   { transform: translate(0, 0) scale(1); }
+            33%  { transform: translate(60px, -40px) scale(1.05); }
+            66%  { transform: translate(-40px, 60px) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        /* noise grain */
+        .bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        /* ── Layout ── */
+        .page {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        /* ── Glass card ── */
+        .glass {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px) saturate(140%);
+            -webkit-backdrop-filter: blur(20px) saturate(140%);
+            border-radius: 20px;
+            transition: background 0.3s, border-color 0.3s, transform 0.3s;
+        }
+
+        .glass:hover {
+            background: var(--glass-hover);
+            border-color: rgba(255,255,255,0.14);
+        }
+
+        /* ── Header ── */
+        header {
+            text-align: center;
+            padding: 56px 40px 48px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(124,109,245,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .avatar-ring {
+            width: 72px; height: 72px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            padding: 2px;
+            animation: spin-slow 8s linear infinite;
+        }
+
+        @keyframes spin-slow { to { transform: rotate(360deg); } }
+
+        .avatar-inner {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: var(--g1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            animation: spin-slow 8s linear infinite reverse;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            margin-top: 10px;
+            font-size: 0.78rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .tagline span { color: var(--accent2); }
+
+        .hero-desc {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ── Section grid ── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        /* ── Section ── */
+        .section { padding: 28px 28px 24px; margin-bottom: 20px; }
+        .section.no-mb { margin-bottom: 0; }
+
+        .section-label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, rgba(124,109,245,0.4), transparent);
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
+
+        /* ── Skills ── */
+        .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+
+        .skill {
+            font-size: 0.75rem;
+            padding: 5px 13px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+            letter-spacing: 0.04em;
+            transition: background 0.2s, border-color 0.2s, color 0.2s;
+        }
+
+        .skill:hover {
+            background: rgba(124,109,245,0.18);
+            border-color: rgba(124,109,245,0.5);
+            color: #fff;
+        }
+
+        .skill.accent { border-color: rgba(124,109,245,0.35); color: #c4bbff; }
+        .skill.cyan   { border-color: rgba(79,195,247,0.35);  color: #a8e6fc; }
+        .skill.pink   { border-color: rgba(240,98,146,0.35);  color: #f8b4cc; }
+
+        /* ── Icon row ── */
+        .icon-row img { height: 32px; margin-right: 4px; margin-top: 10px; }
+
+        /* ── Projects ── */
+        .project {
+            position: relative;
+            padding: 18px 20px;
+            border-radius: 14px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.06);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .project:last-child { margin-bottom: 0; }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            border-radius: 3px 0 0 3px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent2));
+        }
+
+        .project:hover {
+            border-color: rgba(124,109,245,0.3);
+            transform: translateX(4px);
+        }
+
+        .project h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .project p { font-size: 0.8rem; }
+
+        .project-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 100px;
+            background: rgba(124,109,245,0.15);
+            border: 1px solid rgba(124,109,245,0.3);
+            color: #c4bbff;
+            margin-bottom: 8px;
+        }
+
+        /* ── Connect ── */
+        .connect-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 100px;
+            background: linear-gradient(135deg, rgba(124,109,245,0.2), rgba(79,195,247,0.1));
+            border: 1px solid rgba(124,109,245,0.35);
+            color: #c4bbff;
+            text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            transition: background 0.3s, border-color 0.3s, transform 0.2s;
+            margin-top: 14px;
+        }
+
+        .connect-link:hover {
+            background: linear-gradient(135deg, rgba(124,109,245,0.35), rgba(79,195,247,0.2));
+            border-color: rgba(124,109,245,0.6);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .connect-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: rgba(232,232,240,0.2);
+            margin-top: 48px;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Scroll progress bar ── */
+        #progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 2px;
+            width: 0%;
+            background: linear-gradient(to right, var(--accent), var(--accent2), var(--accent3));
+            z-index: 999;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        /* ── Scroll reveal base states ── */
+        .reveal {
+            opacity: 0;
+            transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
+                        transform 0.75s cubic-bezier(0.22,1,0.36,1),
+                        filter 0.75s ease;
+        }
+
+        .reveal.from-bottom  { transform: translateY(48px); }
+        .reveal.from-left    { transform: translateX(-48px); }
+        .reveal.from-right   { transform: translateX(48px); }
+        .reveal.scale-in     { transform: scale(0.92); filter: blur(4px); }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translate(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* ── Stagger children ── */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
+                        transform 0.5s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .stagger-children.visible > *:nth-child(1)  { transition-delay: 0.05s; }
+        .stagger-children.visible > *:nth-child(2)  { transition-delay: 0.12s; }
+        .stagger-children.visible > *:nth-child(3)  { transition-delay: 0.19s; }
+        .stagger-children.visible > *:nth-child(4)  { transition-delay: 0.26s; }
+        .stagger-children.visible > *:nth-child(5)  { transition-delay: 0.33s; }
+        .stagger-children.visible > *:nth-child(6)  { transition-delay: 0.40s; }
+        .stagger-children.visible > *:nth-child(7)  { transition-delay: 0.47s; }
+        .stagger-children.visible > *:nth-child(8)  { transition-delay: 0.54s; }
+        .stagger-children.visible > *:nth-child(9)  { transition-delay: 0.61s; }
+        .stagger-children.visible > *:nth-child(10) { transition-delay: 0.68s; }
+        .stagger-children.visible > *:nth-child(n)  { transition-delay: 0.75s; }
+
+        .stagger-children.visible > * {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ── Header entrance (immediate) ── */
+        header {
+            opacity: 0;
+            transform: translateY(32px);
+            animation: heroIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
+        }
+
+        @keyframes heroIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Glow pulse on visible cards ── */
+        .glass.reveal.visible {
+            box-shadow: 0 0 0 0 transparent;
+            animation: glowPop 0.6s ease forwards;
+        }
+
+        @keyframes glowPop {
+            0%   { box-shadow: 0 0 0 0 rgba(124,109,245,0); }
+            40%  { box-shadow: 0 0 24px 2px rgba(124,109,245,0.18); }
+            100% { box-shadow: 0 0 0 0 rgba(124,109,245,0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<div class="page">
+
+    <!-- Header -->
+    <header class="glass fade-up">
+        <div class="avatar-ring">
+            <div class="avatar-inner">👾</div>
+        </div>
+        <h1>oondraa</h1>
+        <p class="tagline">Hardware &amp; <span>AI</span> Explorer</p>
+        <p class="hero-desc">Building with Python, ESP32, and custom LLMs — always chasing the next interesting problem.</p>
+    </header>
+
+    <!-- About + Stack grid -->
+    <div class="grid-2">
+        <div class="glass section reveal from-left">
+            <div class="section-label">about</div>
+            <h2>Who I Am</h2>
+            <p>Deep in the intersection of hardware and software. From high-performance PCs and 3D printing to training my own language models.</p>
+        </div>
+
+        <div class="glass section reveal from-right">
+            <div class="section-label">stack</div>
+            <h2>Languages</h2>
+            <div class="icon-row">
+                <img src="https://skillicons.dev/icons?i=python,html,css,js,cpp" alt="Languages" />
+            </div>
+            <h2 style="margin-top:16px">Tools</h2>
+            <div class="icon-row">
+                <img src="https://skillicons.dev/icons?i=nodejs,linux,vscode,arduino,git" alt="Tools" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="glass section reveal scale-in">
+        <div class="section-label">expertise</div>
+        <h2>Skills & Interests</h2>
+        <div class="skills-wrap stagger-children">
+            <span class="skill accent">Machine Learning</span>
+            <span class="skill accent">LLM Fine-tuning</span>
+            <span class="skill cyan">ESP32 / Arduino</span>
+            <span class="skill cyan">Home Automation</span>
+            <span class="skill pink">3D Printing</span>
+            <span class="skill pink">PC Building</span>
+            <span class="skill">Python</span>
+            <span class="skill">C++</span>
+            <span class="skill">Linux</span>
+            <span class="skill">Node.js</span>
+            <span class="skill">Git</span>
+        </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="glass section reveal from-bottom">
+        <div class="section-label">work</div>
+        <h2>Projects</h2>
+
+        <div class="project stagger-children" style="display:block">
+            <div class="project-badge">AI / ML</div>
+            <h3>Custom LLM</h3>
+            <p>Training and fine-tuning a large language model for specialized tasks and domain-specific inference.</p>
+        </div>
+
+        <div class="project stagger-children" style="display:block">
+            <div class="project-badge">Hardware</div>
+            <h3>ESP32 / Arduino</h3>
+            <p>Home automation and hardware tinkering — sensors, actuators, custom firmware.</p>
+        </div>
+    </div>
+
+    <!-- Connect -->
+    <div class="glass section reveal from-bottom">
+        <div class="section-label">connect</div>
+        <h2>Find Me Online</h2>
+        <p>All my code lives on GitHub.</p>
+        <a class="connect-link" href="https://github.com/oondraa" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.4.6.1.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.8 1.3 3.48.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.3c0 .32.22.69.83.57C20.57 22.3 24 17.8 24 12.5 24 5.87 18.63.5 12 .5z"/></svg>
+            github.com/oondraa
+        </a>
+    </div>
+
+    <footer class="reveal from-bottom">© 2026 oondraa</footer>
+</div>
+
+<div id="progress"></div>
+
+<script>
+    // ── Scroll progress bar ──
+    const bar = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+        const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = pct + '%';
+    }, { passive: true });
+
+    // ── Parallax orbs ──
+    const orbs = document.querySelectorAll('.orb');
+    window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        orbs[0].style.transform = `translateY(${y * 0.12}px)`;
+        orbs[1].style.transform = `translateY(${-y * 0.08}px)`;
+        orbs[2].style.transform = `translateY(${y * 0.06}px)`;
+    }, { passive: true });
+
+    // ── IntersectionObserver reveal ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const staggerEls = document.querySelectorAll('.stagger-children');
+
+    const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                revealObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    const staggerObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                staggerObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    revealEls.forEach(el => revealObs.observe(el));
+    staggerEls.forEach(el => staggerObs.observe(el));
+</script>
+
+</body>
+</html>
