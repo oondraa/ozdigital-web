@@ -1,538 +1,445 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="html-root">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>oondraa | Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>oondraa | Portfolio</title>
+<meta name="description" content="Portfolio of Ondra (oondraa) — student at the Secondary School of Applied Cybernetics, building software as OZLAB. Projects: Spotify Live Wrapped, ADC — Access Date Changer, and more.">
+<meta name="author" content="Ondřej Zajíček (oondraa)">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oondraa.pages.dev/">
+<link rel="alternate" hreflang="en" href="https://oondraa.pages.dev/">
+<link rel="alternate" hreflang="cs" href="https://oondraa.pages.dev/">
+<link rel="alternate" hreflang="x-default" href="https://oondraa.pages.dev/">
 
-        :root {
-            --g1: #0a0a14;
-            --g2: #0d0d1f;
-            --glass: rgba(255,255,255,0.04);
-            --glass-border: rgba(255,255,255,0.09);
-            --glass-hover: rgba(255,255,255,0.07);
-            --accent: #7c6df5;
-            --accent2: #4fc3f7;
-            --accent3: #f06292;
-            --text: #e8e8f0;
-            --muted: rgba(232,232,240,0.45);
-        }
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="oondraa | Portfolio">
+<meta property="og:title" content="oondraa | Portfolio">
+<meta property="og:description" content="Portfolio of Ondra (oondraa) — student at the Secondary School of Applied Cybernetics, building software as OZLAB.">
+<meta property="og:url" content="https://oondraa.pages.dev/">
+<meta property="og:image" content="https://oondraa.pages.dev/assets/slw-overview.jpg">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="oondraa | Portfolio">
+<meta name="twitter:description" content="Portfolio of Ondra (oondraa) — student at the Secondary School of Applied Cybernetics, building software as OZLAB.">
+<meta name="twitter:image" content="https://oondraa.pages.dev/assets/slw-overview.jpg">
 
-        html { scroll-behavior: smooth; }
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#F2F2F7">
+<link rel="llms-txt" href="/llm.md" title="Notes for LLMs and AI agents">
 
-        body {
-            font-family: 'DM Mono', monospace;
-            background: var(--g1);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ondřej Zajíček",
+  "alternateName": "oondraa",
+  "url": "https://oondraa.pages.dev/",
+  "sameAs": [
+    "https://github.com/oondraa",
+    "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/"
+  ],
+  "jobTitle": "Student & Software Developer",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "OZLAB"
+  },
+  "knowsAbout": ["Python", "HTML", "CSS", "JavaScript", "C++", "C#", "Lua", "Node.js", "Linux"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "oondraa | Portfolio",
+  "url": "https://oondraa.pages.dev/",
+  "inLanguage": ["en", "cs"]
+}
+</script>
 
-        /* ── Animated mesh background ── */
-        .bg {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.18;
-            animation: drift linear infinite;
-        }
-
-        .orb-1 { width: 600px; height: 600px; background: var(--accent); top: -200px; left: -150px; animation-duration: 25s; }
-        .orb-2 { width: 500px; height: 500px; background: var(--accent2); bottom: -100px; right: -100px; animation-duration: 30s; animation-direction: reverse; }
-        .orb-3 { width: 350px; height: 350px; background: var(--accent3); top: 40%; left: 50%; animation-duration: 20s; animation-delay: -10s; }
-
-        @keyframes drift {
-            0%   { transform: translate(0, 0) scale(1); }
-            33%  { transform: translate(60px, -40px) scale(1.05); }
-            66%  { transform: translate(-40px, 60px) scale(0.95); }
-            100% { transform: translate(0, 0) scale(1); }
-        }
-
-        /* noise grain */
-        .bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-        }
-
-        /* ── Layout ── */
-        .page {
-            position: relative;
-            z-index: 1;
-            max-width: 860px;
-            margin: 0 auto;
-            padding: 60px 24px 80px;
-        }
-
-        /* ── Glass card ── */
-        .glass {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(20px) saturate(140%);
-            -webkit-backdrop-filter: blur(20px) saturate(140%);
-            border-radius: 20px;
-            transition: background 0.3s, border-color 0.3s, transform 0.3s;
-        }
-
-        .glass:hover {
-            background: var(--glass-hover);
-            border-color: rgba(255,255,255,0.14);
-        }
-
-        /* ── Header ── */
-        header {
-            text-align: center;
-            padding: 56px 40px 48px;
-            margin-bottom: 24px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(124,109,245,0.12) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .avatar-ring {
-            width: 72px; height: 72px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            padding: 2px;
-            animation: spin-slow 8s linear infinite;
-        }
-
-        @keyframes spin-slow { to { transform: rotate(360deg); } }
-
-        .avatar-inner {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            background: var(--g1);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.8rem;
-            animation: spin-slow 8s linear infinite reverse;
-        }
-
-        h1 {
-            font-family: 'Syne', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.4rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            margin-top: 10px;
-            font-size: 0.78rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--muted);
-        }
-
-        .tagline span { color: var(--accent2); }
-
-        .hero-desc {
-            margin-top: 16px;
-            font-size: 0.9rem;
-            color: var(--muted);
-            max-width: 420px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ── Section grid ── */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
-
-        /* ── Section ── */
-        .section { padding: 28px 28px 24px; margin-bottom: 20px; }
-        .section.no-mb { margin-bottom: 0; }
-
-        .section-label {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, rgba(124,109,245,0.4), transparent);
-        }
-
-        h2 {
-            font-family: 'Syne', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-
-        p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; }
-
-        /* ── Skills ── */
-        .skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-
-        .skill {
-            font-size: 0.75rem;
-            padding: 5px 13px;
-            border-radius: 100px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text);
-            letter-spacing: 0.04em;
-            transition: background 0.2s, border-color 0.2s, color 0.2s;
-        }
-
-        .skill:hover {
-            background: rgba(124,109,245,0.18);
-            border-color: rgba(124,109,245,0.5);
-            color: #fff;
-        }
-
-        .skill.accent { border-color: rgba(124,109,245,0.35); color: #c4bbff; }
-        .skill.cyan   { border-color: rgba(79,195,247,0.35);  color: #a8e6fc; }
-        .skill.pink   { border-color: rgba(240,98,146,0.35);  color: #f8b4cc; }
-
-        /* ── Icon row ── */
-        .icon-row img { height: 32px; margin-right: 4px; margin-top: 10px; }
-
-        /* ── Projects ── */
-        .project {
-            position: relative;
-            padding: 18px 20px;
-            border-radius: 14px;
-            background: rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.06);
-            margin-bottom: 12px;
-            overflow: hidden;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-
-        .project:last-child { margin-bottom: 0; }
-
-        .project::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            width: 3px;
-            border-radius: 3px 0 0 3px;
-            background: linear-gradient(to bottom, var(--accent), var(--accent2));
-        }
-
-        .project:hover {
-            border-color: rgba(124,109,245,0.3);
-            transform: translateX(4px);
-        }
-
-        .project h3 {
-            font-family: 'Syne', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 5px;
-        }
-
-        .project p { font-size: 0.8rem; }
-
-        .project-badge {
-            display: inline-block;
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 100px;
-            background: rgba(124,109,245,0.15);
-            border: 1px solid rgba(124,109,245,0.3);
-            color: #c4bbff;
-            margin-bottom: 8px;
-        }
-
-        /* ── Connect ── */
-        .connect-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 22px;
-            border-radius: 100px;
-            background: linear-gradient(135deg, rgba(124,109,245,0.2), rgba(79,195,247,0.1));
-            border: 1px solid rgba(124,109,245,0.35);
-            color: #c4bbff;
-            text-decoration: none;
-            font-size: 0.82rem;
-            letter-spacing: 0.04em;
-            transition: background 0.3s, border-color 0.3s, transform 0.2s;
-            margin-top: 14px;
-        }
-
-        .connect-link:hover {
-            background: linear-gradient(135deg, rgba(124,109,245,0.35), rgba(79,195,247,0.2));
-            border-color: rgba(124,109,245,0.6);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .connect-link svg { width: 16px; height: 16px; fill: currentColor; }
-
-        /* ── Footer ── */
-        footer {
-            text-align: center;
-            font-size: 0.7rem;
-            color: rgba(232,232,240,0.2);
-            margin-top: 48px;
-            letter-spacing: 0.1em;
-        }
-
-        /* ── Scroll progress bar ── */
-        #progress {
-            position: fixed;
-            top: 0; left: 0;
-            height: 2px;
-            width: 0%;
-            background: linear-gradient(to right, var(--accent), var(--accent2), var(--accent3));
-            z-index: 999;
-            transition: width 0.1s linear;
-            box-shadow: 0 0 8px var(--accent);
-        }
-
-        /* ── Scroll reveal base states ── */
-        .reveal {
-            opacity: 0;
-            transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1),
-                        transform 0.75s cubic-bezier(0.22,1,0.36,1),
-                        filter 0.75s ease;
-        }
-
-        .reveal.from-bottom  { transform: translateY(48px); }
-        .reveal.from-left    { transform: translateX(-48px); }
-        .reveal.from-right   { transform: translateX(48px); }
-        .reveal.scale-in     { transform: scale(0.92); filter: blur(4px); }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translate(0) scale(1);
-            filter: blur(0);
-        }
-
-        /* ── Stagger children ── */
-        .stagger-children > * {
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1),
-                        transform 0.5s cubic-bezier(0.22,1,0.36,1);
-        }
-
-        .stagger-children.visible > *:nth-child(1)  { transition-delay: 0.05s; }
-        .stagger-children.visible > *:nth-child(2)  { transition-delay: 0.12s; }
-        .stagger-children.visible > *:nth-child(3)  { transition-delay: 0.19s; }
-        .stagger-children.visible > *:nth-child(4)  { transition-delay: 0.26s; }
-        .stagger-children.visible > *:nth-child(5)  { transition-delay: 0.33s; }
-        .stagger-children.visible > *:nth-child(6)  { transition-delay: 0.40s; }
-        .stagger-children.visible > *:nth-child(7)  { transition-delay: 0.47s; }
-        .stagger-children.visible > *:nth-child(8)  { transition-delay: 0.54s; }
-        .stagger-children.visible > *:nth-child(9)  { transition-delay: 0.61s; }
-        .stagger-children.visible > *:nth-child(10) { transition-delay: 0.68s; }
-        .stagger-children.visible > *:nth-child(n)  { transition-delay: 0.75s; }
-
-        .stagger-children.visible > * {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        /* ── Header entrance (immediate) ── */
-        header {
-            opacity: 0;
-            transform: translateY(32px);
-            animation: heroIn 0.9s cubic-bezier(0.22,1,0.36,1) 0.1s forwards;
-        }
-
-        @keyframes heroIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ── Glow pulse on visible cards ── */
-        .glass.reveal.visible {
-            box-shadow: 0 0 0 0 transparent;
-            animation: glowPop 0.6s ease forwards;
-        }
-
-        @keyframes glowPop {
-            0%   { box-shadow: 0 0 0 0 rgba(124,109,245,0); }
-            40%  { box-shadow: 0 0 24px 2px rgba(124,109,245,0.18); }
-            100% { box-shadow: 0 0 0 0 rgba(124,109,245,0); }
-        }
-    </style>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F2F2F7; -webkit-font-smoothing: antialiased; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, sans-serif; color: #000; min-height: 100vh; padding-bottom: 56px; }
+  a { color: #0088FF; text-decoration: none; }
+  a:hover { color: #006FD6; }
+  button { font-family: inherit; }
+  [hidden] { display: none !important; }
+  @keyframes scrimIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes sheetIn { from { opacity: 0; transform: scale(0.94) translateY(12px); } to { opacity: 1; transform: none; } }
+  .sheet-scroll { scrollbar-width: thin; scrollbar-color: rgba(60,60,67,0.35) transparent; }
+  .sheet-scroll::-webkit-scrollbar { width: 10px; }
+  .sheet-scroll::-webkit-scrollbar-track { background: transparent; }
+  .sheet-scroll::-webkit-scrollbar-thumb { background: rgba(60,60,67,0.35); border-radius: 100px; border: 3px solid transparent; background-clip: content-box; }
+  .sheet-scroll::-webkit-scrollbar-thumb:hover { background: rgba(60,60,67,0.55); background-clip: content-box; }
+  .row-link:hover, .row-hover:hover { background: rgba(116,116,128,0.08); }
+  .btn-primary:hover { background: #006FD6 !important; }
+  .btn-github:hover { background: #000000 !important; }
+  .btn-linkedin:hover { background: #08528F !important; }
+  .lang-btn:hover { background: rgba(116,116,128,0.2) !important; }
+</style>
 </head>
 <body>
 
-<div class="bg">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
-</div>
+  <div style="position: sticky; top: 0; z-index: 20; background: rgba(242,242,247,0.18); backdrop-filter: saturate(240%) blur(72px); -webkit-backdrop-filter: saturate(240%) blur(72px); border-bottom: 0.5px solid rgba(0,0,0,0.06); box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 1px 12px rgba(0,0,0,0.04);">
+    <div style="max-width: 720px; margin: 0 auto; padding: 0 20px; height: 50px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <span style="font-size: 17px; font-weight: 600; letter-spacing: -0.02em; white-space: nowrap;">oondraa · OZLAB</span>
+      <nav style="display: flex; align-items: center; gap: 18px;">
+        <button id="lang-toggle" class="lang-btn" aria-label="Switch language" style="width: 32px; height: 32px; border: none; border-radius: 100px; background: rgba(116,116,128,0.12); color: #0088FF; font-size: 12px; font-weight: 700; letter-spacing: 0.02em; cursor: pointer; flex-shrink: 0;">CZ</button>
+        <a href="#about" style="font-size: 15px; color: #0088FF;" data-i18n="tNavAbout">About</a>
+        <a href="#projects" style="font-size: 15px; color: #0088FF;" data-i18n="tNavProjects">Projects</a>
+        <a href="#connect" style="font-size: 15px; color: #0088FF;" data-i18n="tNavConnect">Connect</a>
+      </nav>
+    </div>
+  </div>
 
-<div class="page">
+  <div style="max-width: 720px; margin: 0 auto; padding: 0 20px;">
 
-    <!-- Header -->
-    <header class="glass fade-up">
-        <div class="avatar-ring">
-            <div class="avatar-inner">👾</div>
-        </div>
-        <h1>oondraa</h1>
-        <p class="tagline">Hardware &amp; <span>AI</span> Explorer</p>
-        <p class="hero-desc">Building with Python, ESP32, and custom LLMs — always chasing the next interesting problem.</p>
+    <header id="about" style="padding: 44px 0 20px; display: flex; flex-direction: column; gap: 18px;">
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <h1 style="margin: 0; font-size: 40px; line-height: 1.06; font-weight: 700; letter-spacing: -0.028em;" data-i18n="tAboutTitle">About me</h1>
+        <p style="margin: 0; font-size: 17px; line-height: 1.5; color: rgba(60,60,67,0.6); max-width: 30em;">
+          <span data-i18n="tAbout1">I'm Ondra, a student at the Secondary School of Applied Cybernetics.</span><br />
+          <span data-i18n="tAbout2">Czech, so I work in both Czech and English.</span><br />
+          <span data-i18n="tAbout3">You'll find me as oondraa, or under OZLAB, a fictional company. For now.</span>
+          <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; vertical-align: -3px; fill: none; stroke: rgba(60,60,67,0.6); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5V12l3 2"></path></svg>
+        </p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 2px;">
+        <a href="https://github.com/oondraa" target="_blank" rel="noopener" class="btn-github" style="display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 18px; border-radius: 100px; background: #1C1C1E; color: #FFFFFF; font-size: 15px; font-weight: 600; white-space: nowrap;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.4.6.1.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.8 1.3 3.48.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.3c0 .32.22.69.83.57C20.57 22.3 24 17.8 24 12.5 24 5.87 18.63.5 12 .5z"></path></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener" class="btn-linkedin" style="display: inline-flex; align-items: center; gap: 7px; height: 40px; padding: 0 18px; border-radius: 100px; background: #0A66C2; color: #FFFFFF; font-size: 15px; font-weight: 600; white-space: nowrap;">
+          <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>
+          LinkedIn
+        </a>
+      </div>
     </header>
 
-    <!-- About + Stack grid -->
-    <div class="grid-2">
-        <div class="glass section reveal from-left">
-            <div class="section-label">about</div>
-            <h2>Who I Am</h2>
-            <p>Deep in the intersection of hardware and software. From high-performance PCs and 3D printing to training my own language models.</p>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px;">
+      <div style="background: #FFFFFF; border-radius: 26px; padding: 22px;">
+        <h2 style="margin: 0 0 8px; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;" data-i18n="tFreeTitle">Let's build something</h2>
+        <p style="margin: 0; font-size: 17px; line-height: 1.52; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tFree">Freelancer, open to anything: rebuilds of old websites, brand new startups, for individuals, sole traders and companies. Usually through a DOPP contract, other arrangements possible, but that one works best.</p>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 16px;">
+          <a href="chat.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 20px; border-radius: 100px; background: #0088FF; color: #FFFFFF; font-size: 17px; font-weight: 600; white-space: nowrap;">
+            <svg viewBox="0 0 24 24" style="width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;"><path d="M20 12a8 8 0 01-8 8H7l-3 2v-4.5A8 8 0 0112 4a8 8 0 018 8z"></path></svg>
+            <span data-i18n="tLiveChat">Live Chat</span>
+          </a>
+          <a href="mailto:o.zajicek12@gmail.com" style="font-size: 17px; color: #0088FF; white-space: nowrap;">o.zajicek12@gmail.com</a>
         </div>
+      </div>
+    </div>
 
-        <div class="glass section reveal from-right">
-            <div class="section-label">stack</div>
-            <h2>Languages</h2>
-            <div class="icon-row">
-                <img src="https://skillicons.dev/icons?i=python,html,css,js,cpp" alt="Languages" />
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px;">
+      <div style="padding: 0 18px; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(60,60,67,0.6);" id="projects" data-i18n="tSecProjects">My projects</div>
+      <div style="background: #FFFFFF; border-radius: 26px; overflow: hidden;">
+        <a href="https://oondraa.github.io/spotify-live-wrapped/" data-open-sheet="slw" class="row-link" style="display: block; padding: 22px; color: #000; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <img src="assets/spotify-live-wrapped-icon.png" alt="Spotify Live Wrapped" width="52" height="52" style="width: 52px; height: 52px; border-radius: 13px; flex-shrink: 0; display: block;" />
+            <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
+              <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSlwKicker">Self-hosted project for audio enthusiasts</span>
+              <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em;">Spotify Live Wrapped</span>
+              <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.72);" data-i18n="tSlwSub">Your wrapped every day not just in December</span>
             </div>
-            <h2 style="margin-top:16px">Tools</h2>
-            <div class="icon-row">
-                <img src="https://skillicons.dev/icons?i=nodejs,linux,vscode,arduino,git" alt="Tools" />
-            </div>
-        </div>
-    </div>
-
-    <!-- Skills -->
-    <div class="glass section reveal scale-in">
-        <div class="section-label">expertise</div>
-        <h2>Skills & Interests</h2>
-        <div class="skills-wrap stagger-children">
-            <span class="skill accent">Machine Learning</span>
-            <span class="skill accent">LLM Fine-tuning</span>
-            <span class="skill cyan">ESP32 / Arduino</span>
-            <span class="skill cyan">Home Automation</span>
-            <span class="skill pink">3D Printing</span>
-            <span class="skill pink">PC Building</span>
-            <span class="skill">Python</span>
-            <span class="skill">C++</span>
-            <span class="skill">Linux</span>
-            <span class="skill">Node.js</span>
-            <span class="skill">Git</span>
-        </div>
-    </div>
-
-    <!-- Projects -->
-    <div class="glass section reveal from-bottom">
-        <div class="section-label">work</div>
-        <h2>Projects</h2>
-
-        <div class="project stagger-children" style="display:block">
-            <div class="project-badge">AI / ML</div>
-            <h3>Custom LLM</h3>
-            <p>Training and fine-tuning a large language model for specialized tasks and domain-specific inference.</p>
-        </div>
-
-        <div class="project stagger-children" style="display:block">
-            <div class="project-badge">Hardware</div>
-            <h3>ESP32 / Arduino</h3>
-            <p>Home automation and hardware tinkering — sensors, actuators, custom firmware.</p>
-        </div>
-    </div>
-
-    <!-- Connect -->
-    <div class="glass section reveal from-bottom">
-        <div class="section-label">connect</div>
-        <h2>Find Me Online</h2>
-        <p>All my code lives on GitHub.</p>
-        <a class="connect-link" href="https://github.com/oondraa" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.4.6.1.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.8 1.3 3.48.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.3c0 .32.22.69.83.57C20.57 22.3 24 17.8 24 12.5 24 5.87 18.63.5 12 .5z"/></svg>
-            github.com/oondraa
+            <svg viewBox="0 0 24 24" style="width: 19px; height: 19px; flex-shrink: 0; fill: none; stroke: rgba(60,60,67,0.3); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;"><path d="M9 4l8 8-8 8"></path></svg>
+          </div>
+          <video src="assets/slw-promo.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 16px; margin-top: 18px; background: #000; display: block;"></video>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px;">
+            <img src="assets/slw-overview.jpg" alt="Overview" style="width: 100%; height: 96px; object-fit: cover; object-position: top; border-radius: 12px; display: block;" />
+            <img src="assets/slw-top-rankings.jpg" alt="Top rankings" style="width: 100%; height: 96px; object-fit: cover; object-position: top; border-radius: 12px; display: block;" />
+            <img src="assets/slw-charts.jpg" alt="Charts and trends" style="width: 100%; height: 96px; object-fit: cover; object-position: top; border-radius: 12px; display: block;" />
+          </div>
         </a>
+        <div style="height: 0.5px; background: rgba(0,0,0,0.12); margin-left: 74px;"></div>
+        <a href="https://github.com/oondraa/Access-date-changer" data-open-sheet="adc" class="row-link" style="display: block; padding: 22px; color: #000; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <div style="width: 52px; height: 52px; border-radius: 13px; background: rgb(0,136,255); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #FFFFFF; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;"><ellipse cx="12" cy="6.5" rx="7" ry="3"></ellipse><path d="M5 6.5v11c0 1.66 3.13 3 7 3s7-1.34 7-3v-11"></path><path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3"></path></svg>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
+              <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tAdcKicker">Windows app</span>
+              <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em;">ADC — Access Date Changer</span>
+              <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tAdcSub">Standalone utility for editing timestamps of Access databases (.accdb, .mdb).</span>
+            </div>
+            <svg viewBox="0 0 24 24" style="width: 19px; height: 19px; flex-shrink: 0; fill: none; stroke: rgba(60,60,67,0.3); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;"><path d="M9 4l8 8-8 8"></path></svg>
+          </div>
+          <video src="assets/adc-promo.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 16px; margin-top: 18px; background: #000; display: block;"></video>
+        </a>
+        <div style="height: 0.5px; background: rgba(0,0,0,0.12); margin-left: 74px;"></div>
+        <div style="display: flex; align-items: center; gap: 18px; padding: 22px;">
+          <div style="width: 52px; height: 52px; border-radius: 13px; background: rgba(116,116,128,0.08); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 26px; height: 26px; fill: none; stroke: rgba(60,60,67,0.45); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;"><rect x="7" y="7" width="10" height="10" rx="2"></rect><path d="M12 3v4M12 17v4M3 12h4M17 12h4M9 3v1M15 3v1M9 20v1M15 20v1M3 9h1M3 15h1M20 9h1M20 15h1"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSoon">Coming soon</span>
+            <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em;">ADEA — <span style="display: inline-block; width: 168px; height: 1.3em; border-radius: 4px; background: rgb(0,0,0); vertical-align: -0.28em;"></span></span>
+            <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tAdea">A hardware project built around microcontrollers. Details when it's ready.</span>
+          </div>
+        </div>
+        <div style="height: 0.5px; background: rgba(0,0,0,0.12); margin-left: 74px;"></div>
+        <div style="display: flex; align-items: center; gap: 18px; padding: 22px;">
+          <div style="width: 52px; height: 52px; border-radius: 13px; background: rgba(116,116,128,0.08); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 26px; height: 26px; fill: none; stroke: rgba(60,60,67,0.45); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;"><path d="M4 8V5.5A1.5 1.5 0 015.5 4H8M16 4h2.5A1.5 1.5 0 0120 5.5V8M20 16v2.5a1.5 1.5 0 01-1.5 1.5H16M8 20H5.5A1.5 1.5 0 014 18.5V16"></path><path d="M7.5 12h9"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSoon">Coming soon</span>
+            <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em;">OCR — <span style="display: inline-block; width: 168px; height: 1.3em; border-radius: 4px; background: rgb(0,0,0); vertical-align: -0.28em;"></span></span>
+            <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tOcr">Turning anything into text, readable or not.</span>
+          </div>
+        </div>
+        <div style="height: 0.5px; background: rgba(0,0,0,0.12); margin-left: 74px;"></div>
+        <div style="display: flex; align-items: center; gap: 18px; padding: 22px;">
+          <div style="width: 52px; height: 52px; border-radius: 13px; background: rgba(116,116,128,0.08); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 26px; height: 26px; fill: none; stroke: rgba(60,60,67,0.45); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;"><rect x="3" y="4" width="18" height="13" rx="2.5"></rect><path d="M7 8.5l2.5 2L7 13M12 13h4.5"></path><path d="M8 20h8"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSoon">Coming soon</span>
+            <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em;">Linux connector — <span style="display: inline-block; width: 168px; height: 1.3em; border-radius: 4px; background: rgb(0,0,0); vertical-align: -0.28em;"></span></span>
+            <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tLinux">A connector that makes Linux easier to actually use.</span>
+          </div>
+        </div>
+        <div style="height: 0.5px; background: rgba(0,0,0,0.12); margin-left: 74px;"></div>
+        <div style="display: flex; align-items: center; gap: 18px; padding: 22px;">
+          <div style="width: 52px; height: 52px; border-radius: 13px; background: rgba(116,116,128,0.08); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 26px; height: 26px; fill: none; stroke: rgba(60,60,67,0.45); stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;"><circle cx="12" cy="12" r="3"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0;">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSoon">Coming soon</span>
+            <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.015em;">General emotional connector for LLMs — <span style="display: inline-block; width: 168px; height: 1.3em; border-radius: 4px; background: rgb(0,0,0); vertical-align: -0.28em;"></span></span>
+            <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tLlm">My biggest project. If it works, it rewrites how people think about LLMs. The principle is translating human neurology and chemistry into ones and zeros.</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <footer class="reveal from-bottom">© 2026 oondraa</footer>
-</div>
+    <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 30px;">
+      <div style="padding: 0 18px; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSecStack">Stack</div>
+      <div style="background: #FFFFFF; border-radius: 26px; overflow: hidden;">
+        <div style="padding: 16px 22px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-bottom: 0.5px solid rgba(0,0,0,0.12);">
+          <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+            <span style="font-size: 17px; font-weight: 500;" data-i18n="tLangs">Languages</span>
+            <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.6); text-wrap: pretty;" data-i18n="tLangsList">Learning and occasionally using: Python, HTML, CSS, JavaScript, C++, C#, Lua</span>
+          </div>
+          <img src="https://skillicons.dev/icons?i=python,html,css,js,cpp,cs,lua" alt="Python, HTML, CSS, JavaScript, C++, C#, Lua" style="height: 30px; display: block;" loading="lazy" />
+        </div>
+        <div style="padding: 16px 22px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+          <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+            <span style="font-size: 17px; font-weight: 500;" data-i18n="tTools">Tools</span>
+            <span style="font-size: 15px; line-height: 1.47; color: rgba(60,60,67,0.6); text-wrap: pretty;" data-i18n="tToolsList">Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve</span>
+          </div>
+          <img src="https://skillicons.dev/icons?i=nodejs,linux,vscode,idea,arduino,git" alt="Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git" style="height: 30px; display: block;" loading="lazy" />
+        </div>
+      </div>
+    </div>
 
-<div id="progress"></div>
+    <div id="connect" style="display: flex; flex-direction: column; gap: 8px;">
+      <div style="padding: 0 18px; font-size: 13px; letter-spacing: 0.02em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSecConnect">Connect</div>
+      <div style="background: #FFFFFF; border-radius: 26px; overflow: hidden;">
+        <a href="https://github.com/oondraa" target="_blank" rel="noopener" class="row-hover" style="display: flex; align-items: center; gap: 14px; padding: 16px 22px; color: #000;">
+          <div style="width: 38px; height: 38px; border-radius: 10px; background: #1C1C1E; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 21px; height: 21px; fill: #FFFFFF;"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.2 11.4.6.1.82-.26.82-.58v-2.03c-3.34.73-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.08-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.06 1.82 2.8 1.3 3.48.99.1-.77.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 013-.4c1.02 0 2.04.13 3 .4 2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.3c0 .32.22.69.83.57C20.57 22.3 24 17.8 24 12.5 24 5.87 18.63.5 12 .5z"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;">
+            <span style="font-size: 17px; font-weight: 500;">GitHub</span>
+            <span style="font-size: 15px; color: rgba(60,60,67,0.6);" data-i18n="tGh">All my projects lives here</span>
+          </div>
+          <svg viewBox="0 0 24 24" style="width: 19px; height: 19px; flex-shrink: 0; fill: none; stroke: rgba(60,60,67,0.3); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;"><path d="M9 4l8 8-8 8"></path></svg>
+        </a>
+        <div style="height: 0.5px; background: rgba(0,0,0,0.12); margin-left: 74px;"></div>
+        <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener" class="row-hover" style="display: flex; align-items: center; gap: 14px; padding: 16px 22px; color: #000;">
+          <div style="width: 38px; height: 38px; border-radius: 10px; background: #0A66C2; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: #FFFFFF;"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;">
+            <span style="font-size: 17px; font-weight: 500;">LinkedIn</span>
+            <span style="font-size: 15px; color: rgba(60,60,67,0.6);" data-i18n="tLi">Let's get in touch</span>
+          </div>
+          <svg viewBox="0 0 24 24" style="width: 19px; height: 19px; flex-shrink: 0; fill: none; stroke: rgba(60,60,67,0.3); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;"><path d="M9 4l8 8-8 8"></path></svg>
+        </a>
+      </div>
+    </div>
+
+    <div id="slw-scrim" hidden style="position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; padding: 24px; animation: scrimIn 0.2s ease-out;">
+      <div class="sheet-scroll" style="width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; background: #FFFFFF; border-radius: 26px; animation: sheetIn 0.28s cubic-bezier(0.32,0.72,0,1); box-shadow: 0 24px 60px rgba(0,0,0,0.22);">
+        <div style="padding: 22px 22px 0; display: flex; align-items: flex-start; gap: 14px;">
+          <img src="assets/spotify-live-wrapped-icon.png" alt="Spotify Live Wrapped" style="width: 52px; height: 52px; border-radius: 13px; flex-shrink: 0; display: block;" />
+          <div style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tSlwKicker">Self-hosted project for audio enthusiasts</span>
+            <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">Spotify Live Wrapped</h2>
+          </div>
+          <button data-close-sheet="slw" aria-label="Close" style="width: 30px; height: 30px; flex-shrink: 0; border: none; border-radius: 100px; background: rgba(116,116,128,0.12); cursor: pointer; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 15px; height: 15px; fill: none; stroke: rgba(60,60,67,0.6); stroke-width: 2.8; stroke-linecap: round;"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+          </button>
+        </div>
+        <div style="padding: 16px 22px 0; display: flex; flex-wrap: wrap; gap: 10px;">
+          <a href="https://oondraa.github.io/spotify-live-wrapped/" target="_blank" rel="noopener" class="btn-primary" style="display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 20px; border-radius: 100px; background: #0088FF; color: #FFFFFF; font-size: 17px; font-weight: 600; white-space: nowrap;">
+            <span data-i18n="tOpen">Open project</span>
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;"><path d="M9 4l8 8-8 8"></path></svg>
+          </a>
+        </div>
+        <div style="padding: 18px 22px 0; display: flex; flex-direction: column; gap: 10px;">
+          <video src="assets/slw-promo.mp4" autoplay muted loop playsinline controls style="width: 100%; border-radius: 16px; background: #000; display: block;"></video>
+          <img src="assets/slw-overview.jpg" alt="Overview — total time, plays, unique tracks, insights" style="width: 100%; border-radius: 16px; display: block;" />
+          <img src="assets/slw-top-rankings.jpg" alt="Top rankings — artists, tracks, albums" style="width: 100%; border-radius: 16px; display: block;" />
+          <img src="assets/slw-charts.jpg" alt="Charts &amp; trends — activity during the day, week and month" style="width: 100%; border-radius: 16px; display: block;" />
+        </div>
+        <div style="padding: 18px 22px 0;">
+          <p style="margin: 0; font-size: 17px; line-height: 1.52; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tSlwLong">Your wrapped every day not just in December. Connects to your Spotify account and keeps your listening stats (top tracks, artists and genres) up to date all year, running on your own machine.</p>
+        </div>
+        <div style="height: 22px;"></div>
+      </div>
+    </div>
+
+    <div id="adc-scrim" hidden style="position: fixed; inset: 0; z-index: 90; background: rgba(0,0,0,0.4); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; padding: 24px; animation: scrimIn 0.2s ease-out;">
+      <div class="sheet-scroll" style="width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto; background: #FFFFFF; border-radius: 26px; animation: sheetIn 0.28s cubic-bezier(0.32,0.72,0,1); box-shadow: 0 24px 60px rgba(0,0,0,0.22);">
+        <div style="padding: 22px 22px 0; display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 52px; height: 52px; border-radius: 13px; background: rgb(0,136,255); flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 28px; height: 28px; fill: none; stroke: #FFFFFF; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round;"><ellipse cx="12" cy="6.5" rx="7" ry="3"></ellipse><path d="M5 6.5v11c0 1.66 3.13 3 7 3s7-1.34 7-3v-11"></path><path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3"></path></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;">
+            <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: rgba(60,60,67,0.6);" data-i18n="tAdcKicker">Windows app</span>
+            <h2 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.02em;">ADC — Access Date Changer</h2>
+          </div>
+          <button data-close-sheet="adc" aria-label="Close" style="width: 30px; height: 30px; flex-shrink: 0; border: none; border-radius: 100px; background: rgba(116,116,128,0.12); cursor: pointer; display: flex; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" style="width: 15px; height: 15px; fill: none; stroke: rgba(60,60,67,0.6); stroke-width: 2.8; stroke-linecap: round;"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+          </button>
+        </div>
+        <div style="padding: 16px 22px 0; display: flex; flex-wrap: wrap; gap: 10px;">
+          <a href="https://github.com/oondraa/Access-date-changer" target="_blank" rel="noopener" class="btn-primary" style="display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 20px; border-radius: 100px; background: #0088FF; color: #FFFFFF; font-size: 17px; font-weight: 600; white-space: nowrap;">
+            <span data-i18n="tOpen">Open project</span>
+            <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round;"><path d="M9 4l8 8-8 8"></path></svg>
+          </a>
+        </div>
+        <div style="padding: 18px 22px 0; display: flex; flex-direction: column; gap: 10px;">
+          <video src="assets/adc-promo.mp4" autoplay muted loop playsinline controls style="width: 100%; border-radius: 16px; background: #000; display: block;"></video>
+          <img src="assets/adc-app.png" alt="ACCESS DATE CHANGER — editor of database timestamps" style="width: 100%; border-radius: 16px; display: block;" />
+        </div>
+        <div style="padding: 18px 22px 0;">
+          <p style="margin: 0; font-size: 17px; line-height: 1.52; color: rgba(60,60,67,0.72); text-wrap: pretty;" data-i18n="tAdcLong">A lightweight, standalone Windows utility designed to modify system timestamps (Creation, Modification, and Access dates) for Microsoft Access databases (.accdb and .mdb).</p>
+        </div>
+        <div style="height: 22px;"></div>
+      </div>
+    </div>
+
+    <footer style="margin-top: 40px; padding-top: 18px; border-top: 0.5px solid rgba(0,0,0,0.12); font-size: 13px; color: rgba(60,60,67,0.45);">© <span id="year">2026</span> oondraa · © <span id="year2">2026</span> OZLAB</footer>
+
+  </div>
 
 <script>
-    // ── Scroll progress bar ──
-    const bar = document.getElementById('progress');
-    window.addEventListener('scroll', () => {
-        const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-        bar.style.width = pct + '%';
-    }, { passive: true });
+(function () {
+  var EN = {
+    tNavAbout: "About", tNavProjects: "Projects", tNavConnect: "Connect",
+    tAboutTitle: "About me",
+    tAbout1: "I'm Ondra, a student at the Secondary School of Applied Cybernetics.",
+    tAbout2: "Czech, so I work in both Czech and English.",
+    tAbout3: "You'll find me as oondraa, or under OZLAB, a fictional company. For now.",
+    tLiveChat: "Live Chat",
+    tSecProjects: "My projects", tSecStack: "Stack", tSecConnect: "Connect",
+    tSlwKicker: "Self-hosted project for audio enthusiasts",
+    tSlwSub: "Your wrapped every day not just in December",
+    tSlwLong: "Your wrapped every day not just in December. Connects to your Spotify account and keeps your listening stats (top tracks, artists and genres) up to date all year, running on your own machine.",
+    tAdcKicker: "Windows app",
+    tAdcSub: "Standalone utility for editing timestamps of Access databases (.accdb, .mdb).",
+    tAdcLong: "A lightweight, standalone Windows utility designed to modify system timestamps (Creation, Modification, and Access dates) for Microsoft Access databases (.accdb and .mdb).",
+    tSoon: "Coming soon",
+    tAdea: "A hardware project built around microcontrollers. Details when it's ready.",
+    tOcr: "Turning anything into text, readable or not.",
+    tLinux: "A connector that makes Linux easier to actually use.",
+    tLlm: "My biggest project. If it works, it rewrites how people think about LLMs. The principle is translating human neurology and chemistry into ones and zeros.",
+    tLangs: "Languages",
+    tLangsList: "Learning and occasionally using: Python, HTML, CSS, JavaScript, C++, C#, Lua",
+    tTools: "Tools",
+    tToolsList: "Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve",
+    tFreeTitle: "Let's build something",
+    tFree: "Freelancer, open to anything: rebuilds of old websites, brand new startups, for individuals, sole traders and companies. Usually through a DOPP contract, other arrangements possible, but that one works best.",
+    tOpen: "Open project",
+    tGh: "All my projects lives here", tLi: "Let's get in touch"
+  };
+  var CZ = {
+    tNavAbout: "O mně", tNavProjects: "Projekty", tNavConnect: "Kontakt",
+    tAboutTitle: "O mně",
+    tAbout1: "Jsem Ondra, student Střední školy aplikované kybernetiky.",
+    tAbout2: "Jsem Čech, takže pracuju česky i anglicky.",
+    tAbout3: "Najdeš mě jako oondraa, nebo pod OZLAB, fiktivní firmou. Zatím.",
+    tLiveChat: "Live Chat",
+    tSecProjects: "Moje projekty", tSecStack: "Stack", tSecConnect: "Kontakt",
+    tSlwKicker: "Self-hosted projekt pro audio nadšence",
+    tSlwSub: "Tvoje wrapped každý den, ne jen v prosinci",
+    tSlwLong: "Tvoje wrapped každý den, ne jen v prosinci. Připojí se k tvému Spotify účtu a drží statistiky poslechu (nejhranější skladby, interpreti a žánry) aktuální celý rok, běží na tvém vlastním stroji.",
+    tAdcKicker: "Windows aplikace",
+    tAdcSub: "Samostatná utilita pro úpravu časových razítek databází Accessu (.accdb, .mdb).",
+    tAdcLong: "Lehká samostatná Windows utilita pro úpravu systémových časových razítek (vytvoření, úprava a otevření) u databází Microsoft Access (.accdb a .mdb).",
+    tSoon: "Připravuje se",
+    tAdea: "Hardwarový projekt postavený na mikrokontrolerech. Detaily, až to bude hotové.",
+    tOcr: "Převede na text cokoliv, čitelné i nečitelné.",
+    tLinux: "Konektor, díky kterému je Linux použitelnější.",
+    tLlm: "Můj největší projekt. Jestli bude fungovat, přepíše to, jak se o LLM přemýšlí. Princip je přenesení lidské neurologie a chemie do jedniček a nul.",
+    tLangs: "Jazyky",
+    tLangsList: "Učím se a občas používám: Python, HTML, CSS, JavaScript, C++, C#, Lua",
+    tTools: "Nástroje",
+    tToolsList: "Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve",
+    tFreeTitle: "Postavme něco spolu",
+    tFree: "Freelancer, otevřený čemukoliv: od předělání starých webů po nové startupy, pro soukromníky, OSVČ i firmy. Většinou přes DPP, jiný způsob je možný, ale tenhle je nejlepší.",
+    tOpen: "Otevřít projekt",
+    tGh: "Všechny moje projekty jsou tady", tLi: "Pojďme se spojit"
+  };
 
-    // ── Parallax orbs ──
-    const orbs = document.querySelectorAll('.orb');
-    window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        orbs[0].style.transform = `translateY(${y * 0.12}px)`;
-        orbs[1].style.transform = `translateY(${-y * 0.08}px)`;
-        orbs[2].style.transform = `translateY(${y * 0.06}px)`;
-    }, { passive: true });
+  var langBtn = document.getElementById("lang-toggle");
+  var htmlRoot = document.getElementById("html-root");
+  var cz = localStorage.getItem("lang") === "cz";
 
-    // ── IntersectionObserver reveal ──
-    const revealEls = document.querySelectorAll('.reveal');
-    const staggerEls = document.querySelectorAll('.stagger-children');
+  function applyLang() {
+    var dict = cz ? CZ : EN;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key]) el.textContent = dict[key];
+    });
+    langBtn.textContent = cz ? "EN" : "CZ";
+    htmlRoot.setAttribute("lang", cz ? "cs" : "en");
+  }
+  langBtn.addEventListener("click", function () {
+    cz = !cz;
+    localStorage.setItem("lang", cz ? "cz" : "en");
+    applyLang();
+  });
+  applyLang();
 
-    const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                revealObs.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.12 });
+  function openSheet(name) { document.getElementById(name + "-scrim").hidden = false; }
+  function closeSheet(name) { document.getElementById(name + "-scrim").hidden = true; }
 
-    const staggerObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                staggerObs.unobserve(e.target);
-            }
-        });
-    }, { threshold: 0.1 });
+  document.querySelectorAll("[data-open-sheet]").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      openSheet(el.getAttribute("data-open-sheet"));
+    });
+  });
+  document.querySelectorAll("[data-close-sheet]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      closeSheet(el.getAttribute("data-close-sheet"));
+    });
+  });
+  ["slw", "adc"].forEach(function (name) {
+    var scrim = document.getElementById(name + "-scrim");
+    scrim.addEventListener("click", function (e) {
+      if (e.target === scrim) closeSheet(name);
+    });
+    scrim.firstElementChild.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeSheet("slw"); closeSheet("adc"); }
+  });
 
-    revealEls.forEach(el => revealObs.observe(el));
-    staggerEls.forEach(el => staggerObs.observe(el));
+  var year = new Date().getFullYear();
+  document.getElementById("year").textContent = year;
+  document.getElementById("year2").textContent = year;
+})();
 </script>
-
 </body>
 </html>

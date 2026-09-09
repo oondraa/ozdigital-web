@@ -1,0 +1,9 @@
+# oondraa.pages.dev
+User-agent: *
+Allow: /
+
+Sitemap: https://oondraa.pages.dev/sitemap.xml
+
+# Machine-readable summary of this site for LLMs / AI agents:
+# https://oondraa.pages.dev/llm.md
+# https://oondraa.pages.dev/llms.txt
