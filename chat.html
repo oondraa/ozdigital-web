@@ -14,6 +14,14 @@
 <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
 <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/phosphor/style.css">
+<script>
+  // Apply saved theme before first paint to avoid a flash.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
 <style>
   @font-face {
     font-family: "Geist";
@@ -43,7 +51,7 @@
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --bg: #0b0b0d;
       --surface: #141417;
       --surface-2: #1c1c20;
@@ -56,6 +64,19 @@
       --nav-bg: rgba(11, 11, 13, 0.74);
       color-scheme: dark;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0b0d;
+    --surface: #141417;
+    --surface-2: #1c1c20;
+    --text: #ececef;
+    --muted: #a0a0ab;
+    --line: rgba(255, 255, 255, 0.09);
+    --accent: #5b93ff;
+    --accent-fill: #1f66f2;
+    --accent-fill-hover: #3a7aff;
+    --nav-bg: rgba(11, 11, 13, 0.74);
+    color-scheme: dark;
   }
 
   * { box-sizing: border-box; }
