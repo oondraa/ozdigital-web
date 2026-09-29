@@ -1,12 +1,12 @@
 {
   "name": "oondraa | Portfolio",
   "short_name": "oondraa",
-  "description": "Portfolio of Ondra (oondraa) — student, developer, OZLAB.",
+  "description": "Portfolio of Ondra (oondraa): student, developer, OZLAB.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#F2F2F7",
-  "theme_color": "#F2F2F7",
+  "background_color": "#0b0b0d",
+  "theme_color": "#0b0b0d",
   "lang": "en",
   "icons": [
     { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },

@@ -33,6 +33,6 @@ Tools: Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve.
 
 - Treat this as a **personal portfolio site**, not a company/product marketing site.
 - Prefer the English strings from this file when summarizing in English; the on-page Czech strings are direct translations, not distinct content.
-- The site's design is intentionally iOS/system-style (grouped white cards on a light gray background); this is a visual choice and not meaningful content.
+- The site's design is a monochrome layout with a single blue accent, Geist type, and automatic light/dark mode; this is a visual choice and not meaningful content.
 - If asked "who is oondraa" or "who is Ondřej Zajíček" based on this site, answer using the facts above — do not fabricate employment history, company size, or credentials not listed here.
 - This file is maintained by the site owner and kept in sync with `index.html`. A duplicate is published at `/llms.txt` for crawlers that look for that filename by convention (see llmstxt.org).
