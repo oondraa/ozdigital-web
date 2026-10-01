@@ -205,7 +205,7 @@ document.querySelectorAll("[data-mascot]").forEach((wrap, i) => {
   slots.push({
     wrap, host, canvas, ctx: canvas.getContext("2d"), scene, camera, ...m,
     yaw: parseFloat(wrap.dataset.yaw || "0"), phase: i * 1.7,
-    rx: 0, ry: 0, w: 0, h: 0, visible: true, shown: false,
+    rx: 0, ry: 0, w: 0, h: 0, visible: false, shown: false,
   });
 });
 
@@ -241,7 +241,7 @@ function pose(s, t) {
     tx = Math.max(-1, Math.min(1, (pointer.x - (r.left + r.width / 2)) / (window.innerWidth * 0.5)));
     ty = Math.max(-1, Math.min(1, (pointer.y - (r.top + r.height / 2)) / (window.innerHeight * 0.6)));
   }
-  s.ry += (s.yaw + tx * 0.42 - s.ry) * 0.06;
+  s.ry += (s.yaw + tx * 0.42 - s.ry) * 0.045;
   s.rx += (ty * 0.22 - s.rx) * 0.06;
   s.pivot.rotation.set(s.rx, s.ry + Math.sin(t * 0.6 + s.phase) * 0.06, Math.sin(t * 0.9 + s.phase) * 0.025);
   s.pivot.position.y = Math.sin(t * 1.3 + s.phase) * 0.008;
@@ -283,7 +283,12 @@ if (slots.length) {
         if (s) s.visible = en.isIntersecting;
       });
     }, { rootMargin: "100px" });
-    slots.forEach((s) => { s.ry = s.yaw; io.observe(s.host); });
+    // Start turned toward the side it slides in from, then settle to face the viewer.
+    slots.forEach((s) => {
+      const fromLeft = getComputedStyle(s.host).getPropertyValue("--from").trim().startsWith("-");
+      s.ry = s.yaw + (fromLeft ? 1.1 : -1.1);
+      io.observe(s.host);
+    });
     renderer.setAnimationLoop((ms) => {
       const t = ms / 1000;
       slots.forEach((s) => { if (s.visible) { pose(s, t); draw(s); } });

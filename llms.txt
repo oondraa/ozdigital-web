@@ -15,7 +15,7 @@
 
 This is a single static site (no backend, no build step, no framework) hosted on Cloudflare Pages, deployed from `github.com/oondraa/portfolio` (branch `main`).
 
-- `/` (`index.html`) — the portfolio: hero, services (apps, websites, tools and automation), project list, how a freelance job runs (talk, agree, build, launch), tech stack, contact links.
+- `/` (`index.html`) — the portfolio: hero, services (apps, websites, tools and automation), project list, how a job runs (talk, agree, build, launch), contact links.
 - `/chat.html` — a lightweight message composer that hands off to email (`mailto:`). Not indexed for search (`noindex`), it's a contact affordance, not a content page.
 
 ## Projects shown on the site
@@ -23,11 +23,6 @@ This is a single static site (no backend, no build step, no framework) hosted on
 1. **Spotify Live Wrapped** — a self-hosted app that connects to a user's Spotify account and keeps listening stats (top tracks, artists, genres) up to date year-round, not just as a December recap. Repo/demo: `https://oondraa.github.io/spotify-live-wrapped/`.
 2. **ADC — Access Date Changer** — a standalone Windows utility to edit the Creation/Modification/Access timestamps of Microsoft Access database files (`.accdb`, `.mdb`). Repo: `https://github.com/oondraa/Access-date-changer`.
 3. Several projects listed as "Coming soon" with names deliberately blurred/redacted in the UI (ADEA, OCR tool, a Linux connector, and an experimental neural network that is not an LLM) — these are unreleased and intentionally undetailed; do not invent specifics about them beyond the one-line description shown on the page.
-
-## Tech stack mentioned on the site
-
-Languages: Python, HTML, CSS, JavaScript, C++, C#, Lua.
-Tools: Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve.
 
 ## Guidance for summarization / crawling
 

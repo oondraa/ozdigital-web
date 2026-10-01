@@ -76,6 +76,10 @@
   }
 }
 </script>
+<!-- Preload three.js and the mascot in the background. Must stay after the import map. -->
+<link rel="modulepreload" href="https://unpkg.com/three@0.184.0/build/three.module.js" fetchpriority="low">
+<link rel="modulepreload" href="https://unpkg.com/three@0.184.0/build/three.core.js" fetchpriority="low">
+<link rel="modulepreload" href="/mascot.js" fetchpriority="low">
 <script>document.documentElement.classList.add("js");</script>
 <script>
   // Apply saved theme before first paint to avoid a flash.
@@ -90,7 +94,7 @@
   /* Design read: developer + freelancer portfolio for clients and recruiters,
      monochrome with one electric-blue accent, Geist + Geist Mono, native CSS.
      Dials: DESIGN_VARIANCE 8 / MOTION_INTENSITY 7 / VISUAL_DENSITY 4.
-     Signature: a glossy accent orb that recurs in hero, process and contact (CSS placeholder for a 3D render).
+     Signature: the OZLAB cube mascot (three.js, mascot.js) recurs in hero, process and contact.
      One deliberate color-block section (process) on the accent fill.
      Radius rule: surfaces and media 16px, icon tiles 12px, color-block section 32px, interactive controls full pill. */
 
@@ -238,7 +242,7 @@
   /* ---------- Hero ---------- */
   /* Manifesto hero: one giant statement, accent glow from the top edge, orb in the empty lower right. */
   .hero {
-    position: relative; overflow: clip;
+    position: relative; overflow-x: clip;
     min-height: min(860px, calc(100dvh - 64px)); display: grid; align-items: center; padding: 48px 0 72px;
   }
   .hero::before {
@@ -259,28 +263,19 @@
     margin: 32px 0 0; max-width: 40ch; font-size: 20px; line-height: 1.55; color: var(--muted); text-wrap: pretty;
   }
   .hero .ctas { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-  .orb-hero { right: -2%; bottom: -130px; }
-  .orb-hero .orb { --s: clamp(150px, 16vw, 220px); }
+  .orb-hero { position: absolute; right: -2%; bottom: -150px; }
+  .orb-hero .orb { --s: clamp(220px, 22vw, 296px); }
 
-  /* Signature orb. Pure-CSS placeholder; drop an <img> of the 3D render inside .orb to replace it. */
-  .orb-wrap { position: absolute; pointer-events: none; }
-  .orb {
-    --s: 200px; --orb: var(--accent-fill);
-    width: var(--s); aspect-ratio: 1; border-radius: 50%; font-size: calc(var(--s) / 10);
-    background: radial-gradient(circle at 34% 28%, #fff 0 3%, color-mix(in srgb, var(--orb) 30%, #fff) 13%, var(--orb) 48%, color-mix(in srgb, var(--orb) 45%, #000) 100%);
-    box-shadow:
-      inset -1em -1.4em 2.6em rgba(0, 0, 0, 0.28),
-      0 0 4em color-mix(in srgb, var(--orb) 38%, transparent),
-      0 2.4em 3em -1.6em color-mix(in srgb, var(--orb) 70%, transparent);
+  /* Mascot slot. Stays empty until mascot.js has drawn the first frame (no placeholder, nothing flashes),
+     then the character slides in from the side. The slot keeps its size from the start, so nothing shifts. */
+  .orb-wrap { pointer-events: none; }
+  .orb { --s: 200px; --from: 70vw; width: var(--s); aspect-ratio: 1; font-size: calc(var(--s) / 10); }
+  .orb .mascot { width: 100%; height: 100%; display: block; opacity: 0; transform: translateX(var(--from)); }
+  .orb.is-3d .mascot {
+    opacity: 1; transform: none; filter: drop-shadow(0 1.1em 1.2em rgba(0, 0, 0, 0.32));
+    transition: transform 1.3s var(--ease), opacity 0.6s ease-out;
   }
-  .orb img { width: 100%; height: 100%; object-fit: contain; }
-  .orb:has(img) { background: none; box-shadow: none; border-radius: 0; }
-
-  /* 3D mascot (mascot.js) takes over the orb slot once its first frame is drawn. */
-  .orb .mascot { width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 0.8s var(--ease); }
-  .orb.is-3d { --s3d: calc(var(--s) * 1.5); width: var(--s3d); font-size: calc(var(--s3d) / 10); background: none; box-shadow: none; border-radius: 0; animation: none; }
-  .orb.is-3d .mascot { opacity: 1; filter: drop-shadow(0 1.6em 1.8em rgba(0, 0, 0, 0.32)); }
-  .orb-process .orb.is-3d .mascot { filter: drop-shadow(0 1.6em 1.8em rgba(6, 30, 90, 0.45)); }
+  .orb-process .orb.is-3d .mascot { filter: drop-shadow(0 1.1em 1.2em rgba(6, 30, 90, 0.45)); }
 
   /* Scroll scene: project screenshots tilt up into place as they enter the viewport. */
   .scene { padding: 0 0 24px; perspective: 1400px; }
@@ -293,6 +288,7 @@
   .stage .front { left: 0; bottom: 0; width: 62%; aspect-ratio: 1917 / 1012; }
 
   /* ---------- Sections ---------- */
+  main { overflow-x: clip; } /* the mascots slide in from off-screen */
   section { padding: 96px 0; }
   .sec-head { margin: 0 0 40px; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; font-weight: 650; letter-spacing: -0.03em; }
 
@@ -342,12 +338,6 @@
   .work-lead h3 { font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.025em; }
   .work-lead p { font-size: 17px; max-width: 60ch; }
 
-  /* Stack */
-  .stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; border-top: 1px solid var(--line); padding-top: 32px; }
-  .stack h3 { margin: 0 0 6px; font-size: 18px; font-weight: 600; }
-  .stack p { margin: 0 0 20px; color: var(--muted); font-size: 15.5px; }
-  .stack img { height: 40px; width: auto; }
-
   /* Services: tall apps cell + two stacked cells, screenshots peek in behind the copy */
   .services { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px; }
   .svc {
@@ -382,9 +372,10 @@
     position: relative; overflow: hidden; margin: 0 12px; border-radius: 32px;
     background: var(--accent-fill); color: #fff;
   }
-  .process .sec-head { position: relative; z-index: 1; max-width: 14ch; }
-  .orb-process { top: 56px; right: 7%; }
-  .orb-process .orb { --s: clamp(90px, 11vw, 150px); --orb: #dbe6ff; }
+  .process-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
+  .process .sec-head { margin: 0; max-width: 14ch; }
+  .orb-process { flex-shrink: 0; margin: -24px -8px -12px 0; }
+  .orb-process .orb { --s: clamp(140px, 14vw, 200px); }
   .steps { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
   .steps li { border-top: 1px solid rgba(255, 255, 255, 0.4); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
   .steps .ph { font-size: 30px; }
@@ -392,10 +383,10 @@
   .steps p { margin: 0; color: rgba(255, 255, 255, 0.92); font-size: 16px; line-height: 1.55; text-wrap: pretty; }
 
   /* Connect */
-  #connect { position: relative; }
-  .orb-connect { top: 40px; right: 10%; }
-  .orb-connect .orb { --s: clamp(100px, 10vw, 140px); }
-  .connect { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
+  .connect-side { display: flex; flex-direction: column; }
+  .orb-connect { align-self: flex-end; margin-bottom: 8px; }
+  .orb-connect .orb { --s: clamp(150px, 15vw, 210px); }
+  .connect { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
   .connect h2 { margin: 0; font-size: clamp(48px, 7.4vw, 104px); line-height: 0.98; font-weight: 650; letter-spacing: -0.05em; text-wrap: balance; }
   .connect .lede { margin: 24px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 52ch; text-wrap: pretty; }
   .connect .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 32px; }
@@ -443,13 +434,9 @@
   @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sheetIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
-  @keyframes float { 50% { transform: translateY(-12px) rotate(6deg); } }
   @keyframes tiltIn { from { transform: rotateX(26deg) scale(0.88); opacity: 0.35; } to { transform: none; opacity: 1; } }
   @keyframes slideFront { from { transform: translate(-10%, 16%); } to { transform: none; } }
   @media (prefers-reduced-motion: no-preference) {
-    .orb { animation: float 7s ease-in-out infinite; }
-    .orb-process .orb { animation-delay: -2.4s; }
-    .orb-connect .orb { animation-delay: -4.8s; }
     @supports (animation-timeline: view()) {
       .scene .stage { animation: tiltIn linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
       .scene .front { animation: slideFront linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
@@ -476,10 +463,10 @@
     .wrap { padding: 0 16px; }
     .hero { min-height: 0; padding: 40px 0 56px; }
     .hero p { font-size: 17px; margin-top: 24px; }
-    .orb-hero { position: static; margin-bottom: 28px; }
-    .orb-hero .orb { --s: 96px; }
-    .orb-process { top: 40px; right: 16px; }
-    .orb-process .orb { --s: 64px; }
+    .orb-hero { position: static; margin: -12px 0 16px -16px; }
+    .orb-hero .orb { --s: 144px; --from: -70vw; }
+    .orb-process { margin: -16px -12px -8px 0; }
+    .orb-process .orb { --s: 104px; }
     .orb-connect { display: none; }
     .process { margin: 0 8px; border-radius: 24px; }
     .process .sec-head { max-width: 10ch; }
@@ -489,7 +476,6 @@
     .svc-apps .shot-b { top: 130px; }
     section { padding: 64px 0; }
     .sec-head { margin-bottom: 28px; }
-    .stack { grid-template-columns: minmax(0, 1fr); gap: 32px; }
     .work-lead { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 26px; }
     .card .body { padding: 20px; }
     .brand span { display: none; }
@@ -642,9 +628,11 @@
     </section>
 
     <section id="process" class="process">
-      <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
       <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecProcess">How it works</h2>
+        <div class="process-head">
+          <h2 class="sec-head reveal" data-i18n="tSecProcess">How it works</h2>
+          <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
+        </div>
         <ol class="steps">
           <li class="reveal" style="--i:0">
             <i class="ph ph-chats-circle" aria-hidden="true"></i>
@@ -670,26 +658,7 @@
       </div>
     </section>
 
-    <section id="stack">
-      <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecStack">Stack</h2>
-        <div class="stack reveal">
-          <div>
-            <h3 data-i18n="tLangs">Languages</h3>
-            <p data-i18n="tLangsList">What we work with: Python, HTML, CSS, JavaScript, C++, C#, Lua</p>
-            <img class="skill-icons" data-icons="python,html,css,js,cpp,cs,lua" src="https://skillicons.dev/icons?i=python,html,css,js,cpp,cs,lua" alt="Python, HTML, CSS, JavaScript, C++, C#, Lua" loading="lazy" height="40">
-          </div>
-          <div>
-            <h3 data-i18n="tTools">Tools</h3>
-            <p data-i18n="tToolsList">Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve</p>
-            <img class="skill-icons" data-icons="nodejs,linux,vscode,idea,arduino,git" src="https://skillicons.dev/icons?i=nodejs,linux,vscode,idea,arduino,git" alt="Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git" loading="lazy" height="40">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="connect" style="padding-top: 32px;">
-      <div class="orb-wrap orb-connect" aria-hidden="true" data-mascot data-face="o_o" data-tone="blue" data-yaw="-0.3"><div class="orb"></div></div>
+    <section id="connect">
       <div class="wrap connect">
         <div class="reveal">
           <h2 data-i18n="tFreeTitle">Let's build something</h2>
@@ -699,6 +668,8 @@
             <a href="mailto:o.zajicek12@gmail.com" class="mail">o.zajicek12@gmail.com</a>
           </div>
         </div>
+        <div class="connect-side">
+        <div class="orb-wrap orb-connect" aria-hidden="true" data-mascot data-face="o_o" data-tone="blue" data-yaw="-0.3"><div class="orb"></div></div>
         <div class="links reveal" style="--i:1">
           <a href="https://github.com/oondraa" target="_blank" rel="noopener">
             <i class="ph ph-github-logo ph-logo" aria-hidden="true"></i>
@@ -710,6 +681,7 @@
             <span class="txt"><strong>LinkedIn</strong><span data-i18n="tLi">Let's get in touch</span></span>
             <i class="ph ph-arrow-up-right go" aria-hidden="true"></i>
           </a>
+        </div>
         </div>
       </div>
     </section>
@@ -770,7 +742,7 @@
     tP2T: "Agree", tP2: "A standard contract and a proper invoice. Clear scope and price before we write a single line.",
     tP3T: "Build", tP3: "You see it grow along the way, not just at the very end.",
     tP4T: "Launch", tP4: "We put it live and hand over everything that belongs to it.",
-    tSecProjects: "Projects", tSecWorks: "In the works", tSecStack: "Stack",
+    tSecProjects: "Projects", tSecWorks: "In the works",
     tDetails: "See details",
     tSlwKicker: "Self-hosted project for audio enthusiasts",
     tSlwSub: "Your Wrapped every day, not just in December.",
@@ -783,10 +755,6 @@
     tAdea: "A hardware project built around microcontrollers. Details when it's ready.",
     tOcr: "Turning anything into text, readable or not.",
     tLinux: "A connector that makes Linux easier to actually use.",
-    tLangs: "Languages",
-    tLangsList: "What we work with: Python, HTML, CSS, JavaScript, C++, C#, Lua",
-    tTools: "Tools",
-    tToolsList: "Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve",
     tFreeTitle: "Let's build something",
     tFree: "Open to anything: rebuilds of old websites, brand new startups, for individuals, sole traders and companies. Every job runs on a proper contract and invoice.",
     tOpen: "Open project",
@@ -808,7 +776,7 @@
     tP2T: "Dohoda", tP2: "Klasická smlouva a řádná faktura. Jasný rozsah a cena dřív, než napíšeme první řádek.",
     tP3T: "Vývoj", tP3: "Průběžně vidíte, jak to roste, ne až na úplném konci.",
     tP4T: "Spuštění", tP4: "Pustíme to do světa a předáme vám všechno, co k tomu patří.",
-    tSecProjects: "Projekty", tSecWorks: "Připravuje se", tSecStack: "Stack",
+    tSecProjects: "Projekty", tSecWorks: "Připravuje se",
     tDetails: "Zobrazit detail",
     tSlwKicker: "Self-hosted projekt pro audio nadšence",
     tSlwSub: "Vaše Wrapped každý den, ne jen v prosinci.",
@@ -821,10 +789,6 @@
     tAdea: "Hardwarový projekt postavený na mikrokontrolerech. Detaily, až to bude hotové.",
     tOcr: "Převede na text cokoliv, čitelné i nečitelné.",
     tLinux: "Konektor, díky kterému je Linux použitelnější.",
-    tLangs: "Jazyky",
-    tLangsList: "S čím pracujeme: Python, HTML, CSS, JavaScript, C++, C#, Lua",
-    tTools: "Nástroje",
-    tToolsList: "Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve",
     tFreeTitle: "Postavme něco spolu",
     tFree: "Jsme otevření čemukoliv: od předělání starých webů po nové startupy, pro soukromníky, OSVČ i firmy. Každá zakázka řádně na smlouvu a fakturu.",
     tOpen: "Otevřít projekt",
@@ -863,9 +827,6 @@
     themeBtn.setAttribute("aria-label", t === "dark" ? "Switch to light mode" : "Switch to dark mode");
     document.querySelectorAll("meta[name=theme-color]").forEach(function (m) {
       m.setAttribute("content", t === "dark" ? "#0b0b0d" : "#f4f4f5");
-    });
-    document.querySelectorAll(".skill-icons").forEach(function (img) {
-      img.src = "https://skillicons.dev/icons?i=" + img.dataset.icons + "&theme=" + t;
     });
   }
   themeBtn.addEventListener("click", function () {
@@ -929,18 +890,15 @@
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
 
-  // 3D mascot loads after the page is up; the CSS orbs stay as the fallback if WebGL or the import fails.
-  function loadMascot() {
+  // 3D mascot: three.js is preloaded at low priority; the import waits for first paint so it never delays the page.
+  // If WebGL or the import fails, the slots simply stay empty.
+  (function () {
     var c = navigator.connection;
     if (c && c.saveData) return;
-    import("/mascot.js").catch(function () {});
-  }
-  function scheduleMascot() {
-    if ("requestIdleCallback" in window) requestIdleCallback(loadMascot, { timeout: 2000 });
-    else setTimeout(loadMascot, 300);
-  }
-  if (document.readyState === "complete") scheduleMascot();
-  else window.addEventListener("load", scheduleMascot);
+    requestAnimationFrame(function () {
+      setTimeout(function () { import("/mascot.js").catch(function (e) { window.__mascotError = String(e); }); }, 0);
+    });
+  })();
 
   document.getElementById("year").textContent = new Date().getFullYear();
 })();
