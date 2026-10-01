@@ -99,30 +99,39 @@ function buildMascot(face, tone) {
   const body = new THREE.Mesh(GEO.body, ceramic); body.position.y = bodyY; model.add(body);
   const screen = new THREE.Mesh(GEO.screen, glass); screen.position.set(0, SY, screenFront); model.add(screen);
 
-  const faceGroup = new THREE.Group();
-  faceGroup.position.set(0, SY, screenFront + 0.0012); model.add(faceGroup);
-  const stroke = (ax, ay, bx, by, mat = glow) => {
-    const len = Math.hypot(bx - ax, by - ay);
-    const m = new THREE.Mesh(new THREE.CapsuleGeometry(T, len, 8, 24), mat);
-    m.position.set((ax + bx) / 2, (ay + by) / 2, 0);
-    m.rotation.z = Math.atan2(by - ay, bx - ax) - Math.PI / 2; m.scale.z = 0.35;
-    faceGroup.add(m); return m;
-  };
+  const faces = {};
   const parts = { cursor: null, eyes: [] };
-  if (face === "^_^") {
-    stroke(-0.074, 0.002, -0.052, 0.022); stroke(-0.052, 0.022, -0.030, 0.002);
-    stroke(0.030, 0.002, 0.052, 0.022); stroke(0.052, 0.022, 0.074, 0.002);
-    stroke(-0.014, -0.026, 0.014, -0.026, glowBlue);
-  } else if (face === "o_o") {
-    const l = logoRing(faceGroup, 0.016, T, glow, 0.0058, glowBlue, 0.35); l.position.set(-0.052, 0.008, 0);
-    const r = logoRing(faceGroup, 0.016, T, glow, 0.0058, glowBlue, 0.35); r.position.set(0.052, 0.008, 0);
-    parts.eyes.push(l, r);
-    stroke(-0.014, -0.026, 0.014, -0.026, glowBlue);
-  } else {
+  const makeFace = (key, build) => {
+    const g = new THREE.Group();
+    g.position.set(0, SY, screenFront + 0.0012); g.visible = false; model.add(g);
+    const stroke = (ax, ay, bx, by, mat = glow) => {
+      const len = Math.hypot(bx - ax, by - ay);
+      const m = new THREE.Mesh(new THREE.CapsuleGeometry(T, len, 8, 24), mat);
+      m.position.set((ax + bx) / 2, (ay + by) / 2, 0);
+      m.rotation.z = Math.atan2(by - ay, bx - ax) - Math.PI / 2; m.scale.z = 0.35;
+      g.add(m); return m;
+    };
+    build(g, stroke);
+    faces[key] = g;
+  };
+  makeFace(">_", (g, stroke) => {
     stroke(-0.056, 0.024, -0.024, 0.002);
     stroke(-0.056, -0.020, -0.024, 0.002);
     parts.cursor = stroke(0.002, -0.024, 0.050, -0.024, glowBlue);
-  }
+  });
+  makeFace("^_^", (g, stroke) => {
+    stroke(-0.074, 0.002, -0.052, 0.022); stroke(-0.052, 0.022, -0.030, 0.002);
+    stroke(0.030, 0.002, 0.052, 0.022); stroke(0.052, 0.022, 0.074, 0.002);
+    stroke(-0.014, -0.026, 0.014, -0.026, glowBlue);
+  });
+  makeFace("o_o", (g, stroke) => {
+    const l = logoRing(g, 0.016, T, glow, 0.0058, glowBlue, 0.35); l.position.set(-0.052, 0.008, 0);
+    const r = logoRing(g, 0.016, T, glow, 0.0058, glowBlue, 0.35); r.position.set(0.052, 0.008, 0);
+    parts.eyes.push(l, r);
+    stroke(-0.014, -0.026, 0.014, -0.026, glowBlue);
+  });
+  const setFace = (f) => { Object.keys(faces).forEach((k) => { faces[k].visible = k === f; }); };
+  setFace(faces[face] ? face : ">_");
 
   // Antenna: the blue dot of the mark, off the top-right like in the logo.
   const antenna = new THREE.Group();
@@ -142,7 +151,7 @@ function buildMascot(face, tone) {
 
   model.position.y = -bodyY;
   const pivot = new THREE.Group(); pivot.add(model);
-  return { pivot, ...parts };
+  return { pivot, setFace, face: faces[face] ? face : ">_", ...parts };
 }
 
 // ---------- Renderer, lights, environment ----------
@@ -213,8 +222,9 @@ const dpr = () => Math.min(window.devicePixelRatio || 1, 2);
 function measure() {
   let maxW = 1, maxH = 1;
   slots.forEach((s) => {
-    s.w = Math.round(s.host.clientWidth * dpr());
-    s.h = Math.round(s.host.clientHeight * dpr());
+    const zoom = parseFloat(s.wrap.dataset.zoom || "1");
+    s.w = Math.round(s.host.clientWidth * dpr() * zoom);
+    s.h = Math.round(s.host.clientHeight * dpr() * zoom);
     if (s.canvas.width !== s.w) s.canvas.width = s.w;
     if (s.canvas.height !== s.h) s.canvas.height = s.h;
     s.camera.aspect = s.w / Math.max(s.h, 1);
@@ -241,8 +251,10 @@ function pose(s, t) {
     tx = Math.max(-1, Math.min(1, (pointer.x - (r.left + r.width / 2)) / (window.innerWidth * 0.5)));
     ty = Math.max(-1, Math.min(1, (pointer.y - (r.top + r.height / 2)) / (window.innerHeight * 0.6)));
   }
-  s.ry += (s.yaw + tx * 0.42 - s.ry) * 0.045;
-  s.rx += (ty * 0.22 - s.rx) * 0.06;
+  const yawT = s.near ? 0 : s.yaw + tx * 0.42;
+  const rxT = s.near ? 0.12 : ty * 0.22;
+  s.ry += (yawT - s.ry) * 0.045;
+  s.rx += (rxT - s.rx) * 0.06;
   s.pivot.rotation.set(s.rx, s.ry + Math.sin(t * 0.6 + s.phase) * 0.06, Math.sin(t * 0.9 + s.phase) * 0.025);
   s.pivot.position.y = Math.sin(t * 1.3 + s.phase) * 0.008;
   if (s.cursor) s.cursor.visible = Math.floor(t / 0.53) % 2 === 0;
@@ -250,6 +262,29 @@ function pose(s, t) {
     const blink = (t + s.phase) % 4.4 < 0.12 ? 0.12 : 1;
     s.eyes.forEach((e) => { e.scale.y = blink; });
   }
+}
+
+// Hero mascot comes closer once if the visitor stays on the first screen for 6 s:
+// it scales up (CSS .is-near), smiles, shows a speech bubble (.is-talking), then goes back.
+const GREET_AFTER = 6, NEAR_FOR = 4.2;
+const greeter = slots.find((s) => "approach" in s.wrap.dataset);
+let idleSince = null, approachAt = null, greeted = false;
+function updateGreeter(t) {
+  const s = greeter;
+  if (!s || !s.shown) return;
+  if (!greeted) {
+    if (window.scrollY > 80 || document.visibilityState !== "visible") { idleSince = null; return; }
+    if (idleSince === null) idleSince = t;
+    if (t - idleSince >= GREET_AFTER) { greeted = true; approachAt = t; }
+    return;
+  }
+  if (approachAt === null) return;
+  const e = t - approachAt;
+  s.near = e < NEAR_FOR;
+  s.wrap.classList.toggle("is-near", s.near);
+  s.wrap.classList.toggle("is-talking", e > 0.6 && e < NEAR_FOR - 0.3);
+  s.setFace(e > 0.25 && e < NEAR_FOR + 0.4 ? "^_^" : s.face);
+  if (e >= NEAR_FOR + 0.4) approachAt = null;
 }
 
 function draw(s) {
@@ -291,6 +326,7 @@ if (slots.length) {
     });
     renderer.setAnimationLoop((ms) => {
       const t = ms / 1000;
+      updateGreeter(t);
       slots.forEach((s) => { if (s.visible) { pose(s, t); draw(s); } });
     });
   }

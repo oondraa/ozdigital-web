@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>oondraa | Portfolio</title>
-<meta name="description" content="Portfolio of Ondra (oondraa), student at the Secondary School of Applied Cybernetics, building software as OZLAB. Projects: Spotify Live Wrapped, ADC (Access Date Changer), and more.">
+<title>OZLAB | Software studio</title>
+<meta name="description" content="OZLAB is a software studio building websites, apps and tools for people and companies, in Czech and English. Projects include Spotify Live Wrapped and ADC (Access Date Changer).">
 <meta name="author" content="Ondřej Zajíček (oondraa)">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/">
@@ -13,17 +13,20 @@
 <link rel="alternate" hreflang="x-default" href="https://oondraa.pages.dev/">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="oondraa | Portfolio">
-<meta property="og:title" content="oondraa | Portfolio">
-<meta property="og:description" content="Portfolio of Ondra (oondraa), student at the Secondary School of Applied Cybernetics, building software as OZLAB.">
+<meta property="og:site_name" content="OZLAB">
+<meta property="og:title" content="OZLAB | Software studio">
+<meta property="og:description" content="OZLAB is a software studio building websites, apps and tools for people and companies, in Czech and English.">
 <meta property="og:url" content="https://oondraa.pages.dev/">
-<meta property="og:image" content="https://oondraa.pages.dev/assets/slw-overview.jpg">
+<meta property="og:image" content="https://oondraa.pages.dev/assets/og-ozlab.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="OZLAB logo">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="cs_CZ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="oondraa | Portfolio">
-<meta name="twitter:description" content="Portfolio of Ondra (oondraa), student at the Secondary School of Applied Cybernetics, building software as OZLAB.">
-<meta name="twitter:image" content="https://oondraa.pages.dev/assets/slw-overview.jpg">
+<meta name="twitter:title" content="OZLAB | Software studio">
+<meta name="twitter:description" content="OZLAB is a software studio building websites, apps and tools for people and companies, in Czech and English.">
+<meta name="twitter:image" content="https://oondraa.pages.dev/assets/og-ozlab.png">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/icon-192.png" sizes="192x192" type="image/png">
@@ -47,7 +50,7 @@
     "https://github.com/oondraa",
     "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/"
   ],
-  "jobTitle": "Student & Software Developer",
+  "jobTitle": "Founder, OZLAB",
   "affiliation": {
     "@type": "Organization",
     "name": "OZLAB"
@@ -59,7 +62,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "oondraa | Portfolio",
+  "name": "OZLAB",
   "url": "https://oondraa.pages.dev/",
   "inLanguage": ["en", "cs"]
 }
@@ -206,8 +209,11 @@
     border-bottom: 1px solid var(--line);
   }
   .nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .brand { font-weight: 600; font-size: 17px; letter-spacing: -0.02em; color: var(--text); white-space: nowrap; }
-  .brand span { color: var(--muted); font-weight: 500; }
+  /* OZLAB lockup: open-ring mark + "OZ" bold / "LAB" light, as in the brand files. Ring follows the text color. */
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: 0.01em; color: var(--text); white-space: nowrap; }
+  .mark { width: 1.2em; height: 1.2em; flex-shrink: 0; }
+  .brand .wm { font-weight: 350; color: var(--muted); }
+  .brand .wm b { font-weight: 750; color: var(--text); }
   .nav nav { display: flex; align-items: center; gap: 4px; }
   .nav nav a {
     color: var(--muted); font-size: 15px; padding: 8px 12px; border-radius: 999px;
@@ -264,7 +270,23 @@
   }
   .hero .ctas { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
   .orb-hero { position: absolute; right: -2%; bottom: -150px; }
-  .orb-hero .orb { --s: clamp(220px, 22vw, 296px); }
+  .orb-hero .orb { --s: clamp(220px, 22vw, 296px); transform-origin: 72% 28%; transition: transform 0.9s var(--ease); }
+  /* After 6 s on the first screen the hero mascot comes closer and talks (mascot.js toggles the classes). */
+  .orb-hero.is-near { z-index: 2; }
+  .orb-hero.is-near .orb { transform: scale(1.4); }
+  .bubble {
+    position: absolute; right: calc(100% + 20px); top: 34%;
+    padding: 12px 18px; border-radius: var(--r-surface); white-space: nowrap;
+    background: var(--surface); color: var(--text); border: 1px solid var(--line); box-shadow: var(--shadow);
+    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
+    opacity: 0; transform: translate(12px, 6px) scale(0.96); transform-origin: right center;
+    transition: opacity 0.35s ease-out, transform 0.5s var(--ease);
+  }
+  .bubble::after {
+    content: ""; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; margin-top: -6px;
+    background: inherit; border-top: 1px solid var(--line); border-right: 1px solid var(--line); transform: rotate(45deg);
+  }
+  .orb-hero.is-talking .bubble { opacity: 1; transform: none; }
 
   /* Mascot slot. Stays empty until mascot.js has drawn the first frame (no placeholder, nothing flashes),
      then the character slides in from the side. The slot keeps its size from the start, so nothing shifts. */
@@ -405,6 +427,7 @@
   .links a:hover .go { transform: translate(3px, -3px); color: var(--accent); }
 
   footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  .foot-brand { display: inline-flex; align-items: center; gap: 8px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
 
   /* ---------- Dialogs ---------- */
@@ -463,7 +486,10 @@
     .wrap { padding: 0 16px; }
     .hero { min-height: 0; padding: 40px 0 56px; }
     .hero p { font-size: 17px; margin-top: 24px; }
-    .orb-hero { position: static; margin: -12px 0 16px -16px; }
+    .orb-hero { position: relative; right: auto; bottom: auto; width: max-content; margin: -12px 0 16px -16px; }
+    .orb-hero.is-near .orb { transform: none; }
+    .bubble { right: auto; left: calc(100% - 4px); top: 32%; font-size: 14px; padding: 9px 12px; transform-origin: left center; transform: translate(-12px, 6px) scale(0.96); }
+    .bubble::after { right: auto; left: -7px; transform: rotate(-135deg); }
     .orb-hero .orb { --s: 144px; --from: -70vw; }
     .orb-process { margin: -16px -12px -8px 0; }
     .orb-process .orb { --s: 104px; }
@@ -478,7 +504,6 @@
     .sec-head { margin-bottom: 28px; }
     .work-lead { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 26px; }
     .card .body { padding: 20px; }
-    .brand span { display: none; }
     .nav nav a { padding: 8px; font-size: 14px; }
     .lang-btn { margin-left: 4px; }
   }
@@ -491,7 +516,7 @@
 
   <header class="nav">
     <div class="wrap">
-      <a href="#about" class="brand">OZLAB</a>
+      <a href="#about" class="brand" aria-label="OZLAB"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/></svg><span class="wm"><b>OZ</b>LAB</span></a>
       <nav aria-label="Primary">
         <a href="#about" data-i18n="tNavAbout">About</a>
         <a href="#projects" data-i18n="tNavProjects">Projects</a>
@@ -505,7 +530,7 @@
   <main>
     <div class="hero" id="about">
       <div class="wrap">
-        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div></div>
+        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble" data-i18n="tHey">Hey! Got a project? Let's talk.</span></div>
         <h1 class="rise" style="--i:0"><span data-i18n="tHeroA">We're OZLAB.</span> <em data-i18n="tHeroB">We build software.</em></h1>
         <p class="rise" style="--i:1" data-i18n="tHeroSub">A software studio building websites, apps and tools for people and companies, in Czech and English.</p>
         <div class="ctas rise" style="--i:2">
@@ -689,7 +714,7 @@
 
   <footer>
     <div class="wrap">
-      <span>© <span id="year">2026</span> OZLAB</span>
+      <span class="foot-brand"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/></svg><span>© <span id="year">2026</span> OZLAB</span></span>
       <span><span data-i18n="tAbout3">OZLAB is our own brand. Contracts and invoicing are handled by</span> myNEST s.r.o., <a href="https://ares.gov.cz/ekonomicke-subjekty?ico=28855884" target="_blank" rel="noopener"><span data-i18n="tIco">Company ID</span> 28855884</a>.</span>
     </div>
   </footer>
@@ -731,7 +756,7 @@
     tHeroA: "We're OZLAB.", tHeroB: "We build software.",
     tHeroSub: "A software studio building websites, apps and tools for people and companies, in Czech and English.",
     tViewProjects: "View projects",
-    tStart: "Start a project",
+    tStart: "Start a project", tHey: "Hey! Got a project? Let's talk.",
     tAbout3: "OZLAB is our own brand. Contracts and invoicing are handled by", tIco: "Company ID",
     tSecServices: "What we build",
     tSvcApps: "Apps", tSvcAppsT: "Desktop and web apps that do one job properly. Like the two further down.",
@@ -765,7 +790,7 @@
     tHeroA: "Jsme OZLAB.", tHeroB: "Stavíme software.",
     tHeroSub: "Softwarové studio. Stavíme weby, aplikace a nástroje pro lidi i firmy, česky i anglicky.",
     tViewProjects: "Zobrazit projekty",
-    tStart: "Pojďme na to",
+    tStart: "Pojďme na to", tHey: "Hej! Máte projekt? Ozvěte se.",
     tAbout3: "OZLAB je naše vlastní značka. Smlouvy a fakturaci zajišťuje", tIco: "IČO",
     tSecServices: "Co zvládneme",
     tSvcApps: "Aplikace", tSvcAppsT: "Desktopové a webové aplikace, které dělají jednu věc pořádně. Třeba ty dvě o kus níž.",

@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-<rect width="32" height="32" rx="8" fill="#0088FF"/>
-<text x="16" y="23" font-family="-apple-system, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">O</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 360">
+<rect width="360" height="360" rx="80" fill="#1A1A1B"/>
+<path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="#F5F5F7" stroke-width="28.6"/>
+<circle cx="230" cy="129" r="17" fill="#2997FF"/>
 </svg>
