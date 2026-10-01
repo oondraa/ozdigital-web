@@ -34,7 +34,6 @@
 <link rel="llms-txt" href="/llm.md" title="Notes for LLMs and AI agents">
 
 <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/slw-overview.jpg" as="image" fetchpriority="high">
 <link rel="stylesheet" href="/assets/phosphor/style.css">
 
 <script type="application/ld+json">
@@ -66,6 +65,17 @@
 }
 </script>
 
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.184.0/build/three.module.js"
+  },
+  "integrity": {
+    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
+    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT"
+  }
+}
+</script>
 <script>document.documentElement.classList.add("js");</script>
 <script>
   // Apply saved theme before first paint to avoid a flash.
@@ -79,8 +89,10 @@
 <style>
   /* Design read: developer + freelancer portfolio for clients and recruiters,
      monochrome with one electric-blue accent, Geist + Geist Mono, native CSS.
-     Dials: DESIGN_VARIANCE 7 / MOTION_INTENSITY 6 / VISUAL_DENSITY 4.
-     Radius rule: surfaces and media 16px, icon tiles 12px, interactive controls full pill. */
+     Dials: DESIGN_VARIANCE 8 / MOTION_INTENSITY 7 / VISUAL_DENSITY 4.
+     Signature: a glossy accent orb that recurs in hero, process and contact (CSS placeholder for a 3D render).
+     One deliberate color-block section (process) on the accent fill.
+     Radius rule: surfaces and media 16px, icon tiles 12px, color-block section 32px, interactive controls full pill. */
 
   @font-face {
     font-family: "Geist";
@@ -121,6 +133,7 @@
     --redact: #111114;
     --shadow: 0 1px 2px rgba(20, 24, 40, 0.06), 0 12px 32px -12px rgba(20, 24, 40, 0.18);
     --nav-bg: rgba(244, 244, 245, 0.78);
+    --glow: rgba(23, 96, 240, 0.16);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     --r-surface: 16px;
     --r-tile: 12px;
@@ -140,6 +153,7 @@
       --redact: #ececef;
       --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -16px rgba(0, 0, 0, 0.7);
       --nav-bg: rgba(11, 11, 13, 0.74);
+      --glow: rgba(31, 102, 242, 0.4);
       color-scheme: dark;
     }
   }
@@ -156,6 +170,7 @@
     --redact: #ececef;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -16px rgba(0, 0, 0, 0.7);
     --nav-bg: rgba(11, 11, 13, 0.74);
+    --glow: rgba(31, 102, 242, 0.4);
     color-scheme: dark;
   }
 
@@ -221,23 +236,57 @@
   .btn-ghost:hover { background: var(--surface-2); }
 
   /* ---------- Hero ---------- */
-  .hero { padding: 64px 0 72px; }
-  .hero .wrap {
-    display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-    gap: 48px; align-items: center;
+  /* Manifesto hero: one giant statement, accent glow from the top edge, orb in the empty lower right. */
+  .hero {
+    position: relative; overflow: clip;
+    min-height: min(860px, calc(100dvh - 64px)); display: grid; align-items: center; padding: 48px 0 72px;
   }
+  .hero::before {
+    content: ""; position: absolute; left: 50%; top: -300px; width: min(980px, 140vw); height: 600px;
+    transform: translateX(-50%); pointer-events: none;
+    background: radial-gradient(closest-side, var(--glow), transparent);
+  }
+  .hero .wrap { position: relative; }
   .hero h1 {
-    margin: 0; font-size: clamp(40px, 4vw, 58px); line-height: 1.02;
-    font-weight: 650; letter-spacing: -0.035em; text-wrap: balance;
+    position: relative; z-index: 1; margin: 0;
+    font-size: clamp(52px, 9vw, 128px); line-height: 0.98; font-weight: 650; letter-spacing: -0.05em;
   }
-  .hero h1 em { display: block; font-style: normal; color: var(--muted); }
+  .hero h1 span, .hero h1 em { display: block; }
+  .hero h1 em { font-style: normal; color: var(--muted); }
   @media (min-width: 961px) { .hero h1 span, .hero h1 em { white-space: nowrap; } }
   .hero p {
-    margin: 24px 0 0; max-width: 34ch; font-size: 19px; line-height: 1.55; color: var(--muted); text-wrap: pretty;
+    position: relative; z-index: 1;
+    margin: 32px 0 0; max-width: 40ch; font-size: 20px; line-height: 1.55; color: var(--muted); text-wrap: pretty;
   }
-  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .hero .ctas { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .orb-hero { right: -2%; bottom: -48px; }
+  .orb-hero .orb { --s: clamp(150px, 16vw, 220px); }
 
-  .stage { position: relative; aspect-ratio: 1568 / 1010; margin-right: -24px; }
+  /* Signature orb. Pure-CSS placeholder; drop an <img> of the 3D render inside .orb to replace it. */
+  .orb-wrap { position: absolute; pointer-events: none; }
+  .orb {
+    --s: 200px; --orb: var(--accent-fill);
+    width: var(--s); aspect-ratio: 1; border-radius: 50%; font-size: calc(var(--s) / 10);
+    background: radial-gradient(circle at 34% 28%, #fff 0 3%, color-mix(in srgb, var(--orb) 30%, #fff) 13%, var(--orb) 48%, color-mix(in srgb, var(--orb) 45%, #000) 100%);
+    box-shadow:
+      inset -1em -1.4em 2.6em rgba(0, 0, 0, 0.28),
+      0 0 4em color-mix(in srgb, var(--orb) 38%, transparent),
+      0 2.4em 3em -1.6em color-mix(in srgb, var(--orb) 70%, transparent);
+  }
+  .orb img { width: 100%; height: 100%; object-fit: contain; }
+  .orb:has(img) { background: none; box-shadow: none; border-radius: 0; }
+
+  /* 3D mascot (mascot.js) takes over the orb slot once its first frame is drawn. */
+  .orb .mascot { width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 0.8s var(--ease); }
+  .orb.is-3d { --s3d: calc(var(--s) * 1.5); width: var(--s3d); font-size: calc(var(--s3d) / 10); background: none; box-shadow: none; border-radius: 0; animation: none; }
+  .orb.is-3d .mascot { opacity: 1; filter: drop-shadow(0 1.6em 1.8em rgba(0, 0, 0, 0.32)); }
+  .orb-process .orb.is-3d .mascot { filter: drop-shadow(0 1.6em 1.8em rgba(6, 30, 90, 0.45)); }
+
+  /* Scroll scene: project screenshots tilt up into place as they enter the viewport. */
+  .scene { padding: 0 0 24px; perspective: 1400px; }
+  .scene .stage { max-width: 1040px; margin: 0 auto; transform-origin: 50% 100%; }
+
+  .stage { position: relative; aspect-ratio: 1568 / 1010; }
   .stage figure { margin: 0; position: absolute; border-radius: var(--r-surface); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); background: #000; }
   .stage img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
   .stage .back { top: 0; right: 0; width: 92%; aspect-ratio: 1568 / 717; }
@@ -299,9 +348,55 @@
   .stack p { margin: 0 0 20px; color: var(--muted); font-size: 15.5px; }
   .stack img { height: 40px; width: auto; }
 
+  /* Services: tall apps cell + two stacked cells, screenshots peek in behind the copy */
+  .services { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 20px; }
+  .svc {
+    position: relative; isolation: isolate; overflow: hidden; min-height: 320px; padding: 28px;
+    display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-surface);
+  }
+  .svc::after {
+    content: ""; position: absolute; inset: auto 0 0 0; height: 62%; z-index: -1; pointer-events: none;
+    background: linear-gradient(to bottom, transparent, var(--surface) 58%);
+  }
+  .svc-apps { grid-row: span 2; min-height: 600px; }
+  .svc .shot {
+    position: absolute; z-index: -2; border-radius: var(--r-tile); border: 1px solid var(--line); box-shadow: var(--shadow);
+    transition: transform 0.7s var(--ease);
+  }
+  .svc-apps .shot-a { top: 32px; right: -12%; width: 76%; transform: rotate(-5deg); }
+  .svc-apps .shot-b { top: 168px; left: 6%; width: 68%; transform: rotate(3deg); }
+  .svc-apps:hover .shot-a { transform: rotate(-3deg) translateY(-8px); }
+  .svc-apps:hover .shot-b { transform: rotate(1deg) translateY(-4px); }
+  .svc-tools .shot { top: 26px; right: -8%; width: 66%; transform: rotate(-4deg); }
+  .svc-tools:hover .shot { transform: rotate(-2deg) translateY(-6px); }
+  .svc-web { background: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--accent-fill) 26%, var(--surface)), var(--surface) 62%); }
+  .svc-web::after { display: none; }
+  .svc .ph-deco { position: absolute; z-index: -2; top: -18px; right: 18px; font-size: 180px; line-height: 1; color: color-mix(in srgb, var(--accent) 22%, transparent); }
+  .svc .ph-big { font-size: 34px; color: var(--accent); }
+  .svc h3 { margin: 0; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1; font-weight: 650; letter-spacing: -0.03em; }
+  .svc p { margin: 0; color: var(--muted); font-size: 16.5px; line-height: 1.55; max-width: 42ch; text-wrap: pretty; }
+
+  /* Process: the one color-block section, on the accent fill */
+  .process {
+    position: relative; overflow: hidden; margin: 0 12px; border-radius: 32px;
+    background: var(--accent-fill); color: #fff;
+  }
+  .process .sec-head { position: relative; z-index: 1; max-width: 14ch; }
+  .orb-process { top: 56px; right: 7%; }
+  .orb-process .orb { --s: clamp(90px, 11vw, 150px); --orb: #dbe6ff; }
+  .steps { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
+  .steps li { border-top: 1px solid rgba(255, 255, 255, 0.4); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+  .steps .ph { font-size: 30px; }
+  .steps h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+  .steps p { margin: 0; color: rgba(255, 255, 255, 0.92); font-size: 16px; line-height: 1.55; text-wrap: pretty; }
+
   /* Connect */
-  .connect { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
-  .connect h2 { margin: 0; font-size: clamp(40px, 5.6vw, 76px); line-height: 1.02; font-weight: 650; letter-spacing: -0.04em; text-wrap: balance; }
+  #connect { position: relative; }
+  .orb-connect { top: 40px; right: 10%; }
+  .orb-connect .orb { --s: clamp(100px, 10vw, 140px); }
+  .connect { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
+  .connect h2 { margin: 0; font-size: clamp(48px, 7.4vw, 104px); line-height: 0.98; font-weight: 650; letter-spacing: -0.05em; text-wrap: balance; }
   .connect .lede { margin: 24px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 52ch; text-wrap: pretty; }
   .connect .ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 32px; }
   .connect .mail { font-size: 17px; font-weight: 500; }
@@ -348,7 +443,17 @@
   @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   @keyframes sheetIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+  @keyframes float { 50% { transform: translateY(-12px) rotate(6deg); } }
+  @keyframes tiltIn { from { transform: rotateX(26deg) scale(0.88); opacity: 0.35; } to { transform: none; opacity: 1; } }
+  @keyframes slideFront { from { transform: translate(-10%, 16%); } to { transform: none; } }
   @media (prefers-reduced-motion: no-preference) {
+    .orb { animation: float 7s ease-in-out infinite; }
+    .orb-process .orb { animation-delay: -2.4s; }
+    .orb-connect .orb { animation-delay: -4.8s; }
+    @supports (animation-timeline: view()) {
+      .scene .stage { animation: tiltIn linear both; animation-timeline: view(); animation-range: entry 0% cover 45%; }
+      .scene .front { animation: slideFront linear both; animation-timeline: view(); animation-range: entry 0% cover 55%; }
+    }
     .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms); }
     .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
     .js .reveal.in { opacity: 1; transform: none; }
@@ -360,16 +465,28 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 960px) {
-    .stage { margin-right: 0; }
-    .hero .wrap, .connect { grid-template-columns: minmax(0, 1fr); gap: 48px; }
-    .bento { grid-template-columns: minmax(0, 1fr); }
+    .connect { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+    .bento, .services { grid-template-columns: minmax(0, 1fr); }
+    .svc-apps { grid-row: auto; min-height: 520px; }
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; }
     .card-adc .media { aspect-ratio: 16 / 9; flex: none; min-height: 0; }
     .works { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 767px) {
     .wrap { padding: 0 16px; }
-    .hero { padding: 40px 0 64px; }
-    .hero p { font-size: 17px; }
+    .hero { min-height: 0; padding: 40px 0 56px; }
+    .hero p { font-size: 17px; margin-top: 24px; }
+    .orb-hero { position: static; margin-bottom: 28px; }
+    .orb-hero .orb { --s: 96px; }
+    .orb-process { top: 40px; right: 16px; }
+    .orb-process .orb { --s: 64px; }
+    .orb-connect { display: none; }
+    .process { margin: 0 8px; border-radius: 24px; }
+    .process .sec-head { max-width: 10ch; }
+    .steps { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .svc { min-height: 300px; padding: 22px; }
+    .svc-apps { min-height: 460px; }
+    .svc-apps .shot-b { top: 130px; }
     section { padding: 64px 0; }
     .sec-head { margin-bottom: 28px; }
     .stack { grid-template-columns: minmax(0, 1fr); gap: 32px; }
@@ -402,20 +519,51 @@
   <main>
     <div class="hero" id="about">
       <div class="wrap">
-        <div>
-          <h1 class="rise" style="--i:0"><span data-i18n="tHeroA">I'm Ondra.</span> <em data-i18n="tHeroB">I build software.</em></h1>
-          <p class="rise" style="--i:1" data-i18n="tHeroSub">Student at the Secondary School of Applied Cybernetics. Freelance websites, apps and tools, in Czech and English.</p>
-          <div class="ctas rise" style="--i:2">
-            <a href="#projects" class="btn btn-primary"><span data-i18n="tViewProjects">View projects</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
-            <a href="https://github.com/oondraa" target="_blank" rel="noopener" class="btn btn-ghost"><i class="ph ph-github-logo" aria-hidden="true"></i>GitHub</a>
-          </div>
+        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div></div>
+        <h1 class="rise" style="--i:0"><span data-i18n="tHeroA">I'm Ondra.</span> <em data-i18n="tHeroB">I build software.</em></h1>
+        <p class="rise" style="--i:1" data-i18n="tHeroSub">Websites, apps and tools for people and companies. Applied cybernetics student, freelancing in Czech and English.</p>
+        <div class="ctas rise" style="--i:2">
+          <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Start a project</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <a href="#projects" class="btn btn-ghost"><span data-i18n="tViewProjects">View projects</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
         </div>
-        <div class="stage rise" style="--i:2">
-          <figure class="back"><img src="assets/slw-overview.jpg" alt="Spotify Live Wrapped dashboard: total listening time, plays and insights" width="1568" height="717" fetchpriority="high"></figure>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="wrap">
+        <div class="stage">
+          <figure class="back"><img src="assets/slw-overview.jpg" alt="Spotify Live Wrapped dashboard: total listening time, plays and insights" width="1568" height="717"></figure>
           <figure class="front"><img src="assets/adc-app.png" alt="ADC, the Access Date Changer database timestamp editor" width="1917" height="1012"></figure>
         </div>
       </div>
     </div>
+
+    <section id="services">
+      <div class="wrap">
+        <h2 class="sec-head reveal" data-i18n="tSecServices">What I build</h2>
+        <div class="services">
+          <article class="svc svc-apps reveal" style="--i:0">
+            <img class="shot shot-a" src="assets/slw-top-rankings.jpg" alt="" loading="lazy" width="1568" height="717">
+            <img class="shot shot-b" src="assets/slw-charts.jpg" alt="" loading="lazy" width="1568" height="717">
+            <i class="ph ph-app-window ph-big" aria-hidden="true"></i>
+            <h3 data-i18n="tSvcApps">Apps</h3>
+            <p data-i18n="tSvcAppsT">Desktop and web apps that do one job properly. Like the two further down.</p>
+          </article>
+          <article class="svc svc-web reveal" style="--i:1">
+            <i class="ph ph-browsers ph-deco" aria-hidden="true"></i>
+            <i class="ph ph-browser ph-big" aria-hidden="true"></i>
+            <h3 data-i18n="tSvcWeb">Websites</h3>
+            <p data-i18n="tSvcWebT">A brand new site, or the old one you'd rather nobody saw. I'll rebuild it.</p>
+          </article>
+          <article class="svc svc-tools reveal" style="--i:2">
+            <img class="shot" src="assets/adc-app.png" alt="" loading="lazy" width="1917" height="1012">
+            <i class="ph ph-wrench ph-big" aria-hidden="true"></i>
+            <h3 data-i18n="tSvcTools">Tools and automation</h3>
+            <p data-i18n="tSvcToolsT">Scripts, utilities, hardware on Arduino. If you do it by hand every week, it can be automated.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <section id="projects">
       <div class="wrap">
@@ -493,7 +641,36 @@
       </div>
     </section>
 
-    <section id="stack" style="padding-top: 0;">
+    <section id="process" class="process">
+      <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
+      <div class="wrap">
+        <h2 class="sec-head reveal" data-i18n="tSecProcess">How it works</h2>
+        <ol class="steps">
+          <li class="reveal" style="--i:0">
+            <i class="ph ph-chats-circle" aria-hidden="true"></i>
+            <h3 data-i18n="tP1T">Talk</h3>
+            <p data-i18n="tP1">Tell me what you need, in Czech or English. We work out the scope together.</p>
+          </li>
+          <li class="reveal" style="--i:1">
+            <i class="ph ph-handshake" aria-hidden="true"></i>
+            <h3 data-i18n="tP2T">Agree</h3>
+            <p data-i18n="tP2">Usually a DPP contract. Clear scope and price before I write a single line.</p>
+          </li>
+          <li class="reveal" style="--i:2">
+            <i class="ph ph-code" aria-hidden="true"></i>
+            <h3 data-i18n="tP3T">Build</h3>
+            <p data-i18n="tP3">You see it grow along the way, not just at the very end.</p>
+          </li>
+          <li class="reveal" style="--i:3">
+            <i class="ph ph-rocket-launch" aria-hidden="true"></i>
+            <h3 data-i18n="tP4T">Launch</h3>
+            <p data-i18n="tP4">I put it live and hand over everything that belongs to it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="stack">
       <div class="wrap">
         <h2 class="sec-head reveal" data-i18n="tSecStack">Stack</h2>
         <div class="stack reveal">
@@ -512,12 +689,13 @@
     </section>
 
     <section id="connect" style="padding-top: 32px;">
+      <div class="orb-wrap orb-connect" aria-hidden="true" data-mascot data-face="o_o" data-tone="blue" data-yaw="-0.3"><div class="orb"></div></div>
       <div class="wrap connect">
         <div class="reveal">
           <h2 data-i18n="tFreeTitle">Let's build something</h2>
           <p class="lede" data-i18n="tFree">Freelancer, open to anything: rebuilds of old websites, brand new startups, for individuals, sole traders and companies. Usually through a DPP contract, other arrangements possible, but that one works best.</p>
           <div class="ctas">
-            <a href="chat.html" class="btn btn-primary"><i class="ph ph-chat-circle" aria-hidden="true"></i><span data-i18n="tLiveChat">Live Chat</span></a>
+            <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Start a project</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
             <a href="mailto:o.zajicek12@gmail.com" class="mail">o.zajicek12@gmail.com</a>
           </div>
         </div>
@@ -579,10 +757,19 @@
   var EN = {
     tNavAbout: "About", tNavProjects: "Projects", tNavConnect: "Connect",
     tHeroA: "I'm Ondra.", tHeroB: "I build software.",
-    tHeroSub: "Student at the Secondary School of Applied Cybernetics. Freelance websites, apps and tools, in Czech and English.",
+    tHeroSub: "Websites, apps and tools for people and companies. Applied cybernetics student, freelancing in Czech and English.",
     tViewProjects: "View projects",
+    tStart: "Start a project",
     tAbout3: "You'll find me as oondraa, or under OZLAB, a fictional company. For now.",
-    tLiveChat: "Live Chat",
+    tSecServices: "What I build",
+    tSvcApps: "Apps", tSvcAppsT: "Desktop and web apps that do one job properly. Like the two further down.",
+    tSvcWeb: "Websites", tSvcWebT: "A brand new site, or the old one you'd rather nobody saw. I'll rebuild it.",
+    tSvcTools: "Tools and automation", tSvcToolsT: "Scripts, utilities, hardware on Arduino. If you do it by hand every week, it can be automated.",
+    tSecProcess: "How it works",
+    tP1T: "Talk", tP1: "Tell me what you need, in Czech or English. We work out the scope together.",
+    tP2T: "Agree", tP2: "Usually a DPP contract. Clear scope and price before I write a single line.",
+    tP3T: "Build", tP3: "You see it grow along the way, not just at the very end.",
+    tP4T: "Launch", tP4: "I put it live and hand over everything that belongs to it.",
     tSecProjects: "Projects", tSecWorks: "In the works", tSecStack: "Stack",
     tDetails: "See details",
     tSlwKicker: "Self-hosted project for audio enthusiasts",
@@ -608,10 +795,19 @@
   var CZ = {
     tNavAbout: "O mně", tNavProjects: "Projekty", tNavConnect: "Kontakt",
     tHeroA: "Jsem Ondra.", tHeroB: "Stavím software.",
-    tHeroSub: "Student Střední školy aplikované kybernetiky. Weby, aplikace a nástroje na volné noze, česky i anglicky.",
+    tHeroSub: "Weby, aplikace a nástroje pro lidi i firmy. Student aplikované kybernetiky na volné noze, česky i anglicky.",
     tViewProjects: "Zobrazit projekty",
+    tStart: "Pojďme na to",
     tAbout3: "Najdeš mě jako oondraa, nebo pod OZLAB, fiktivní firmou. Zatím.",
-    tLiveChat: "Live Chat",
+    tSecServices: "Co zvládnu",
+    tSvcApps: "Aplikace", tSvcAppsT: "Desktopové a webové aplikace, které dělají jednu věc pořádně. Třeba ty dvě o kus níž.",
+    tSvcWeb: "Weby", tSvcWebT: "Úplně nový web, nebo ten starý, za který se stydíš. Postavím ho znovu.",
+    tSvcTools: "Nástroje a automatizace", tSvcToolsT: "Skripty, utility, hardware na Arduinu. Co děláš každý týden ručně, jde zautomatizovat.",
+    tSecProcess: "Jak to probíhá",
+    tP1T: "Domluva", tP1: "Napiš, co potřebuješ, česky nebo anglicky. Rozsah vymyslíme spolu.",
+    tP2T: "Dohoda", tP2: "Většinou přes DPP. Jasný rozsah a cena dřív, než napíšu první řádek.",
+    tP3T: "Vývoj", tP3: "Průběžně vidíš, jak to roste, ne až na úplném konci.",
+    tP4T: "Spuštění", tP4: "Pustím to do světa a předám ti všechno, co k tomu patří.",
     tSecProjects: "Projekty", tSecWorks: "Připravuje se", tSecStack: "Stack",
     tDetails: "Zobrazit detail",
     tSlwKicker: "Self-hosted projekt pro audio nadšence",
@@ -732,6 +928,19 @@
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
+
+  // 3D mascot loads after the page is up; the CSS orbs stay as the fallback if WebGL or the import fails.
+  function loadMascot() {
+    var c = navigator.connection;
+    if (c && c.saveData) return;
+    import("/mascot.js").catch(function () {});
+  }
+  function scheduleMascot() {
+    if ("requestIdleCallback" in window) requestIdleCallback(loadMascot, { timeout: 2000 });
+    else setTimeout(loadMascot, 300);
+  }
+  if (document.readyState === "complete") scheduleMascot();
+  else window.addEventListener("load", scheduleMascot);
 
   document.getElementById("year").textContent = new Date().getFullYear();
 })();
