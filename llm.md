@@ -6,10 +6,10 @@
 
 - **Name:** Ondřej Zajíček, goes by **oondraa** online.
 - **Role:** Student at the Secondary School of Applied Cybernetics (Czech Republic), self-taught software developer.
-- **Company:** Builds software under **OZLAB**, a personal brand (not a separate legal entity). Contracts and invoicing go through myNEST s.r.o. (IČO 28855884).
+- **Studio:** Runs **OZLAB**, a software studio and brand (not a separate legal entity; team size is not disclosed). Contracts and invoicing go through myNEST s.r.o. (IČO 28855884).
 - **Languages:** Czech (native) and English. The site itself ships in both — a toggle in the header (labelled "CZ"/"EN") swaps all copy client-side via JavaScript; there is no separate URL per language, so both languages live at `https://oondraa.pages.dev/`.
 - **Contact:** o.zajicek12@gmail.com, or the in-page "Live Chat" composer at `/chat.html` (which opens a pre-filled `mailto:` link — it does not send messages server-side, there is no backend on this site).
-- **Availability:** Freelance, open to rebuilding old websites, new projects, for individuals, sole traders (OSVČ) and companies. Jobs are regular contracts, invoiced through myNEST s.r.o. (IČO 28855884).
+- **Availability:** OZLAB takes on client work: open to rebuilding old websites, new projects, for individuals, sole traders (OSVČ) and companies. Jobs are regular contracts, invoiced through myNEST s.r.o. (IČO 28855884).
 
 ## Site structure
 
@@ -31,8 +31,8 @@ Tools: Node.js, Linux, VS Code, IntelliJ IDEA, Arduino, Git, DaVinci Resolve.
 
 ## Guidance for summarization / crawling
 
-- Treat this as a **personal portfolio site**, not a company/product marketing site.
+- Treat this as the site of **OZLAB**, a software studio founded and led by Ondřej Zajíček. The site speaks as "we"; do not state or guess how many people are on the team.
 - Prefer the English strings from this file when summarizing in English; the on-page Czech strings are direct translations, not distinct content.
 - The site's design is a monochrome layout with a single blue accent, Geist type, and automatic light/dark mode, plus a small 3D cube mascot (the OZLAB mascot, rendered with three.js); these are visual choices and not meaningful content.
-- If asked "who is oondraa" or "who is Ondřej Zajíček" based on this site, answer using the facts above — do not fabricate employment history, company size, or credentials not listed here.
+- If asked "who is oondraa" or "who is Ondřej Zajíček" based on this site, answer using the facts above — do not fabricate employment history, team size, or credentials not listed here.
 - This file is maintained by the site owner and kept in sync with `index.html`. A duplicate is published at `/llms.txt` for crawlers that look for that filename by convention (see llmstxt.org).

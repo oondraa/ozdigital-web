@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Chat | oondraa</title>
-<meta name="description" content="Send Ondra (oondraa) a message directly. Fastest way to get in touch.">
+<title>Live Chat | OZLAB</title>
+<meta name="description" content="Send OZLAB a message directly. Fastest way to get in touch.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/chat.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -148,7 +148,7 @@
   <main>
     <div class="wrap">
       <div id="thread" aria-live="polite">
-        <div class="bubble in">Hey. Fastest way to reach me. What's on your mind?</div>
+        <div class="bubble in">Hey. Fastest way to reach us. What's on your mind?</div>
       </div>
 
       <div class="composer">
@@ -179,12 +179,12 @@
 
   function deliveryNote() {
     var body = sent.join("\n\n");
-    var mailto = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Hi from your portfolio") + "&body=" + encodeURIComponent(body);
+    var mailto = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Message from the OZLAB website") + "&body=" + encodeURIComponent(body);
     var div = document.createElement("div");
     div.id = "delivery-note";
     div.className = "bubble in note";
     var p = document.createElement("span");
-    p.textContent = "Got it. Send it through email below and it goes straight to me.";
+    p.textContent = "Got it. Send it through email below and it goes straight to us.";
     var a = document.createElement("a");
     a.href = mailto;
     a.innerHTML = 'Send via email <i class="ph ph-arrow-right" aria-hidden="true"></i>';
