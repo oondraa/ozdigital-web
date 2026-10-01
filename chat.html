@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Chat | OZLAB</title>
-<meta name="description" content="Send OZLAB a message directly. Fastest way to get in touch.">
+<title>Chat | OZLAB</title>
+<meta name="description" content="Send OZLAB a message. It goes straight to our phone and we reply within 24 hours.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/chat.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -80,6 +80,9 @@
   }
 
   * { box-sizing: border-box; }
+  /* Hide the text caret that browsers show with caret browsing (F7) on plain text; keep it where you type. */
+  body { caret-color: transparent; }
+  input, textarea, [contenteditable] { caret-color: auto; }
   html, body { margin: 0; padding: 0; }
   body {
     background: var(--bg); color: var(--text);
@@ -119,6 +122,7 @@
     transition: border-color 0.2s var(--ease);
   }
   .field:focus-within { border-color: var(--accent); }
+  .field textarea:focus-visible { outline: none; } /* the field's own border already shows focus */
   textarea { flex: 1; min-width: 0; border: none; outline: none; resize: none; background: transparent; font-size: 16px; line-height: 1.5; padding: 9px 0; max-height: 160px; }
   textarea::placeholder { color: var(--muted); }
   .send {
@@ -129,6 +133,10 @@
   .send:hover { background: var(--accent-fill-hover); }
   .send:active { transform: scale(0.94); }
   .hint { font-size: 13px; color: var(--muted); padding-left: 4px; }
+  .send:disabled { opacity: 0.5; cursor: progress; }
+  .bubble.muted { color: var(--muted); font-size: 15px; }
+  /* Honeypot field: off-screen for people, still in the form for bots. */
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
   @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .bubble { animation: none; } }
@@ -139,8 +147,8 @@
 
   <header class="nav">
     <div class="wrap">
-      <a class="back" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i>Back</a>
-      <span class="title">Live Chat</span>
+      <a class="back" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="back">Back</span></a>
+      <span class="title" data-i18n="title">Chat with OZLAB</span>
       <span></span>
     </div>
   </header>
@@ -148,49 +156,105 @@
   <main>
     <div class="wrap">
       <div id="thread" aria-live="polite">
-        <div class="bubble in">Hey. Fastest way to reach us. What's on your mind?</div>
+        <div class="bubble in" data-i18n="hello">Hi! Tell us what you need: a website, online booking, a system, anything.</div>
       </div>
 
-      <div class="composer">
-        <label for="draft">Your message</label>
+      <form class="composer" id="composer" novalidate>
+        <label for="draft" id="draft-label" data-i18n="labelMsg">Your message</label>
         <div class="field">
-          <textarea id="draft" rows="1" placeholder="Write a message"></textarea>
-          <button id="send-btn" class="send" type="button" aria-label="Send"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
+          <textarea id="draft" rows="1" data-i18n-ph="phMsg" placeholder="Write a message"></textarea>
+          <button id="send-btn" class="send" type="submit" aria-label="Send"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
         </div>
-        <div class="hint">Usually replies within a day.</div>
-      </div>
+        <input class="hp" type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="hint" data-i18n="hint">The message goes straight to our phone. We reply within 24 hours.</div>
+      </form>
     </div>
   </main>
 
 <script>
 (function () {
   var EMAIL = "o.zajicek12@gmail.com";
-  var thread = document.getElementById("thread");
-  var draft = document.getElementById("draft");
-  var sendBtn = document.getElementById("send-btn");
-  var sent = [];
+  var T = {
+    en: {
+      back: "Back", title: "Chat with OZLAB",
+      hello: "Hi! Tell us what you need: a website, online booking, a system, anything.",
+      labelMsg: "Your message", phMsg: "Write a message",
+      labelContact: "Email or phone", phContact: "Email or phone number",
+      hint: "The message goes straight to our phone. We reply within 24 hours.",
+      askContact: "Thanks! Where should we get back to you? Leave an email or a phone number.",
+      badContact: "That doesn't look like an email or a phone number. Could you check it?",
+      sending: "Sending…",
+      done: "Done, we've got your message. We'll get back to you within 24 hours, usually much sooner.",
+      more: "Want to add something? Just write it, it goes to us too.",
+      fail: "Something went wrong on our side and the message didn't go through. Please send it by email instead:",
+      failLink: "Send via email"
+    },
+    cz: {
+      back: "Zpět", title: "Chat s OZLAB",
+      hello: "Ahoj! Napište, co potřebujete: web, online rezervace, systém, cokoliv.",
+      labelMsg: "Vaše zpráva", phMsg: "Napište zprávu",
+      labelContact: "E-mail nebo telefon", phContact: "E-mail nebo telefonní číslo",
+      hint: "Zpráva přijde rovnou nám do mobilu. Odpovídáme do 24 hodin.",
+      askContact: "Díky! Kam se vám máme ozvat? Napište e-mail nebo telefon.",
+      badContact: "Tohle nevypadá jako e-mail ani telefon. Zkontrolujete to prosím?",
+      sending: "Odesílám…",
+      done: "Hotovo, zprávu máme. Ozveme se do 24 hodin, většinou mnohem dřív.",
+      more: "Chcete ještě něco doplnit? Klidně pište, přijde nám to taky.",
+      fail: "Něco se u nás pokazilo a zpráva neodešla. Pošlete ji prosím e-mailem:",
+      failLink: "Poslat e-mailem"
+    }
+  };
+  // Message templates for the pricing buttons on the main page (chat.html?plan=...). Prices stay on index.html only.
+  var PLANS = {
+    en: {
+      vizitka: "Hi, I'm interested in the Business card website. A few words about me and what I need: ",
+      firemni: "Hi, I'm interested in the Business website. A few words about my business and what I need: ",
+      system: "Hi, I need a custom system. Briefly, what it should do: "
+    },
+    cz: {
+      vizitka: "Dobrý den, mám zájem o web Vizitka. Pár slov o mně a o tom, co potřebuju: ",
+      firemni: "Dobrý den, mám zájem o Firemní web. Pár slov o mé firmě a o tom, co potřebuju: ",
+      system: "Dobrý den, potřebuju systém na míru. Stručně, co by měl umět: "
+    }
+  };
+  // Same language choice as the main page: saved toggle wins, otherwise Czech for Czech and Slovak browsers.
+  var lang = /^(cs|sk)/i.test(navigator.language || "") ? "cz" : "en";
+  try { var saved = localStorage.getItem("lang"); if (saved) lang = saved === "cz" ? "cz" : "en"; } catch (e) {}
+  var t = T[lang];
+  document.documentElement.lang = lang === "cz" ? "cs" : "en";
+  document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t[el.getAttribute("data-i18n")]; });
+  document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { el.placeholder = t[el.getAttribute("data-i18n-ph")]; });
 
-  function bubble(text) {
+  var thread = document.getElementById("thread");
+  var form = document.getElementById("composer");
+  var draft = document.getElementById("draft");
+  var label = document.getElementById("draft-label");
+  var sendBtn = document.getElementById("send-btn");
+  var honeypot = document.getElementById("website");
+
+  // step: "message" -> "contact" -> "sent" (after that, extra messages go out right away with the same contact)
+  var step = "message";
+  var pending = [];
+  var contact = "";
+  var busy = false;
+
+  function bubble(text, who) {
     var div = document.createElement("div");
-    div.className = "bubble out";
+    div.className = "bubble " + who;
     div.textContent = text;
     thread.appendChild(div);
+    div.scrollIntoView({ block: "end" });
+    return div;
   }
 
-  function deliveryNote() {
-    var body = sent.join("\n\n");
-    var mailto = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Message from the OZLAB website") + "&body=" + encodeURIComponent(body);
-    var div = document.createElement("div");
-    div.id = "delivery-note";
-    div.className = "bubble in note";
-    var p = document.createElement("span");
-    p.textContent = "Got it. Send it through email below and it goes straight to us.";
-    var a = document.createElement("a");
-    a.href = mailto;
-    a.innerHTML = 'Send via email <i class="ph ph-arrow-right" aria-hidden="true"></i>';
-    div.appendChild(p);
-    div.appendChild(a);
-    thread.appendChild(div);
+  function looksLikeContact(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || v.replace(/\D/g, "").length >= 9;
+  }
+
+  function setMode(mode) {
+    var isContact = mode === "contact";
+    label.textContent = isContact ? t.labelContact : t.labelMsg;
+    draft.placeholder = isContact ? t.phContact : t.phMsg;
   }
 
   function autosize() {
@@ -198,24 +262,91 @@
     draft.style.height = Math.min(draft.scrollHeight, 160) + "px";
   }
 
-  function send() {
-    var text = draft.value.trim();
-    if (!text) { draft.focus(); return; }
-    bubble(text);
-    sent.push(text);
-    draft.value = "";
-    autosize();
-    var note = document.getElementById("delivery-note");
-    if (note) note.remove();
-    deliveryNote();
-    thread.lastElementChild.scrollIntoView({ block: "end" });
+  function failNote(text) {
+    var div = bubble("", "in note");
+    var p = document.createElement("span");
+    p.textContent = t.fail;
+    var a = document.createElement("a");
+    a.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(lang === "cz" ? "Zpráva z webu OZLAB" : "Message from the OZLAB website") + "&body=" + encodeURIComponent(text + "\n\n" + contact);
+    a.innerHTML = '<span></span> <i class="ph ph-arrow-right" aria-hidden="true"></i>';
+    a.firstChild.textContent = t.failLink;
+    div.appendChild(p);
+    div.appendChild(a);
+    div.scrollIntoView({ block: "end" });
   }
 
-  sendBtn.addEventListener("click", send);
+  function deliver(text, after) {
+    busy = true;
+    sendBtn.disabled = true;
+    var status = bubble(t.sending, "in muted");
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ message: text, contact: contact, lang: lang, website: honeypot.value })
+    })
+      .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (res) {
+        status.remove();
+        if (!res.ok) throw new Error(res.error || "failed");
+        after();
+      })
+      .catch(function () {
+        status.remove();
+        failNote(text);
+      })
+      .then(function () {
+        busy = false;
+        sendBtn.disabled = false;
+      });
+  }
+
+  function send() {
+    var text = draft.value.trim();
+    if (!text || busy) { draft.focus(); return; }
+    draft.value = "";
+    autosize();
+
+    if (step === "message") {
+      bubble(text, "out");
+      pending.push(text);
+      step = "contact";
+      setMode("contact");
+      setTimeout(function () { bubble(t.askContact, "in"); }, 350);
+      return;
+    }
+
+    if (step === "contact") {
+      bubble(text, "out");
+      if (!looksLikeContact(text)) { bubble(t.badContact, "in"); return; }
+      contact = text;
+      step = "sent";
+      setMode("message");
+      deliver(pending.join("\n\n"), function () {
+        pending = [];
+        bubble(t.done, "in");
+        setTimeout(function () { bubble(t.more, "in"); }, 600);
+      });
+      return;
+    }
+
+    bubble(text, "out");
+    deliver(text, function () {});
+  }
+
+  form.addEventListener("submit", function (e) { e.preventDefault(); send(); });
   draft.addEventListener("input", autosize);
   draft.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
   });
+
+  // Prefill a template when coming from a pricing button; the visitor finishes it and sends it themselves.
+  var plan = new URLSearchParams(location.search).get("plan");
+  if (plan && PLANS[lang].hasOwnProperty(plan)) {
+    draft.value = PLANS[lang][plan];
+    autosize();
+  }
+  draft.focus();
+  draft.setSelectionRange(draft.value.length, draft.value.length);
 })();
 </script>
 </body>
