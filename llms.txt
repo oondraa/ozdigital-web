@@ -6,10 +6,10 @@
 
 - **Name:** Ondřej Zajíček, goes by **oondraa** online.
 - **Role:** Student at the Secondary School of Applied Cybernetics (Czech Republic), self-taught software developer.
-- **Company:** Builds software under **OZLAB**, a personal brand (not a separate legal entity). Contracts and invoicing go through a partner company.
+- **Company:** Builds software under **OZLAB**, a personal brand (not a separate legal entity). Contracts and invoicing go through myNEST s.r.o. (IČO 28855884).
 - **Languages:** Czech (native) and English. The site itself ships in both — a toggle in the header (labelled "CZ"/"EN") swaps all copy client-side via JavaScript; there is no separate URL per language, so both languages live at `https://oondraa.pages.dev/`.
 - **Contact:** o.zajicek12@gmail.com, or the in-page "Live Chat" composer at `/chat.html` (which opens a pre-filled `mailto:` link — it does not send messages server-side, there is no backend on this site).
-- **Availability:** Freelance, open to rebuilding old websites, new projects, for individuals, sole traders (OSVČ) and companies. Jobs are regular contracts, invoiced through a partner company.
+- **Availability:** Freelance, open to rebuilding old websites, new projects, for individuals, sole traders (OSVČ) and companies. Jobs are regular contracts, invoiced through myNEST s.r.o. (IČO 28855884).
 
 ## Site structure
 
