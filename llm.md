@@ -47,9 +47,10 @@ A static site (no build step, no framework) hosted on Cloudflare Pages, deployed
 
 ## OZLAB's own projects (on `/lab.html`)
 
-1. **Spotify Live Wrapped** — a self-hosted app that connects to a user's Spotify account and keeps listening stats (top tracks, artists, genres) up to date year-round, not just as a December recap. Repo/demo: `https://oondraa.github.io/spotify-live-wrapped/`.
-2. **ADC — Access Date Changer** — a standalone Windows utility to edit the Creation/Modification/Access timestamps of Microsoft Access database files (`.accdb`, `.mdb`). Repo: `https://github.com/oondraa/Access-date-changer`.
-3. Several projects listed as being worked on, with names deliberately blurred/redacted in the UI (ADEA, OCR tool, a Linux connector, and an experimental neural network that is not an LLM) — these are unreleased and intentionally undetailed; do not invent specifics about them beyond the one-line description shown on the page.
+1. **OZBEAT** — a music visualizer for Windows (Rust). Shows what is playing on the PC (Spotify, browser, any app in the Windows media controls) or on BluOS speakers, with cover art and artist photos as a moving background, line-synced lyrics and audio-reactive visuals; supports a second screen and runs as a screensaver. Free for personal, non-commercial use (source-available, not open source). Website: `https://oondraa.github.io/OZBEAT/`, repo: `https://github.com/oondraa/OZBEAT`.
+2. **Spotify Live Wrapped** — a self-hosted app that connects to a user's Spotify account and keeps listening stats (top tracks, artists, genres) up to date year-round, not just as a December recap. Repo/demo: `https://oondraa.github.io/spotify-live-wrapped/`.
+3. **ADC — Access Date Changer** — a standalone Windows utility to edit the Creation/Modification/Access timestamps of Microsoft Access database files (`.accdb`, `.mdb`). Repo: `https://github.com/oondraa/Access-date-changer`.
+4. Several projects listed as being worked on, with names deliberately blurred/redacted in the UI (ADEA, OCR tool, a Linux connector, and an experimental neural network that is not an LLM) — these are unreleased and intentionally undetailed; do not invent specifics about them beyond the one-line description shown on the page.
 
 These are personal projects, not client work.
 

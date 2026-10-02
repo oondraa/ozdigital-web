@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OZLAB | What else we're working on</title>
-<meta name="description" content="What else OZLAB is working on: our own software projects, including Spotify Live Wrapped, ADC (Access Date Changer) and an experimental neural network.">
+<meta name="description" content="What else OZLAB is working on: our own software projects, including OZBEAT, Spotify Live Wrapped, ADC (Access Date Changer) and an experimental neural network.">
 <meta name="author" content="Ondřej Zajíček (oondraa)">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/lab.html">
@@ -334,6 +334,11 @@
   .thumbs img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border-radius: 8px; border: 1px solid var(--line); }
   .card-adc .media { aspect-ratio: auto; flex: 1; min-height: 220px; }
   .card-adc .body { flex: none; }
+  /* Newest project: full-width row, video left, text right */
+  .card-wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .card-wide .media { aspect-ratio: auto; min-height: 100%; }
+  .card-wide .body { padding: 30px 32px 32px; }
+  .card .tag-new { align-self: flex-start; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--accent-fill); color: var(--on-accent); }
 
   /* In the works: 1 wide + 3 compact */
   .works { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
@@ -494,6 +499,9 @@
     .svc-apps { grid-row: auto; min-height: 520px; }
     .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; }
     .card-adc .media { aspect-ratio: 16 / 9; flex: none; min-height: 0; }
+    .card-wide { display: flex; }
+    .card-wide .media { aspect-ratio: 16 / 9; min-height: 0; }
+    .card-wide .body { padding: 24px 26px 26px; }
     .works { grid-template-columns: minmax(0, 1fr); }
     .pains { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .plans { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
@@ -558,6 +566,29 @@
         <h2 class="sec-head reveal" data-i18n="tSecProjects">From our workshop</h2>
         <p class="sec-lede reveal" hidden data-i18n="tProjectsLede">Besides websites we build our own software. A few things we've made for ourselves, so you can see what we're capable of.</p>
         <div class="bento">
+          <a href="https://oondraa.github.io/OZBEAT/" data-open-sheet="ozbeat" class="card card-wide reveal" style="--i:0">
+            <div class="media">
+              <video data-src="assets/ozbeat-promo-720.mp4" poster="assets/ozbeat-poster.jpg" muted loop playsinline preload="none" aria-label="OZBEAT recording: cover art, artist and synced lyrics"></video>
+            </div>
+            <div class="body">
+              <span class="tag-new" data-i18n="tNew">New</span>
+              <div class="head">
+                <img class="icon" src="assets/ozbeat-icon.png" alt="" width="48" height="48">
+                <div>
+                  <div class="kicker" data-i18n="tOzbKicker">Windows app and screensaver</div>
+                  <h3>OZBEAT</h3>
+                </div>
+              </div>
+              <p class="desc" data-i18n="tOzbSub">A music visualizer for Windows. Cover art, synced lyrics and smooth visuals for whatever is playing: Spotify, YouTube in the browser or BluOS speakers.</p>
+              <div class="thumbs">
+                <img src="assets/ozbeat-yzo.webp" alt="Cover art and synced lyrics" loading="lazy" width="1600" height="900">
+                <img src="assets/ozbeat-calin.webp" alt="Artwork background" loading="lazy" width="1600" height="899">
+                <img src="assets/ozbeat-viktorsheen.webp" alt="Artist photo background" loading="lazy" width="1600" height="900">
+              </div>
+              <span class="more"><span data-i18n="tDetails">See details</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+
           <a href="https://oondraa.github.io/spotify-live-wrapped/" data-open-sheet="slw" class="card reveal" style="--i:0">
             <div class="media">
               <video data-src="assets/slw-promo-720.mp4" poster="assets/slw-poster.jpg" muted loop playsinline preload="none" aria-label="Spotify Live Wrapped promo video"></video>
@@ -644,6 +675,25 @@
     </div>
   </footer>
 
+  <dialog id="ozbeat-sheet" aria-labelledby="ozbeat-title">
+    <div class="sheet-head">
+      <img class="icon" src="assets/ozbeat-icon.png" alt="" width="44" height="44">
+      <h2 id="ozbeat-title">OZBEAT</h2>
+      <button class="close-btn" type="button" data-close-sheet aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>
+    </div>
+    <div class="sheet-body">
+      <p style="margin-top: 0;" data-i18n="tOzbLong">Play music the way you normally do and OZBEAT fills the screen with it: cover art and artist photos as a soft moving background, lyrics synced line by line, and visuals that swell with the sound. Works with Spotify, the browser, any app in the Windows media controls and BluOS speakers. Cover on one screen, lyrics on the other, and it also runs as a screensaver. Written in Rust, nothing to install, free for personal use.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+        <a href="https://oondraa.github.io/OZBEAT/" target="_blank" rel="noopener" class="btn btn-primary"><span data-i18n="tOpen">Open project</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
+        <a href="https://github.com/oondraa/OZBEAT/releases/latest/download/OZBEAT.exe" class="btn btn-ghost"><i class="ph ph-download-simple" aria-hidden="true"></i><span data-i18n="tDownload">Download for Windows</span></a>
+      </div>
+      <video data-src="assets/ozbeat-promo.mp4" poster="assets/ozbeat-poster.jpg" controls muted loop playsinline preload="none"></video>
+      <img src="assets/ozbeat-yzo.webp" alt="OZBEAT showing cover art and synced lyrics" loading="lazy" width="1600" height="900">
+      <img src="assets/ozbeat-calin.webp" alt="OZBEAT with an artwork background" loading="lazy" width="1600" height="899">
+      <img src="assets/ozbeat-viktorsheen.webp" alt="OZBEAT with an artist photo background" loading="lazy" width="1600" height="900">
+    </div>
+  </dialog>
+
   <dialog id="slw-sheet" aria-labelledby="slw-title">
     <div class="sheet-head">
       <img class="icon" src="assets/spotify-live-wrapped-icon.png" alt="" width="44" height="44">
@@ -713,6 +763,10 @@
     tSlwKicker: "Self-hosted project for audio enthusiasts",
     tSlwSub: "Your Wrapped every day, not just in December.",
     tSlwLong: "Your Wrapped every day, not just in December. Connects to your Spotify account and keeps your listening stats (top tracks, artists and genres) up to date all year, running on your own machine.",
+    tNew: "New", tDownload: "Download for Windows",
+    tOzbKicker: "Windows app and screensaver",
+    tOzbSub: "A music visualizer for Windows. Cover art, synced lyrics and smooth visuals for whatever is playing: Spotify, YouTube in the browser or BluOS speakers.",
+    tOzbLong: "Play music the way you normally do and OZBEAT fills the screen with it: cover art and artist photos as a soft moving background, lyrics synced line by line, and visuals that swell with the sound. Works with Spotify, the browser, any app in the Windows media controls and BluOS speakers. Cover on one screen, lyrics on the other, and it also runs as a screensaver. Written in Rust, nothing to install, free for personal use.",
     tAdcKicker: "Windows app",
     tAdcSub: "Standalone utility for editing timestamps of Access databases (.accdb, .mdb).",
     tAdcLong: "A lightweight, standalone Windows utility designed to modify system timestamps (Creation, Modification, and Access dates) for Microsoft Access databases (.accdb and .mdb).",
@@ -773,6 +827,10 @@
     tSlwKicker: "Self-hosted projekt pro audio nadšence",
     tSlwSub: "Vaše Wrapped každý den, ne jen v prosinci.",
     tSlwLong: "Vaše Wrapped každý den, ne jen v prosinci. Připojí se k vašemu Spotify účtu a drží statistiky poslechu (nejhranější skladby, interpreti a žánry) aktuální celý rok, běží na vašem vlastním stroji.",
+    tNew: "Novinka", tDownload: "Stáhnout pro Windows",
+    tOzbKicker: "Windows aplikace a spořič obrazovky",
+    tOzbSub: "Vizualizér hudby pro Windows. Obal alba, synchronizovaný text a plynulé animace k čemukoliv, co zrovna hraje: Spotify, YouTube v prohlížeči nebo reproduktory BluOS.",
+    tOzbLong: "Pustíte si hudbu jako obvykle a OZBEAT s ní zaplní obrazovku: obal alba a fotky interpreta jako jemné pohyblivé pozadí, text synchronizovaný řádek po řádku a animace, které se nadouvají s hudbou. Funguje se Spotify, prohlížečem, jakoukoliv aplikací v ovládání médií ve Windows i s reproduktory BluOS. Obal na jednom monitoru, text na druhém, a umí běžet i jako spořič obrazovky. Napsaný v Rustu, nic se neinstaluje, zdarma pro osobní použití.",
     tAdcKicker: "Windows aplikace",
     tAdcSub: "Samostatná utilita pro úpravu časových razítek databází Accessu (.accdb, .mdb).",
     tAdcLong: "Lehká samostatná Windows utilita pro úpravu systémových časových razítek (vytvoření, úprava a otevření) u databází Microsoft Access (.accdb a .mdb).",
