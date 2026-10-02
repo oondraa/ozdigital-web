@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OZLAB | Websites and custom systems</title>
-<meta name="description" content="Websites, online booking and internal systems for businesses of any size. Fixed price, contract and invoice, free consultation.">
+<title>OZLAB | Creative studio</title>
+<meta name="description" content="OZLAB is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
 <meta name="author" content="Ondřej Zajíček (oondraa)">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/">
@@ -14,8 +14,8 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OZLAB">
-<meta property="og:title" content="OZLAB | Websites and custom systems">
-<meta property="og:description" content="Websites, online booking and internal systems for businesses of any size. Fixed price, contract and invoice.">
+<meta property="og:title" content="OZLAB | Creative studio">
+<meta property="og:description" content="OZLAB is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
 <meta property="og:url" content="https://oondraa.pages.dev/">
 <meta property="og:image" content="https://oondraa.pages.dev/assets/og-ozlab.png">
 <meta property="og:image:width" content="1200">
@@ -24,8 +24,8 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="cs_CZ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="OZLAB | Websites and custom systems">
-<meta name="twitter:description" content="Websites, online booking and internal systems for businesses of any size. Fixed price, contract and invoice.">
+<meta name="twitter:title" content="OZLAB | Creative studio">
+<meta name="twitter:description" content="OZLAB is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
 <meta name="twitter:image" content="https://oondraa.pages.dev/assets/og-ozlab.png">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -447,39 +447,8 @@
     *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   }
 
-  /* Pains: four short "sound familiar?" tiles that reuse the .work look */
-  .pains { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
-  .pains .work .ph { color: var(--accent); }
 
-  /* Pricing: three plans, the middle one lifted onto the accent tint */
   .sec-lede { margin: -24px 0 40px; max-width: 56ch; color: var(--muted); font-size: 18px; line-height: 1.6; text-wrap: pretty; }
-  .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
-  .plan {
-    display: flex; flex-direction: column; gap: 14px; padding: 30px;
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-surface);
-  }
-  .plan-hot {
-    background: color-mix(in srgb, var(--accent-fill) 13%, var(--surface));
-    border-color: color-mix(in srgb, var(--accent-fill) 34%, transparent);
-  }
-  .plan .tag { align-self: flex-start; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--accent-fill); color: var(--on-accent); }
-  .plan h3 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
-  .plan .price { font-size: clamp(30px, 3vw, 40px); font-weight: 650; letter-spacing: -0.04em; line-height: 1.1; }
-  .plan .for { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.55; text-wrap: pretty; }
-  .plan ul { list-style: none; margin: 4px 0 8px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  .plan li { display: flex; gap: 10px; font-size: 15.5px; line-height: 1.45; }
-  .plan li .ph { color: var(--accent); font-size: 18px; flex-shrink: 0; margin-top: 1px; }
-  .plan .btn { margin-top: auto; align-self: flex-start; }
-  .plans-note { margin: 20px 0 0; color: var(--muted); font-size: 15px; }
-
-  /* After launch: two handover options under the plans */
-  .care { margin-top: 20px; padding: 30px; border: 1px solid var(--line); border-radius: var(--r-surface); background: var(--surface); }
-  .care h3 { margin: 0 0 20px; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
-  .care-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
-  .care-opt { display: flex; gap: 16px; align-items: flex-start; }
-  .care-opt .ph { font-size: 28px; color: var(--accent); flex-shrink: 0; }
-  .care-opt strong { display: block; font-size: 18px; font-weight: 600; margin-bottom: 6px; }
-  .care-opt p { margin: 0; color: var(--muted); font-size: 15.5px; line-height: 1.55; text-wrap: pretty; }
 
   /* FAQ: native <details> */
   .faq { display: flex; flex-direction: column; max-width: 860px; }
@@ -502,9 +471,6 @@
     .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; }
     .card-adc .media { aspect-ratio: 16 / 9; flex: none; min-height: 0; }
     .works { grid-template-columns: minmax(0, 1fr); }
-    .pains { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .plans { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
-    .care-opts { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 767px) {
     .wrap { padding: 0 16px; }
@@ -527,8 +493,6 @@
     .sec-head { margin-bottom: 28px; }
     .work-lead { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 26px; }
     .card .body { padding: 20px; }
-    .pains { grid-template-columns: minmax(0, 1fr); }
-    .plan, .care { padding: 24px; }
     .faq summary { font-size: 17px; padding: 18px 0; }
     .nav nav a { padding: 8px; font-size: 14px; }
     .lang-btn { margin-left: 4px; }
@@ -544,8 +508,8 @@
     <div class="wrap">
       <a href="#about" class="brand" aria-label="OZLAB"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/></svg><span class="wm"><b>OZ</b>LAB</span></a>
       <nav aria-label="Primary">
-        <a href="#services" data-i18n="tNavAbout">Services</a>
-        <a href="#pricing" data-i18n="tNavProjects">Pricing</a>
+        <a href="#services" data-i18n="tNavAbout">What we do</a>
+        <a href="#process" data-i18n="tNavProjects">How we work</a>
         <a href="#connect" data-i18n="tNavConnect">Contact</a>
         <button id="theme-toggle" class="lang-btn theme-btn" type="button" aria-label="Switch to light mode"><i class="ph ph-sun" aria-hidden="true"></i></button>
         <button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">CZ</button>
@@ -556,65 +520,37 @@
   <main>
     <div class="hero" id="about">
       <div class="wrap">
-        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble" data-i18n="tHey">What should we build? The first call is free.</span></div>
-        <h1 class="rise" style="--i:0"><span data-i18n="tHeroA">From web to system.</span> <em data-i18n="tHeroB">We build it for you.</em></h1>
-        <p class="rise" style="--i:1" data-i18n="tHeroSub">Websites, online booking and internal systems that bring you customers and save your company time. You tell us what you need, the tech is our problem.</p>
+        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble" data-i18n="tHey">Got an idea? Let's make it.</span></div>
+        <h1 class="rise" style="--i:0"><span data-i18n="tHeroA">A creative studio.</span> <em data-i18n="tHeroB">Made to order.</em></h1>
+        <p class="rise" style="--i:1" data-i18n="tHeroSub">We design and build websites, apps and systems. No templates and no packages: every project is made from scratch for one client and their idea.</p>
         <div class="ctas rise" style="--i:2">
-          <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Free consultation</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-          <a href="#pricing" class="btn btn-ghost"><span data-i18n="tViewProjects">See pricing</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+          <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Get in touch</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <a href="#services" class="btn btn-ghost"><span data-i18n="tViewProjects">What we do</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
 
-    <section id="pains">
-      <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecPains">Sound familiar?</h2>
-        <div class="pains">
-          <article class="work reveal" style="--i:0">
-            <i class="ph ph-envelope-simple-open" aria-hidden="true"></i>
-            <h3 data-i18n="tPain1T">Nobody gets in touch</h3>
-            <p data-i18n="tPain1">The website exists, but enquiries don't come. It's a mess on a phone and there's no easy way to reach you.</p>
-          </article>
-          <article class="work reveal" style="--i:1">
-            <i class="ph ph-magnifying-glass" aria-hidden="true"></i>
-            <h3 data-i18n="tPain2T">Google can't find you</h3>
-            <p data-i18n="tPain2">People search "realtor Brno" or "plumber near me" and find your competitors instead.</p>
-          </article>
-          <article class="work reveal" style="--i:2">
-            <i class="ph ph-phone-call" aria-hidden="true"></i>
-            <h3 data-i18n="tPain3T">Bookings by phone</h3>
-            <p data-i18n="tPain3">You spend the day on calls and texts sorting out appointments. Online booking does it for you, even at night.</p>
-          </article>
-          <article class="work reveal" style="--i:3">
-            <i class="ph ph-table" aria-hidden="true"></i>
-            <h3 data-i18n="tPain4T">The company runs on spreadsheets</h3>
-            <p data-i18n="tPain4">Orders in Excel, stock in your head, notes on paper. Things get lost and every week costs hours.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <section id="services">
       <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecServices">What we'll build for you</h2>
+        <h2 class="sec-head reveal" data-i18n="tSecServices">What we do</h2>
         <div class="services">
           <article class="svc svc-apps reveal" style="--i:0">
             <i class="ph ph-kanban ph-deco" aria-hidden="true"></i>
             <i class="ph ph-tree-structure ph-big" aria-hidden="true"></i>
-            <h3 data-i18n="tSvcApps">Internal systems</h3>
-            <p data-i18n="tSvcAppsT">Orders, stock, attendance, clients, invoicing. A system built around how your company actually works, not the other way round.</p>
+            <h3 data-i18n="tSvcApps">Apps and systems</h3>
+            <p data-i18n="tSvcAppsT">From a company's internal tools to standalone apps. Designed and built around how it actually needs to work, not squeezed into something off the shelf.</p>
           </article>
           <article class="svc svc-web reveal" style="--i:1">
             <i class="ph ph-browsers ph-deco" aria-hidden="true"></i>
             <i class="ph ph-browser ph-big" aria-hidden="true"></i>
-            <h3 data-i18n="tSvcWeb">Websites and online booking</h3>
-            <p data-i18n="tSvcWebT">A new website, or a rebuild of the one you'd rather nobody saw. Great on a phone, with bookings or orders when you need them.</p>
+            <h3 data-i18n="tSvcWeb">Websites</h3>
+            <p data-i18n="tSvcWebT">Websites with a face of their own, not a template. Design, copy and code under one roof, and great on a phone.</p>
           </article>
           <article class="svc svc-tools reveal" style="--i:2">
             <i class="ph ph-gear-six ph-deco" aria-hidden="true"></i>
             <i class="ph ph-wrench ph-big" aria-hidden="true"></i>
-            <h3 data-i18n="tSvcTools">Automation</h3>
-            <p data-i18n="tSvcToolsT">Invoices, spreadsheets, emails, exports. If you do it by hand every week, a computer can do it for you.</p>
+            <h3 data-i18n="tSvcTools">Automation and experiments</h3>
+            <p data-i18n="tSvcToolsT">Whatever gets done by hand over and over, we teach a computer to do. And if nobody has built it yet, we're happy to try.</p>
           </article>
         </div>
       </div>
@@ -623,97 +559,31 @@
     <section id="process" class="process">
       <div class="wrap">
         <div class="process-head">
-          <h2 class="sec-head reveal" data-i18n="tSecProcess">How it works</h2>
+          <h2 class="sec-head reveal" data-i18n="tSecProcess">How we work</h2>
           <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
         </div>
         <ol class="steps">
           <li class="reveal" style="--i:0">
             <i class="ph ph-chats-circle" aria-hidden="true"></i>
             <h3 data-i18n="tP1T">Talk</h3>
-            <p data-i18n="tP1">Tell us what you need, in Czech or English. We work out the scope together.</p>
+            <p data-i18n="tP1">Tell us what you're coming with. We go through the idea, the goals and what you expect from it.</p>
           </li>
           <li class="reveal" style="--i:1">
             <i class="ph ph-handshake" aria-hidden="true"></i>
             <h3 data-i18n="tP2T">Agree</h3>
-            <p data-i18n="tP2">A standard contract and a proper invoice. Clear scope and price before we write a single line.</p>
+            <p data-i18n="tP2">Scope, deadline and price are set for your project, not taken from a list. A standard contract and a proper invoice.</p>
           </li>
           <li class="reveal" style="--i:2">
             <i class="ph ph-code" aria-hidden="true"></i>
-            <h3 data-i18n="tP3T">Build</h3>
-            <p data-i18n="tP3">You see it grow along the way, not just at the very end.</p>
+            <h3 data-i18n="tP3T">Create</h3>
+            <p data-i18n="tP3">We design and build. You see it take shape along the way and have your say.</p>
           </li>
           <li class="reveal" style="--i:3">
             <i class="ph ph-rocket-launch" aria-hidden="true"></i>
             <h3 data-i18n="tP4T">Launch</h3>
-            <p data-i18n="tP4">We put it live and hand over everything that belongs to it.</p>
+            <p data-i18n="tP4">We put it live, hand over everything that belongs to it and stay around afterwards.</p>
           </li>
         </ol>
-      </div>
-    </section>
-
-    <section id="pricing">
-      <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecPricing">Pricing</h2>
-        <p class="sec-lede reveal" data-i18n="tPricingLede">No surprises. You know the exact price before we start, and it doesn't change along the way.</p>
-        <div class="plans">
-          <article class="plan reveal" style="--i:0">
-            <h3 data-i18n="tPlan1">Business card</h3>
-            <div class="price" data-i18n="tPlan1P">from 4,990 CZK</div>
-            <p class="for" data-i18n="tPlan1For">For tradespeople, freelancers and anyone who needs to be findable online.</p>
-            <ul>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan1a">One-page website</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan1b">Contact, map and opening hours</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan1c">Looks great on a phone</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan1d">Live in 2 weeks</span></li>
-            </ul>
-            <a href="chat.html?plan=vizitka" class="btn btn-ghost"><span data-i18n="tPlanCta">I want this</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-          </article>
-          <article class="plan plan-hot reveal" style="--i:1">
-            <span class="tag" data-i18n="tPlanHot">Most popular</span>
-            <h3 data-i18n="tPlan2">Business website</h3>
-            <div class="price" data-i18n="tPlan2P">from 11,990 CZK</div>
-            <p class="for" data-i18n="tPlan2For">For realtors, salons, restaurants and firms that want enquiries from the web.</p>
-            <ul>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan2a">Multiple pages: services, references, about you</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan2b">Enquiry form straight to your inbox</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan2c">Set up so Google can find you</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan2d">We'll help you with the texts</span></li>
-            </ul>
-            <a href="chat.html?plan=firemni" class="btn btn-primary"><span data-i18n="tPlanCta">I want this</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-          </article>
-          <article class="plan reveal" style="--i:2">
-            <h3 data-i18n="tPlan3">Custom system</h3>
-            <div class="price" data-i18n="tPlan3P">by agreement</div>
-            <p class="for" data-i18n="tPlan3For">Booking systems, client portals, internal systems for running your company. Whatever you need.</p>
-            <ul>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan3a">Online bookings and orders</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan3b">Client portals and internal systems</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan3c">Automation of repetitive work</span></li>
-            <li><i class="ph ph-check" aria-hidden="true"></i><span data-i18n="tPlan3d">Fixed price after a consultation</span></li>
-            </ul>
-            <a href="chat.html?plan=system" class="btn btn-ghost"><span data-i18n="tPlanCta3">Let's talk</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-          </article>
-        </div>
-        <div class="care reveal">
-          <h3 data-i18n="tCareTitle">After launch, you choose</h3>
-          <div class="care-opts">
-            <div class="care-opt">
-              <i class="ph ph-key" aria-hidden="true"></i>
-              <div>
-                <strong data-i18n="tCare1T">One-off handover</strong>
-                <p data-i18n="tCare1">We put the website on your domain, a new one or the one you already have, and hand it over. You also get our simple editor for changing texts and images yourself. No further fees from us.</p>
-              </div>
-            </div>
-            <div class="care-opt">
-              <i class="ph ph-shield-check" aria-hidden="true"></i>
-              <div>
-                <strong data-i18n="tCare2T">Monthly care</strong>
-                <p data-i18n="tCare2">We host the website and look after it for a fixed monthly fee. Edits, backups and updates are on us, you don't have to deal with anything.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <p class="plans-note reveal" data-i18n="tPlansNote">Prices are a guide. You get the exact one in writing before we start, and every job runs on a contract and a proper invoice.</p>
       </div>
     </section>
 
@@ -722,28 +592,28 @@
         <h2 class="sec-head reveal" data-i18n="tSecFaq">Common questions</h2>
         <div class="faq reveal">
           <details>
-            <summary><span data-i18n="tQ1">How much does a website cost?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA1">A one-page business card site starts at 9,900 CZK, a full business website at 24,900 CZK. After a short call you get a fixed price in writing. It doesn't change unless you change the brief.</p>
+            <summary><span data-i18n="tQ1">How much does it cost?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA1">We don't have a price list, because no two projects are the same. We price it after the first conversation, based on what you need, and you get the price in writing before we start.</p>
           </details>
           <details>
             <summary><span data-i18n="tQ2">How long will it take?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA2">A typical website is live in 2 to 4 weeks. Most of that time depends on how quickly we get your texts and photos.</p>
+            <p data-i18n="tA2">It depends on the scope. We agree on the deadline up front, so you know it before we start.</p>
           </details>
           <details>
             <summary><span data-i18n="tQ3">What do you need from me?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA3">Half an hour on a call, a few sentences about your business, your logo and photos if you have them. We'll help with the rest, including the texts.</p>
+            <p data-i18n="tA3">Mostly the idea and some time for a conversation. Anything you already have (logo, photos, texts) helps; we'll take care of the rest.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ4">Will I be able to edit the site myself?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA4">Yes. We'll show you how to change texts and photos. If you'd rather not deal with it, we can look after the site for you every month.</p>
+            <summary><span data-i18n="tQ4">Will I be able to make changes myself?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA4">Yes. Depending on the project we hand over an editor or show you how it works. If you'd rather not deal with it, we'll look after it for you.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ5">What about the domain and hosting?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA5">We'll sort it out. The domain is registered in your name, so the website always belongs to you, not to us.</p>
+            <summary><span data-i18n="tQ5">Who owns it afterwards?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA5">You do. The domain and the finished work are yours. Whether you run it yourself or we look after it is something we agree on per project.</p>
           </details>
           <details>
             <summary><span data-i18n="tQ6">Who am I actually dealing with?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA6">OZLAB is a small software studio. You talk directly to the people building your site, with no middlemen. Contracts and invoices go through myNEST s.r.o., so everything is done properly.</p>
+            <p data-i18n="tA6">OZLAB is a small creative studio. You talk directly to the people who design and build your project, with no middlemen. Contracts and invoices go through myNEST s.r.o., so everything is done properly.</p>
           </details>
         </div>
       </div>
@@ -752,10 +622,10 @@
     <section id="connect">
       <div class="wrap connect">
         <div class="reveal">
-          <h2 data-i18n="tFreeTitle">Let's talk it over</h2>
-          <p class="lede" data-i18n="tFree">Write a few sentences about your business and what you need. We'll get back to you within 24 hours with a proposal and a price. Already have a website? Send us the link and we'll tell you for free what we'd improve.</p>
+          <h2 data-i18n="tFreeTitle">Got an idea?</h2>
+          <p class="lede" data-i18n="tFree">Write a few sentences about what you'd like to make. We'll get back to you within 24 hours and talk it through.</p>
           <div class="ctas">
-            <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Free consultation</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Get in touch</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
             <a href="mailto:o.zajicek12@gmail.com" class="mail">o.zajicek12@gmail.com</a>
           </div>
         </div>
@@ -794,36 +664,21 @@
 <script>
 (function () {
   var EN = {
-    tNavAbout: "Services", tNavProjects: "Pricing", tNavConnect: "Contact",
-    tHeroA: "From web to system.", tHeroB: "We build it for you.",
-    tHeroSub: "Websites, online booking and internal systems that bring you customers and save your company time. You tell us what you need, the tech is our problem.",
-    tViewProjects: "See pricing",
-    tStart: "Free consultation", tHey: "What should we build? The first call is free.",
+    tNavAbout: "What we do", tNavProjects: "How we work", tNavConnect: "Contact",
+    tHeroA: "A creative studio.", tHeroB: "Made to order.",
+    tHeroSub: "We design and build websites, apps and systems. No templates and no packages: every project is made from scratch for one client and their idea.",
+    tViewProjects: "What we do",
+    tStart: "Get in touch", tHey: "Got an idea? Let's make it.",
     tAbout3: "OZLAB is our own brand. Contracts and invoicing are handled by", tIco: "Company ID",
-    tSecPains: "Sound familiar?",
-    tPain1T: "Nobody gets in touch", tPain1: "The website exists, but enquiries don't come. It's a mess on a phone and there's no easy way to reach you.",
-    tPain2T: "Google can't find you", tPain2: "People search \"realtor Brno\" or \"plumber near me\" and find your competitors instead.",
-    tPain3T: "Bookings by phone", tPain3: "You spend the day on calls and texts sorting out appointments. Online booking does it for you, even at night.",
-    tPain4T: "The company runs on spreadsheets", tPain4: "Orders in Excel, stock in your head, notes on paper. Things get lost and every week costs hours.",
-    tSecServices: "What we'll build for you",
-    tSvcApps: "Internal systems", tSvcAppsT: "Orders, stock, attendance, clients, invoicing. A system built around how your company actually works, not the other way round.",
-    tSvcWeb: "Websites and online booking", tSvcWebT: "A new website, or a rebuild of the one you'd rather nobody saw. Great on a phone, with bookings or orders when you need them.",
-    tSvcTools: "Automation", tSvcToolsT: "Invoices, spreadsheets, emails, exports. If you do it by hand every week, a computer can do it for you.",
-    tSecProcess: "How it works",
-    tP1T: "Talk", tP1: "Get in touch and we'll reply within 24 hours. The first consultation is free and with no obligation.",
-    tP2T: "Agree", tP2: "A fixed price and deadline up front. A standard contract and a proper invoice, no surprises.",
-    tP3T: "Build", tP3: "You see it grow along the way and can have your say. A typical website is done in 2 to 4 weeks, systems depend on the scope.",
-    tP4T: "Launch", tP4: "We put it live, train you and your team, and stay around if anything needs fixing.",
-    tSecPricing: "Pricing",
-    tPricingLede: "No surprises. You know the exact price before we start, and it doesn't change along the way.",
-    tPlanHot: "Most popular", tPlanCta: "I want this", tPlanCta3: "Let's talk",
-    tPlan1: "Business card", tPlan1P: "from 4,990 CZK", tPlan1For: "For tradespeople, freelancers and anyone who needs to be findable online.",
-    tPlan1a: "One-page website", tPlan1b: "Contact, map and opening hours", tPlan1c: "Looks great on a phone", tPlan1d: "Live in 2 weeks",
-    tPlan2: "Business website", tPlan2P: "from 11,990 CZK", tPlan2For: "For realtors, salons, restaurants and firms that want enquiries from the web.",
-    tPlan2a: "Multiple pages: services, references, about you", tPlan2b: "Enquiry form straight to your inbox", tPlan2c: "Set up so Google can find you", tPlan2d: "We'll help you with the texts",
-    tPlan3: "Custom system", tPlan3P: "by agreement", tPlan3For: "Booking systems, client portals, internal systems for running your company. Whatever you need.",
-    tPlan3a: "Online bookings and orders", tPlan3b: "Client portals and internal systems", tPlan3c: "Automation of repetitive work", tPlan3d: "Fixed price after a consultation",
-    tPlansNote: "Prices are a guide. You get the exact one in writing before we start, and every job runs on a contract and a proper invoice.",
+    tSecServices: "What we do",
+    tSvcApps: "Apps and systems", tSvcAppsT: "From a company's internal tools to standalone apps. Designed and built around how it actually needs to work, not squeezed into something off the shelf.",
+    tSvcWeb: "Websites", tSvcWebT: "Websites with a face of their own, not a template. Design, copy and code under one roof, and great on a phone.",
+    tSvcTools: "Automation and experiments", tSvcToolsT: "Whatever gets done by hand over and over, we teach a computer to do. And if nobody has built it yet, we're happy to try.",
+    tSecProcess: "How we work",
+    tP1T: "Talk", tP1: "Tell us what you're coming with. We go through the idea, the goals and what you expect from it.",
+    tP2T: "Agree", tP2: "Scope, deadline and price are set for your project, not taken from a list. A standard contract and a proper invoice.",
+    tP3T: "Create", tP3: "We design and build. You see it take shape along the way and have your say.",
+    tP4T: "Launch", tP4: "We put it live, hand over everything that belongs to it and stay around afterwards.",
     tSecProjects: "From our workshop", tSecWorks: "What we're working on",
     tProjectsLede: "Besides client work we build our own software. A few things we've made for ourselves, so you can see what we're capable of.",
     tDetails: "See details",
@@ -839,54 +694,34 @@
     tOcr: "Turning anything into text, readable or not.",
     tLinux: "A connector that makes Linux easier to actually use.",
     tSecFaq: "Common questions",
-    tQ1: "How much does a website cost?", tA1: "A one-page business card site starts at 4,990 CZK, a full business website at 11,990 CZK. Custom systems are priced after a consultation. Either way you get a fixed price in writing, and it doesn't change unless you change the brief.",
-    tQ2: "How long will it take?", tA2: "A typical website is live in 2 to 4 weeks. A custom system depends on its size; you'll know the deadline before we start.",
-    tQ3: "What do you need from me?", tA3: "Half an hour on a call, a few sentences about your business, your logo and photos if you have them. We'll help with the rest, including the texts.",
-    tQ4: "Will I be able to edit the site myself?", tA4: "Yes. With every website we hand over you get our simple editor, where you change texts and images without any programming. If you go for monthly care, we make the edits for you.",
-    tQ5: "What about the domain and hosting?", tA5: "That's up to you. We'll have a call and go through what you have now. Then we either put the website on your domain (a new one or your current one) and hand it over with the editor, or we host and look after it for you for a monthly fee.",
-    tQ6: "Who am I actually dealing with?", tA6: "OZLAB is a small software studio. You talk directly to the people building your project, with no middlemen. Contracts and invoices go through myNEST s.r.o., so everything is done properly.",
-    tFreeTitle: "Let's talk it over",
-    tFree: "Write a few sentences about your business and what you need. We'll get back to you within 24 hours with a proposal and a price. Already have a website? Send us the link and we'll tell you for free what we'd improve.",
+    tQ1: "How much does it cost?", tA1: "We don't have a price list, because no two projects are the same. We price it after the first conversation, based on what you need, and you get the price in writing before we start.",
+    tQ2: "How long will it take?", tA2: "It depends on the scope. We agree on the deadline up front, so you know it before we start.",
+    tQ3: "What do you need from me?", tA3: "Mostly the idea and some time for a conversation. Anything you already have (logo, photos, texts) helps; we'll take care of the rest.",
+    tQ4: "Will I be able to make changes myself?", tA4: "Yes. Depending on the project we hand over an editor or show you how it works. If you'd rather not deal with it, we'll look after it for you.",
+    tQ5: "Who owns it afterwards?", tA5: "You do. The domain and the finished work are yours. Whether you run it yourself or we look after it is something we agree on per project.",
+    tQ6: "Who am I actually dealing with?", tA6: "OZLAB is a small creative studio. You talk directly to the people who design and build your project, with no middlemen. Contracts and invoices go through myNEST s.r.o., so everything is done properly.",
+    tFreeTitle: "Got an idea?",
+    tFree: "Write a few sentences about what you'd like to make. We'll get back to you within 24 hours and talk it through.",
     tOpen: "Open project",
     tGh: "Our code lives here", tLi: "Let's get in touch", tYt: "Watch what we build",
-    tCareTitle: "After launch, you choose",
-    tCare1T: "One-off handover",
-    tCare1: "We put the website on your domain, a new one or the one you already have, and hand it over. You also get our simple editor for changing texts and images yourself. No further fees from us.",
-    tCare2T: "Monthly care",
-    tCare2: "We host the website and look after it for a fixed monthly fee. Edits, backups and updates are on us, you don't have to deal with anything.",
     tLabLink: "What else we're working on"
   };
   var CZ = {
-    tNavAbout: "Služby", tNavProjects: "Ceník", tNavConnect: "Kontakt",
-    tHeroA: "Od webu po systém.", tHeroB: "Postavíme to za vás.",
-    tHeroSub: "Weby, online rezervace i interní systémy, které vám přivedou zákazníky a ušetří firmě čas. Vy řeknete, co potřebujete, technika je naše starost.",
-    tViewProjects: "Zobrazit ceník",
-    tStart: "Konzultace zdarma", tHey: "Co vám máme postavit? Konzultace je zdarma.",
+    tNavAbout: "Co děláme", tNavProjects: "Jak pracujeme", tNavConnect: "Kontakt",
+    tHeroA: "Kreativní studio.", tHeroB: "Všechno na zakázku.",
+    tHeroSub: "Navrhujeme a stavíme weby, aplikace a systémy. Žádné šablony ani balíčky: každý projekt děláme od nuly pro konkrétního klienta a jeho nápad.",
+    tViewProjects: "Co děláme",
+    tStart: "Napište nám", tHey: "Máte nápad? Pojďme ho postavit.",
     tAbout3: "OZLAB je naše vlastní značka. Smlouvy a fakturaci zajišťuje", tIco: "IČO",
-    tSecPains: "Poznáváte se?",
-    tPain1T: "Nikdo se neozve", tPain1: "Web sice existuje, ale poptávky nechodí. Na mobilu se rozpadá a chybí snadný způsob, jak vás kontaktovat.",
-    tPain2T: "Google vás nenajde", tPain2: "Lidé hledají „makléř Brno“ nebo „instalatér Praha“ a najdou vaši konkurenci.",
-    tPain3T: "Rezervace po telefonu", tPain3: "Celý den vyřizujete hovory a SMS kvůli termínům. Online rezervace to udělá za vás, i v noci.",
-    tPain4T: "Firma jede v Excelu", tPain4: "Zakázky v tabulkách, sklad v hlavě, poznámky na papírku. Věci se ztrácí a každý týden to stojí hodiny.",
-    tSecServices: "Co pro vás postavíme",
-    tSvcApps: "Interní systémy", tSvcAppsT: "Zakázky, sklad, docházka, klienti, fakturace. Systém postavený podle toho, jak vaše firma opravdu funguje, ne naopak.",
-    tSvcWeb: "Weby a online rezervace", tSvcWebT: "Nový web, nebo předělávka toho, za který se stydíte. Skvělý na mobilu, a když je potřeba, i s rezervacemi nebo objednávkami.",
-    tSvcTools: "Automatizace", tSvcToolsT: "Faktury, tabulky, e-maily, exporty. Co každý týden děláte ručně, za vás může dělat počítač.",
-    tSecProcess: "Jak to probíhá",
-    tP1T: "Domluva", tP1: "Ozvete se a my se do 24 hodin ozveme zpátky. První konzultace je zdarma a nezávazná.",
-    tP2T: "Dohoda", tP2: "Pevná cena a termín předem. Klasická smlouva a řádná faktura, žádná překvapení.",
-    tP3T: "Vývoj", tP3: "Průběžně vidíte, jak to roste, a můžete do toho mluvit. Běžný web je hotový za 2 až 4 týdny, systém podle rozsahu.",
-    tP4T: "Spuštění", tP4: "Spustíme to, zaškolíme vás i váš tým a zůstaneme k dispozici, kdyby bylo potřeba něco doladit.",
-    tSecPricing: "Ceník",
-    tPricingLede: "Žádná překvapení. Přesnou cenu znáte dřív, než začneme, a během práce se nemění.",
-    tPlanHot: "Nejčastější volba", tPlanCta: "To chci", tPlanCta3: "Probereme to",
-    tPlan1: "Vizitka", tPlan1P: "od 4 990 Kč", tPlan1For: "Pro řemeslníky, OSVČ a každého, koho mají lidé na internetu najít.",
-    tPlan1a: "Jednostránkový web", tPlan1b: "Kontakt, mapa a otevírací doba", tPlan1c: "Skvěle vypadá na mobilu", tPlan1d: "Hotovo do 2 týdnů",
-    tPlan2: "Firemní web", tPlan2P: "od 11 990 Kč", tPlan2For: "Pro makléře, salony, restaurace a firmy, které chtějí z webu poptávky.",
-    tPlan2a: "Víc stránek: služby, reference, o vás", tPlan2b: "Poptávkový formulář rovnou do e-mailu", tPlan2c: "Nastavený tak, aby vás našel Google", tPlan2d: "S texty vám pomůžeme",
-    tPlan3: "Systém na míru", tPlan3P: "dle domluvy", tPlan3For: "Rezervační systémy, klientské portály, interní systémy pro chod firmy. Cokoliv potřebujete.",
-    tPlan3a: "Online rezervace a objednávky", tPlan3b: "Klientské portály a interní systémy", tPlan3c: "Automatizace opakované práce", tPlan3d: "Pevná cena po konzultaci",
-    tPlansNote: "Ceny jsou orientační. Přesnou cenu dostanete písemně ještě před začátkem a každá zakázka běží na smlouvu a řádnou fakturu.",
+    tSecServices: "Co děláme",
+    tSvcApps: "Aplikace a systémy", tSvcAppsT: "Od interních nástrojů firmy po samostatné aplikace. Navržené a postavené podle toho, jak to má opravdu fungovat, ne naroubované na něco z krabice.",
+    tSvcWeb: "Weby", tSvcWebT: "Weby s vlastní tváří, žádná šablona. Design, texty i vývoj pod jednou střechou a skvělé na mobilu.",
+    tSvcTools: "Automatizace a experimenty", tSvcToolsT: "Co se pořád dokola dělá ručně, to naučíme počítač. A když to ještě nikdo nepostavil, rádi to zkusíme.",
+    tSecProcess: "Jak pracujeme",
+    tP1T: "Rozhovor", tP1: "Řeknete nám, s čím přicházíte. Projdeme nápad, cíle a co od toho čekáte.",
+    tP2T: "Dohoda", tP2: "Rozsah, termín a cenu stanovíme pro váš projekt, ne podle ceníku. Klasická smlouva a řádná faktura.",
+    tP3T: "Tvorba", tP3: "Navrhujeme a stavíme. Průběžně vidíte, jak to vzniká, a můžete do toho mluvit.",
+    tP4T: "Spuštění", tP4: "Spustíme to, předáme vše, co k tomu patří, a zůstaneme po ruce.",
     tSecProjects: "Z naší dílny", tSecWorks: "Na čem pracujeme",
     tProjectsLede: "Kromě zakázek stavíme i vlastní software. Pár věcí, které jsme udělali pro sebe, ať vidíte, co umíme.",
     tDetails: "Zobrazit detail",
@@ -902,21 +737,16 @@
     tOcr: "Převede na text cokoliv, čitelné i nečitelné.",
     tLinux: "Konektor, díky kterému je Linux použitelnější.",
     tSecFaq: "Časté otázky",
-    tQ1: "Kolik stojí web?", tA1: "Jednostránková vizitka začíná na 4 990 Kč, plnohodnotný firemní web na 11 990 Kč. Systémy na míru naceníme po konzultaci. Vždy dostanete pevnou cenu písemně a nezmění se, pokud nezměníte zadání.",
-    tQ2: "Jak dlouho to trvá?", tA2: "Běžný web je venku za 2 až 4 týdny. Systém na míru podle velikosti, termín znáte ještě před začátkem.",
-    tQ3: "Co od vás budeme potřebovat?", tA3: "Půl hodiny na telefonu, pár vět o vašem podnikání, logo a fotky, pokud je máte. Se zbytkem, i s texty, vám pomůžeme.",
-    tQ4: "Budu si moct web upravovat sám?", tA4: "Ano. Ke každému předanému webu dostanete náš jednoduchý editor, ve kterém změníte texty a obrázky bez programování. Pokud máte měsíční správu, úpravy uděláme za vás.",
-    tQ5: "Jak je to s doménou a hostingem?", tA5: "Záleží na vás. Zavoláme si a projdeme, co máte teď. Pak buď web nasadíme na vaši doménu (novou, nebo stávající) a předáme vám ho i s editorem, nebo ho za měsíční poplatek hostujeme a spravujeme za vás.",
-    tQ6: "S kým vlastně jednám?", tA6: "OZLAB je malé softwarové studio. Mluvíte přímo s lidmi, kteří váš projekt staví, bez prostředníků. Smlouvy a faktury jdou přes myNEST s.r.o., takže je všechno řádně.",
-    tFreeTitle: "Pojďme to probrat",
-    tFree: "Napište pár vět o tom, co děláte a co potřebujete. Do 24 hodin se ozveme s návrhem a cenou. Máte už web? Pošlete odkaz a zdarma vám řekneme, co bychom na něm zlepšili.",
+    tQ1: "Kolik to stojí?", tA1: "Ceník nemáme, protože žádné dva projekty nejsou stejné. Cenu stanovíme po prvním rozhovoru podle toho, co potřebujete, a dostanete ji písemně ještě před začátkem.",
+    tQ2: "Jak dlouho to trvá?", tA2: "Záleží na rozsahu. Termín domluvíme předem, takže ho znáte dřív, než začneme.",
+    tQ3: "Co od vás budeme potřebovat?", tA3: "Hlavně nápad a chvíli času na rozhovor. Podklady, které už máte (logo, fotky, texty), se hodí, o zbytek se postaráme.",
+    tQ4: "Budu si to moct upravovat sám?", tA4: "Ano. Podle projektu vám předáme editor, nebo vám ukážeme, jak na to. A když se s tím nechcete zabývat, postaráme se o to za vás.",
+    tQ5: "Komu to pak patří?", tA5: "Vám. Doména i hotové dílo jsou vaše. Jestli to budete provozovat sami, nebo se o to postaráme my, domluvíme podle projektu.",
+    tQ6: "S kým vlastně jednám?", tA6: "OZLAB je malé kreativní studio. Mluvíte přímo s lidmi, kteří váš projekt navrhují a staví, bez prostředníků. Smlouvy a faktury jdou přes myNEST s.r.o., takže je všechno řádně.",
+    tFreeTitle: "Máte nápad?",
+    tFree: "Napište pár vět o tom, co byste chtěli vytvořit. Do 24 hodin se ozveme a probereme, jak na to.",
     tOpen: "Otevřít projekt",
     tGh: "Tady najdete náš kód", tLi: "Pojďme se spojit", tYt: "Podívejte se, co stavíme",
-    tCareTitle: "Po spuštění si vyberete",
-    tCare1T: "Jednorázové předání",
-    tCare1: "Web nasadíme na vaši doménu, novou nebo tu, kterou už máte, a předáme vám ho. Dostanete i náš jednoduchý editor, ve kterém si sami upravíte texty a obrázky. Žádné další poplatky od nás.",
-    tCare2T: "Měsíční správa",
-    tCare2: "Web hostujeme a staráme se o něj za pevný měsíční poplatek. Úpravy, zálohy i aktualizace jsou na nás, vy nemusíte řešit nic.",
     tLabLink: "Na čem ještě pracujeme"
   };
 

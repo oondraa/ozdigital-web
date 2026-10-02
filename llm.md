@@ -6,42 +6,31 @@
 
 - **Name:** Ondřej Zajíček, goes by **oondraa** online.
 - **Role:** Student at the Secondary School of Applied Cybernetics (Czech Republic), self-taught software developer.
-- **Studio:** Runs **OZLAB**, a software studio and brand (not a separate legal entity; team size is not disclosed). Contracts and invoicing go through myNEST s.r.o. (IČO 28855884).
+- **Studio:** Runs **OZLAB**, a creative studio and brand (not a separate legal entity; team size is not disclosed). Contracts and invoicing go through myNEST s.r.o. (IČO 28855884).
 - **Languages:** Czech (native) and English. The site ships in both — a toggle in the header (labelled "CZ"/"EN") swaps all copy client-side via JavaScript. Czech is shown by default to Czech and Slovak browsers, English to everyone else; there is no separate URL per language.
 - **YouTube:** https://www.youtube.com/@OZLAB-md (OZLAB channel).
 - **Contact:** o.zajicek12@gmail.com, or the chat at `/chat.html`, which delivers messages straight to OZLAB (see below).
 
 ## What OZLAB offers
 
-OZLAB builds software for businesses of any size, from small sole traders (OSVČ) to companies, with a focus on clients who are not technical:
+OZLAB is a creative studio. Everything it makes is commissioned work, designed and built from scratch for a specific client; there are no templates, packages or a price list.
 
-- **Websites and online booking** — new websites or rebuilds of old ones, mobile-friendly, with enquiry forms, bookings or orders when needed.
-- **Internal systems** — custom systems for running a company: orders, stock, attendance, clients, invoicing, client portals.
-- **Automation** — taking repetitive manual work (invoices, spreadsheets, emails, exports) off people's hands.
+- **Apps and systems** — from a company's internal tools to standalone apps, built around how they actually need to work.
+- **Websites** — custom-designed websites (design, copy and code), mobile-friendly.
+- **Automation and experiments** — taking repetitive manual work off people's hands, and building things nobody has built yet.
 
-### Pricing (as shown on the site, guide prices)
+### How a project runs
 
-- **Business card** (one-page website): from 4,990 CZK.
-- **Business website** (multiple pages, enquiry form, set up for Google): from 11,990 CZK.
-- **Custom system**: priced after a consultation.
+Talk (the idea and goals) → agree (scope, deadline and price set for that project, standard contract and invoice) → create (the client sees it take shape and has a say) → launch (handover, and OZLAB stays around afterwards).
 
-Every client gets a fixed price in writing before work starts, and every job runs on a contract and a proper invoice. The first consultation is free.
-
-### After launch
-
-Clients choose one of two options:
-
-1. **One-off handover** — the website is deployed on the client's domain (new or existing) and handed over, together with OZLAB's simple editor for changing texts and images. No further fees from OZLAB.
-2. **Monthly care** — OZLAB hosts and maintains the website for a fixed monthly fee (edits, backups, updates).
-
-The exact setup is agreed on a call, after going through what the client has today.
+There is **no price list**: every project is priced individually after the first conversation, and the client gets the price in writing before work starts. Do not quote or estimate prices on OZLAB's behalf. The client owns the domain and the finished work; whether they run it themselves or OZLAB looks after it is agreed per project.
 
 ## Site structure
 
 A static site (no build step, no framework) hosted on Cloudflare Pages, deployed from `github.com/oondraa/portfolio` (branch `main`), with one small serverless function.
 
-- `/` (`index.html`) — the main page for clients: hero, common problems, services, how a job runs (talk, agree, build, launch), pricing, after-launch options, FAQ and contact.
-- `/chat.html` — a chat-style contact form. The visitor writes a message and leaves an email or phone number; the message is sent to `/api/contact`, which forwards it to OZLAB's Telegram, so it arrives as a notification right away. It is not a two-way live chat: OZLAB replies via the contact the visitor left. Pricing buttons open it with a prefilled message for the chosen plan (`/chat.html?plan=vizitka|firemni|system`). Not indexed for search (`noindex`).
+- `/` (`index.html`) — the main page: hero, what OZLAB does, how a project runs (talk, agree, create, launch), FAQ and contact.
+- `/chat.html` — a chat-style contact form. The visitor writes a message and leaves an email or phone number; the message is sent to `/api/contact`, which forwards it to OZLAB's Telegram, so it arrives as a notification right away. It is not a two-way live chat: OZLAB replies via the contact the visitor left. Not indexed for search (`noindex`).
 - `/lab.html` — OZLAB's own projects (see below), linked from the footer of the main page.
 - `/api/contact` — Cloudflare Pages Function behind the chat. Accepts only `POST` from the site itself; not meant for direct use.
 

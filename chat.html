@@ -156,7 +156,7 @@
   <main>
     <div class="wrap">
       <div id="thread" aria-live="polite">
-        <div class="bubble in" data-i18n="hello">Hi! Tell us what you need: a website, online booking, a system, anything.</div>
+        <div class="bubble in" data-i18n="hello">Hi! Tell us about your idea: a website, an app, a system, anything.</div>
       </div>
 
       <form class="composer" id="composer" novalidate>
@@ -177,7 +177,7 @@
   var T = {
     en: {
       back: "Back", title: "Chat with OZLAB",
-      hello: "Hi! Tell us what you need: a website, online booking, a system, anything.",
+      hello: "Hi! Tell us about your idea: a website, an app, a system, anything.",
       labelMsg: "Your message", phMsg: "Write a message",
       labelContact: "Email or phone", phContact: "Email or phone number",
       hint: "The message goes straight to our phone. We reply within 24 hours.",
@@ -191,7 +191,7 @@
     },
     cz: {
       back: "Zpět", title: "Chat s OZLAB",
-      hello: "Ahoj! Napište, co potřebujete: web, online rezervace, systém, cokoliv.",
+      hello: "Ahoj! Napište, s jakým nápadem přicházíte: web, aplikace, systém, cokoliv.",
       labelMsg: "Vaše zpráva", phMsg: "Napište zprávu",
       labelContact: "E-mail nebo telefon", phContact: "E-mail nebo telefonní číslo",
       hint: "Zpráva přijde rovnou nám do mobilu. Odpovídáme do 24 hodin.",
@@ -202,19 +202,6 @@
       more: "Chcete ještě něco doplnit? Klidně pište, přijde nám to taky.",
       fail: "Něco se u nás pokazilo a zpráva neodešla. Pošlete ji prosím e-mailem:",
       failLink: "Poslat e-mailem"
-    }
-  };
-  // Message templates for the pricing buttons on the main page (chat.html?plan=...). Prices stay on index.html only.
-  var PLANS = {
-    en: {
-      vizitka: "Hi, I'm interested in the Business card website. A few words about me and what I need: ",
-      firemni: "Hi, I'm interested in the Business website. A few words about my business and what I need: ",
-      system: "Hi, I need a custom system. Briefly, what it should do: "
-    },
-    cz: {
-      vizitka: "Dobrý den, mám zájem o web Vizitka. Pár slov o mně a o tom, co potřebuju: ",
-      firemni: "Dobrý den, mám zájem o Firemní web. Pár slov o mé firmě a o tom, co potřebuju: ",
-      system: "Dobrý den, potřebuju systém na míru. Stručně, co by měl umět: "
     }
   };
   // Same language choice as the main page: saved toggle wins, otherwise Czech for Czech and Slovak browsers.
@@ -339,12 +326,6 @@
     if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); }
   });
 
-  // Prefill a template when coming from a pricing button; the visitor finishes it and sends it themselves.
-  var plan = new URLSearchParams(location.search).get("plan");
-  if (plan && PLANS[lang].hasOwnProperty(plan)) {
-    draft.value = PLANS[lang][plan];
-    autosize();
-  }
   draft.focus();
   draft.setSelectionRange(draft.value.length, draft.value.length);
 })();
