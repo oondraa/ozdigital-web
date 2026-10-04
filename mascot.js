@@ -1,4 +1,4 @@
-// OZLAB mascot "Oz", rendered live with three.js.
+// OZDIGITAL mascot "Oz", rendered live with three.js.
 // Model ported from the Claude Design "Cube Mascot v2" file; the viewer UI, orbit controls and exporters are dropped.
 // One shared WebGL renderer draws every [data-mascot] slot into that slot's own 2D canvas,
 // so the page holds a single GL context no matter how many mascots it shows.
@@ -70,7 +70,7 @@ const GEO = {
   ball: new THREE.SphereGeometry(0.019, 48, 32),
 };
 
-// Open ring from the OZLAB mark: gap in the upper-right quadrant, dot in the gap.
+// Open ring from the OZDIGITAL mark: gap in the upper-right quadrant, dot in the gap.
 function logoRing(parent, R, tube, ringMat, dotR, dMat, flat) {
   const g = new THREE.Group();
   const arc = new THREE.Mesh(new THREE.TorusGeometry(R, tube, 16, 72, Math.PI * 1.5), ringMat);
@@ -140,7 +140,7 @@ function buildMascot(face, tone) {
   antenna.position.set(0.06, LEG + H / 2 + H / 2 * 1.05 - 0.012, -0.02); antenna.rotation.z = -0.22;
   model.add(antenna);
 
-  // Side badge: the OZLAB mark on the right flank.
+  // Side badge: the OZDIGITAL mark on the right flank.
   const badge = logoRing(model, 0.034, 0.0075, badgeMat, 0.0085, dotMat, 0.45);
   badge.rotation.y = Math.PI / 2;
   badge.position.set(W / 2 * 1.05 + 0.0005, bodyY + 0.005, 0);

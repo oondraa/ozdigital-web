@@ -1,7 +1,7 @@
 {
-  "name": "OZLAB | Software studio",
-  "short_name": "OZLAB",
-  "description": "OZLAB is a software studio building websites, apps and tools for people and companies, in Czech and English.",
+  "name": "OZDIGITAL | Software studio",
+  "short_name": "OZDIGITAL",
+  "description": "OZDIGITAL is a software studio building websites, apps and tools for people and companies, in Czech and English.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

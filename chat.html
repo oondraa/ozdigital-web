@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chat | OZLAB</title>
-<meta name="description" content="Send OZLAB a message. It goes straight to our phone and we reply within 24 hours.">
+<title>Chat | OZDIGITAL</title>
+<meta name="description" content="Send OZDIGITAL a message. It goes straight to our phone and we reply within 24 hours.">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/chat.html">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -148,7 +148,7 @@
   <header class="nav">
     <div class="wrap">
       <a class="back" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="back">Back</span></a>
-      <span class="title" data-i18n="title">Chat with OZLAB</span>
+      <span class="title" data-i18n="title">Chat with OZDIGITAL</span>
       <span></span>
     </div>
   </header>
@@ -176,7 +176,7 @@
   var EMAIL = "o.zajicek12@gmail.com";
   var T = {
     en: {
-      back: "Back", title: "Chat with OZLAB",
+      back: "Back", title: "Chat with OZDIGITAL",
       hello: "Hi! Tell us about your idea: a website, an app, a system, anything.",
       labelMsg: "Your message", phMsg: "Write a message",
       labelContact: "Email or phone", phContact: "Email or phone number",
@@ -190,7 +190,7 @@
       failLink: "Send via email"
     },
     cz: {
-      back: "Zpět", title: "Chat s OZLAB",
+      back: "Zpět", title: "Chat s OZDIGITAL",
       hello: "Ahoj! Napište, s jakým nápadem přicházíte: web, aplikace, systém, cokoliv.",
       labelMsg: "Vaše zpráva", phMsg: "Napište zprávu",
       labelContact: "E-mail nebo telefon", phContact: "E-mail nebo telefonní číslo",
@@ -254,7 +254,7 @@
     var p = document.createElement("span");
     p.textContent = t.fail;
     var a = document.createElement("a");
-    a.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(lang === "cz" ? "Zpráva z webu OZLAB" : "Message from the OZLAB website") + "&body=" + encodeURIComponent(text + "\n\n" + contact);
+    a.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(lang === "cz" ? "Zpráva z webu OZDIGITAL" : "Message from the OZDIGITAL website") + "&body=" + encodeURIComponent(text + "\n\n" + contact);
     a.innerHTML = '<span></span> <i class="ph ph-arrow-right" aria-hidden="true"></i>';
     a.firstChild.textContent = t.failLink;
     div.appendChild(p);
