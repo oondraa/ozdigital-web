@@ -213,11 +213,10 @@
     border-bottom: 1px solid var(--line);
   }
   .nav .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  /* OZDIGITAL lockup: open-ring mark + "OZ" bold / "DIGITAL" light, as in the brand files. Ring follows the text color. */
+  /* OZDIGITAL lockup: open-ring mark with the blue "z" + one-weight wordmark, as in the brand files. Ring follows the text color. */
   .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 18px; letter-spacing: 0.01em; color: var(--text); white-space: nowrap; }
   .mark { width: 1.2em; height: 1.2em; flex-shrink: 0; }
-  .brand .wm { font-weight: 350; color: var(--muted); }
-  .brand .wm b { font-weight: 750; color: var(--text); }
+  .brand .wm { font-weight: 600; color: var(--text); }
   .nav nav { display: flex; align-items: center; gap: 4px; }
   .nav nav a {
     color: var(--muted); font-size: 15px; padding: 8px 12px; border-radius: 999px;
@@ -542,7 +541,7 @@
 
   <header class="nav">
     <div class="wrap">
-      <a href="/" class="brand" aria-label="OZDIGITAL"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/></svg><span class="wm"><b>OZ</b>DIGITAL</span></a>
+      <a href="/" class="brand" aria-label="OZDIGITAL"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/><path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">OZDIGITAL</span></a>
       <nav aria-label="Primary">
         <a href="/#services" data-i18n="tNavAbout">What we do</a>
         <a href="/#process" data-i18n="tNavProjects">How we work</a>
@@ -670,7 +669,7 @@
 
   <footer>
     <div class="wrap">
-      <span class="foot-brand"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/></svg><span>© <span id="year">2026</span> OZDIGITAL</span></span>
+      <span class="foot-brand"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/><path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>© <span id="year">2026</span> OZDIGITAL</span></span>
       <span><span data-i18n="tAbout3">OZDIGITAL is our own brand. Contracts and invoicing are handled by</span> myNEST s.r.o., <a href="https://ares.gov.cz/ekonomicke-subjekty?ico=28855884" target="_blank" rel="noopener"><span data-i18n="tIco">Company ID</span> 28855884</a>.</span>
     </div>
   </footer>

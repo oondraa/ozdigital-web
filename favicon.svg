@@ -2,4 +2,5 @@
 <rect width="360" height="360" rx="80" fill="#1A1A1B"/>
 <path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="#F5F5F7" stroke-width="28.6"/>
 <circle cx="230" cy="129" r="17" fill="#2997FF"/>
+<path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
