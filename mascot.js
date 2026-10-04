@@ -71,7 +71,8 @@ const GEO = {
 };
 
 // Open ring from the OZDIGITAL mark: gap in the upper-right quadrant, dot in the gap.
-function logoRing(parent, R, tube, ringMat, dotR, dMat, flat) {
+// Pass zMat to also draw the blue "z" inside the ring (proportions from favicon.svg, ring radius 71.5).
+function logoRing(parent, R, tube, ringMat, dotR, dMat, flat, zMat) {
   const g = new THREE.Group();
   const arc = new THREE.Mesh(new THREE.TorusGeometry(R, tube, 16, 72, Math.PI * 1.5), ringMat);
   arc.rotation.z = Math.PI / 2; g.add(arc);
@@ -81,6 +82,16 @@ function logoRing(parent, R, tube, ringMat, dotR, dMat, flat) {
   });
   const dot = new THREE.Mesh(new THREE.SphereGeometry(dotR, 24, 16), dMat);
   dot.position.set(Math.cos(Math.PI / 4) * R, Math.sin(Math.PI / 4) * R, 0); g.add(dot);
+  if (zMat) {
+    const u = R / 71.5, zr = 9.2 * u;
+    const pts = [[-23, 23], [22.5, 23], [-23, -23], [22.5, -23]].map(([x, y]) => [x * u, y * u]);
+    for (let i = 0; i < 3; i++) {
+      const [ax, ay] = pts[i], [bx, by] = pts[i + 1], len = Math.hypot(bx - ax, by - ay);
+      const m = new THREE.Mesh(new THREE.CapsuleGeometry(zr, len, 8, 16), zMat);
+      m.position.set((ax + bx) / 2, (ay + by) / 2, 0);
+      m.rotation.z = Math.atan2(by - ay, bx - ax) - Math.PI / 2; g.add(m);
+    }
+  }
   g.scale.z = flat; parent.add(g); return g;
 }
 
@@ -141,7 +152,7 @@ function buildMascot(face, tone) {
   model.add(antenna);
 
   // Side badge: the OZDIGITAL mark on the right flank.
-  const badge = logoRing(model, 0.034, 0.0075, badgeMat, 0.0085, dotMat, 0.45);
+  const badge = logoRing(model, 0.034, 0.0075, badgeMat, 0.0085, dotMat, 0.45, dotMat);
   badge.rotation.y = Math.PI / 2;
   badge.position.set(W / 2 * 1.05 + 0.0005, bodyY + 0.005, 0);
 
