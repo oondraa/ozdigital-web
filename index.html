@@ -447,6 +447,41 @@
   }
 
 
+  /* Team: people cards, monogram tile stands in until there is a photo */
+  .team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .member {
+    display: flex; flex-direction: column; gap: 18px; padding: 40px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-surface);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .member:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+  /* Avatars are often dark logos: a ring + soft lift keeps them off a dark card. */
+  .member .avatar {
+    width: 152px; height: 152px; border-radius: var(--r-surface); overflow: hidden; flex-shrink: 0;
+    display: grid; place-items: center; background: var(--accent-fill); color: var(--on-accent);
+    font-size: 48px; font-weight: 650; letter-spacing: -0.02em;
+    box-shadow: 0 0 0 1px var(--line), 0 0 0 5px color-mix(in srgb, var(--text) 6%, transparent), 0 14px 32px -12px rgba(0, 0, 0, 0.55);
+    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  }
+  .member .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .member:hover .avatar { transform: scale(1.03); box-shadow: 0 0 0 1px var(--line), 0 0 0 5px color-mix(in srgb, var(--accent) 35%, transparent), 0 18px 40px -12px rgba(0, 0, 0, 0.6); }
+  .member h3 { margin: 8px 0 0; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; font-weight: 650; letter-spacing: -0.03em; }
+  .member .roles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .member .role {
+    display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px;
+    font-size: 16px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap;
+    background: color-mix(in srgb, var(--accent-fill) 14%, var(--surface-2)); color: var(--text);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .member p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 44ch; text-wrap: pretty; }
+  .member .socials { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
+  .member .socials a {
+    width: 44px; height: 44px; border-radius: 999px; display: grid; place-items: center;
+    border: 1px solid var(--line); background: var(--surface-2); color: var(--text); font-size: 20px;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .member .socials a:hover { color: var(--accent); }
+
   .sec-lede { margin: -24px 0 40px; max-width: 56ch; color: var(--muted); font-size: 18px; line-height: 1.6; text-wrap: pretty; }
 
   /* FAQ: native <details> */
@@ -492,12 +527,15 @@
     .sec-head { margin-bottom: 28px; }
     .work-lead { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 26px; }
     .card .body { padding: 20px; }
+    .team { grid-template-columns: minmax(0, 1fr); }
+    .member { padding: 24px; }
+    .member .avatar { width: 112px; height: 112px; }
     .faq summary { font-size: 17px; padding: 18px 0; }
     .nav nav a { padding: 8px; font-size: 14px; }
     .lang-btn { margin-left: 4px; }
   }
   @media (max-width: 430px) {
-    .nav nav a[href="#services"] { display: none; }
+    .nav nav a[href="#services"], .nav nav a[href="#team"] { display: none; }
   }
 </style>
 </head>
@@ -509,6 +547,7 @@
       <nav aria-label="Primary">
         <a href="#services" data-i18n="tNavAbout">What we do</a>
         <a href="#process" data-i18n="tNavProjects">How we work</a>
+        <a href="#team" data-i18n="tNavTeam">Team</a>
         <a href="#connect" data-i18n="tNavConnect">Contact</a>
         <button id="theme-toggle" class="lang-btn theme-btn" type="button" aria-label="Switch to light mode"><i class="ph ph-sun" aria-hidden="true"></i></button>
         <button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">CZ</button>
@@ -583,6 +622,38 @@
             <p data-i18n="tP4">We put it live, hand over everything that belongs to it and stay around afterwards.</p>
           </li>
         </ol>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="wrap">
+        <h2 class="sec-head reveal" data-i18n="tSecTeam">Who's behind it</h2>
+        <p class="sec-lede reveal" data-i18n="tTeamLede">A small team, no middlemen. These are the people you'll actually talk to and who build your project.</p>
+        <div class="team">
+          <article class="member reveal" style="--i:0">
+            <div class="avatar" aria-hidden="true"><img src="/assets/team-ondrej.png" alt="" width="152" height="152" loading="lazy"></div>
+            <div>
+              <h3>Ondřej Zajíček</h3>
+              <div class="roles"><span class="role" data-i18n="tRoleLead">Brand lead</span><span class="role">Developer</span><span class="role">UI/UX designer</span></div>
+            </div>
+            <p data-i18n="tM1">Leads OZDIGITAL and is your main point of contact. Designs, writes code and keeps you in the loop from the first message to launch.</p>
+            <div class="socials">
+              <a href="https://github.com/oondraa" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
+              <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph ph-linkedin-logo" aria-hidden="true"></i></a>
+            </div>
+          </article>
+          <article class="member reveal" style="--i:1">
+            <div class="avatar" aria-hidden="true"><img src="/assets/team-adam.jpg" alt="" width="152" height="152" loading="lazy"></div>
+            <div>
+              <h3>Adam Bukač</h3>
+              <div class="roles"><span class="role">Developer</span><span class="role">UI/UX designer</span></div>
+            </div>
+            <p data-i18n="tM2">Designs interfaces and writes code. Comes along to client meetings, so you'll meet him in person too.</p>
+            <div class="socials">
+              <a href="https://github.com/AdamBuk" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -678,6 +749,10 @@
     tP2T: "Agree", tP2: "Scope, deadline and price are set for your project, not taken from a list. A standard contract and a proper invoice.",
     tP3T: "Create", tP3: "We design and build. You see it take shape along the way and have your say.",
     tP4T: "Launch", tP4: "We put it live, hand over everything that belongs to it and stay around afterwards.",
+    tNavTeam: "Team", tSecTeam: "Who's behind it",
+    tTeamLede: "A small team, no middlemen. These are the people you'll actually talk to and who build your project.",
+    tRoleLead: "Brand lead", tM1: "Leads OZDIGITAL and is your main point of contact. Designs, writes code and keeps you in the loop from the first message to launch.",
+    tM2: "Designs interfaces and writes code. Comes along to client meetings, so you'll meet him in person too.",
     tSecProjects: "From our workshop", tSecWorks: "What we're working on",
     tProjectsLede: "Besides client work we build our own software. A few things we've made for ourselves, so you can see what we're capable of.",
     tDetails: "See details",
@@ -721,6 +796,10 @@
     tP2T: "Dohoda", tP2: "Rozsah, termín a cenu stanovíme pro váš projekt, ne podle ceníku. Klasická smlouva a řádná faktura.",
     tP3T: "Tvorba", tP3: "Navrhujeme a stavíme. Průběžně vidíte, jak to vzniká, a můžete do toho mluvit.",
     tP4T: "Spuštění", tP4: "Spustíme to, předáme vše, co k tomu patří, a zůstaneme po ruce.",
+    tNavTeam: "Tým", tSecTeam: "Kdo za tím stojí",
+    tTeamLede: "Malý tým, žádní prostředníci. Tohle jsou lidé, se kterými budete mluvit a kteří váš projekt postaví.",
+    tRoleLead: "Vedoucí značky", tM1: "Vede OZDIGITAL a je vaším hlavním kontaktem. Navrhuje, programuje a je s vámi v kontaktu od první zprávy až po spuštění.",
+    tM2: "Navrhuje rozhraní a programuje. Chodí s námi i na schůzky s klienty, takže se s ním potkáte osobně.",
     tSecProjects: "Z naší dílny", tSecWorks: "Na čem pracujeme",
     tProjectsLede: "Kromě zakázek stavíme i vlastní software. Pár věcí, které jsme udělali pro sebe, ať vidíte, co umíme.",
     tDetails: "Zobrazit detail",
