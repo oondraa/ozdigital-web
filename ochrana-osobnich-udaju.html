@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ochrana osobních údajů | OZDIGITAL</title>
+<meta name="description" content="Jak OZDIGITAL (myNEST s.r.o.) nakládá s osobními údaji, které nám pošlete přes chat nebo e-mail.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://oondraa.pages.dev/ochrana-osobnich-udaju.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#f4f4f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme: dark)">
+<link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  // Apply saved theme before first paint to avoid a flash.
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<style>
+  @font-face {
+    font-family: "Geist";
+    src: url("/fonts/geist-latin-wght-normal.woff2") format("woff2");
+    font-weight: 100 900; font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("/fonts/geist-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 100 900; font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  :root {
+    --bg: #f4f4f5; --surface: #ffffff; --text: #111114; --muted: #595963;
+    --line: rgba(17, 17, 20, 0.1); --accent: #1760f0;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0b0b0d; --surface: #141417; --text: #ececef; --muted: #a0a0ab;
+      --line: rgba(255, 255, 255, 0.09); --accent: #5b93ff;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0b0d; --surface: #141417; --text: #ececef; --muted: #a0a0ab;
+    --line: rgba(255, 255, 255, 0.09); --accent: #5b93ff;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { width: 100%; max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  header { border-bottom: 1px solid var(--line); }
+  header .wrap { height: 64px; display: flex; align-items: center; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 15px; }
+  main { padding: 64px 0 96px; }
+  h1 { margin: 0 0 8px; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; font-weight: 650; letter-spacing: -0.035em; }
+  .updated { margin: 0 0 48px; color: var(--muted); font-size: 15px; }
+  h2 { margin: 48px 0 12px; font-size: 22px; line-height: 1.25; font-weight: 600; letter-spacing: -0.02em; }
+  p, li { color: var(--muted); text-wrap: pretty; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--text); font-weight: 600; }
+  .box { padding: 20px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+  .box p { margin: 0; }
+  footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+  @media (max-width: 767px) {
+    .wrap { padding: 0 16px; }
+    main { padding: 40px 0 64px; }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap"><a class="back" href="index.html">&larr; Zpět na OZDIGITAL</a></div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <h1>Ochrana osobních údajů</h1>
+      <p class="updated">Platné od 7. 10. 2026</p>
+
+      <p>Na této stránce vysvětlujeme, jaké osobní údaje získáváme, když nás přes web kontaktujete, k čemu je používáme a jaká máte práva.</p>
+
+      <h2>Kdo je správce</h2>
+      <div class="box">
+        <p><strong>myNEST s.r.o.</strong><br>
+        Hradecká 1152/11, 500 03 Hradec Králové<br>
+        IČO 28855884, zapsaná u Krajského soudu v Hradci Králové, oddíl C, vložka 31352<br>
+        Kontakt pro otázky k osobním údajům: <a href="mailto:o.zajicek12@gmail.com">o.zajicek12@gmail.com</a></p>
+      </div>
+      <p style="margin-top: 14px;">OZDIGITAL je značka, pod kterou tuto službu nabízíme. Smluvní stranou a správcem údajů je myNEST s.r.o.</p>
+
+      <h2>Jaké údaje zpracováváme</h2>
+      <ul>
+        <li><strong>Obsah zprávy</strong>, kterou napíšete do chatu na webu nebo pošlete e-mailem.</li>
+        <li><strong>Kontakt</strong>, který nám necháte: e-mail nebo telefonní číslo, případně jméno, pokud ho uvedete.</li>
+        <li><strong>Údaje potřebné ke smlouvě a fakturaci</strong>, pokud se domluvíme na spolupráci (jméno nebo název firmy, adresa, IČO).</li>
+      </ul>
+      <p>Web nepoužívá analytické ani reklamní cookies. Ve vašem prohlížeči si pamatuje jen zvolený jazyk a světlý nebo tmavý režim (v úložišti prohlížeče, ne v cookies). Tyto volby k nám neodcházejí.</p>
+
+      <h2>Proč je zpracováváme</h2>
+      <p>Údaje používáme jen k tomu, abychom vám mohli odpovědět, probrat váš projekt, připravit nabídku a případně uzavřít a plnit smlouvu. Právním základem je jednání o smlouvě a její plnění na vaši žádost (čl. 6 odst. 1 písm. b) GDPR). Fakturační údaje uchováváme, protože nám to ukládá zákon (čl. 6 odst. 1 písm. c) GDPR).</p>
+      <p>Údaje neprodáváme, nepoužíváme k marketingu a neposíláme vám obchodní sdělení, o která jste nežádali.</p>
+
+      <h2>Komu údaje předáváme</h2>
+      <p>Údaje vidíme jen my dva, Ondřej Zajíček a Adam Bukač. Technicky přitom využíváme tyto služby:</p>
+      <ul>
+        <li><strong>Cloudflare</strong> (hosting webu a přenos zprávy z chatu),</li>
+        <li><strong>Telegram</strong> (zpráva z chatu nám přijde jako upozornění do telefonu),</li>
+        <li><strong>Google</strong> (e-mailová schránka Gmail, pokud nám píšete e-mailem nebo vám tak odpovídáme).</li>
+      </ul>
+      <p>Tito poskytovatelé mohou údaje zpracovávat i mimo Evropskou unii. Předáváme jim jen to, co je nutné k doručení vaší zprávy.</p>
+
+      <h2>Jak dlouho údaje uchováváme</h2>
+      <ul>
+        <li>Pokud ke spolupráci nedojde, zprávu a kontakt smažeme nejpozději do 12 měsíců od poslední komunikace.</li>
+        <li>Pokud spolupráci uzavřeme, uchováváme údaje po dobu trvání smlouvy a dále po dobu, kterou vyžadují právní předpisy (například účetní doklady 10 let).</li>
+      </ul>
+
+      <h2>Vaše práva</h2>
+      <p>Máte právo požádat o přístup ke svým údajům, jejich opravu nebo výmaz, omezení zpracování, přenesení údajů a vznést námitku proti zpracování. Stačí napsat na <a href="mailto:o.zajicek12@gmail.com">o.zajicek12@gmail.com</a>, odpovíme nejpozději do jednoho měsíce.</p>
+      <p>Pokud se domníváte, že s údaji nakládáme v rozporu s předpisy, můžete podat stížnost u Úřadu pro ochranu osobních údajů (Pplk. Sochora 27, 170 00 Praha 7, <a href="https://uoou.gov.cz" target="_blank" rel="noopener">uoou.gov.cz</a>).</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">© 2026 OZDIGITAL · myNEST s.r.o., IČO 28855884</div>
+  </footer>
+</body>
+</html>

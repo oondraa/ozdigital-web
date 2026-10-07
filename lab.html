@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root">
+<html lang="cs" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +8,12 @@
 <meta name="author" content="Ondřej Zajíček (oondraa)">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/lab.html">
-<link rel="alternate" hreflang="en" href="https://oondraa.pages.dev/">
-<link rel="alternate" hreflang="cs" href="https://oondraa.pages.dev/">
-<link rel="alternate" hreflang="x-default" href="https://oondraa.pages.dev/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OZDIGITAL">
-<meta property="og:title" content="OZDIGITAL | Creative studio">
-<meta property="og:description" content="OZDIGITAL is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
-<meta property="og:url" content="https://oondraa.pages.dev/">
+<meta property="og:title" content="OZDIGITAL | What else we're working on">
+<meta property="og:description" content="What else OZDIGITAL is working on: our own software projects, including OZBEAT, Spotify Live Wrapped, ADC (Access Date Changer) and an experimental neural network.">
+<meta property="og:url" content="https://oondraa.pages.dev/lab.html">
 <meta property="og:image" content="https://oondraa.pages.dev/assets/og-ozdigital.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -24,8 +21,8 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="cs_CZ">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="OZDIGITAL | Creative studio">
-<meta name="twitter:description" content="OZDIGITAL is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
+<meta name="twitter:title" content="OZDIGITAL | What else we're working on">
+<meta name="twitter:description" content="What else OZDIGITAL is working on: our own software projects, including OZBEAT, Spotify Live Wrapped, ADC (Access Date Changer) and an experimental neural network.">
 <meta name="twitter:image" content="https://oondraa.pages.dev/assets/og-ozdigital.png">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -411,6 +408,7 @@
   footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
   .foot-brand { display: inline-flex; align-items: center; gap: 8px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+  footer .legal { flex-basis: 100%; order: 3; }
 
   /* ---------- Dialogs ---------- */
   dialog {
@@ -545,7 +543,7 @@
         <a href="/#process" data-i18n="tNavProjects">How we work</a>
         <a href="/#connect" data-i18n="tNavConnect">Contact</a>
         <button id="theme-toggle" class="lang-btn theme-btn" type="button" aria-label="Switch to light mode"><i class="ph ph-sun" aria-hidden="true"></i></button>
-        <button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">CZ</button>
+        <button id="lang-toggle" class="lang-btn" type="button" aria-label="Přepnout jazyk">EN</button>
       </nav>
     </div>
   </header>
@@ -668,7 +666,8 @@
   <footer>
     <div class="wrap">
       <span class="foot-brand"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/><path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>© <span id="year">2026</span> OZDIGITAL</span></span>
-      <span><span data-i18n="tAbout3">OZDIGITAL is our own brand. Contracts and invoicing are handled by</span> myNEST s.r.o., <a href="https://ares.gov.cz/ekonomicke-subjekty?ico=28855884" target="_blank" rel="noopener"><span data-i18n="tIco">Company ID</span> 28855884</a>.</span>
+      <span class="legal"><span data-i18n="tAbout3">OZDIGITAL is our own brand. Contracts and invoicing are handled by</span> myNEST s.r.o., Hradecká 1152/11, 500 03 Hradec Králové, <a href="https://ares.gov.cz/ekonomicke-subjekty?ico=28855884" target="_blank" rel="noopener"><span data-i18n="tIco">Company ID</span> 28855884</a>, <span data-i18n="tReg">registered with the Regional Court in Hradec Králové, section C, file 31352</span>.</span>
+      <a href="ochrana-osobnich-udaju.html" data-i18n="tPrivacy">Privacy policy</a>
     </div>
   </footer>
 
@@ -726,6 +725,7 @@
   var EN = {
     tNavAbout: "What we do", tNavProjects: "How we work", tNavConnect: "Contact",
     tAbout3: "OZDIGITAL is our own brand. Contracts and invoicing are handled by", tIco: "Company ID",
+    tReg: "registered with the Regional Court in Hradec Králové, section C, file 31352", tPrivacy: "Privacy policy",
     tSecProjects: "Projects", tSecWorks: "What we're working on",
     tProjectsLede: "Besides client work we build our own software. A few things we've made for ourselves, so you can see what we're capable of.",
     tDetails: "See details",
@@ -753,6 +753,7 @@
   var CZ = {
     tNavAbout: "Co děláme", tNavProjects: "Jak pracujeme", tNavConnect: "Kontakt",
     tAbout3: "OZDIGITAL je naše vlastní značka. Smlouvy a fakturaci zajišťuje", tIco: "IČO",
+    tReg: "zapsaná u Krajského soudu v Hradci Králové, oddíl C, vložka 31352", tPrivacy: "Ochrana osobních údajů",
     tSecProjects: "Projekty", tSecWorks: "Na čem pracujeme",
     tProjectsLede: "Kromě zakázek stavíme i vlastní software. Pár věcí, které jsme udělali pro sebe, ať vidíte, co umíme.",
     tDetails: "Zobrazit detail",
@@ -780,8 +781,8 @@
 
   var langBtn = document.getElementById("lang-toggle");
   var htmlRoot = document.getElementById("html-root");
-  // Czech by default for Czech and Slovak browsers; a saved choice from the toggle wins.
-  var cz = /^(cs|sk)/i.test(navigator.language || "");
+  // Czech by default, same as the main page; a saved choice from the toggle wins.
+  var cz = true;
   try { var saved = localStorage.getItem("lang"); if (saved) cz = saved === "cz"; } catch (e) {}
 
   function applyLang() {

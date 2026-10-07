@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stránka nenalezena | OZDIGITAL</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("theme"); } catch (e) {}
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
+<style>
+  @font-face {
+    font-family: "Geist";
+    src: url("/fonts/geist-latin-wght-normal.woff2") format("woff2");
+    font-weight: 100 900; font-display: swap;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: "Geist";
+    src: url("/fonts/geist-latin-ext-wght-normal.woff2") format("woff2");
+    font-weight: 100 900; font-display: swap;
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  :root { --bg: #f4f4f5; --text: #111114; --muted: #595963; --accent-fill: #1760f0; --accent-fill-hover: #0f4fd0; color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0b0b0d; --text: #ececef; --muted: #a0a0ab; --accent-fill: #1f66f2; --accent-fill-hover: #3a7aff; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #0b0b0d; --text: #ececef; --muted: #a0a0ab; --accent-fill: #1f66f2; --accent-fill-hover: #3a7aff; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--text); display: grid; place-items: center; padding: 24px 16px;
+    font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 520px; }
+  .code { margin: 0; font-size: clamp(72px, 16vw, 140px); line-height: 1; font-weight: 650; letter-spacing: -0.06em; color: var(--muted); }
+  h1 { margin: 16px 0 8px; font-size: clamp(26px, 4vw, 36px); line-height: 1.15; font-weight: 650; letter-spacing: -0.03em; }
+  p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.6; }
+  .btn {
+    display: inline-flex; align-items: center; height: 46px; padding: 0 22px; margin-top: 28px; border-radius: 999px;
+    background: var(--accent-fill); color: #fff; font-weight: 600; text-decoration: none;
+  }
+  .btn:hover { background: var(--accent-fill-hover); }
+  .btn:focus-visible { outline: 2px solid var(--accent-fill); outline-offset: 3px; }
+</style>
+</head>
+<body>
+  <main>
+    <p class="code">404</p>
+    <h1>Tahle stránka tu není.</h1>
+    <p>Odkaz je možná starý nebo v něm je překlep. <span lang="en">This page doesn't exist.</span></p>
+    <a class="btn" href="/">Zpět na úvod</a>
+  </main>
+</body>
+</html>

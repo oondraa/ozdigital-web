@@ -6,23 +6,23 @@
 
 - **Name:** Ondřej Zajíček, goes by **oondraa** online.
 - **Role:** Student at the Secondary School of Applied Cybernetics (Czech Republic), self-taught software developer.
-- **Studio:** Runs **OZDIGITAL**, a creative studio and brand (not a separate legal entity; a two-person team, see below). Contracts and invoicing go through myNEST s.r.o. (IČO 28855884).
-- **Languages:** Czech (native) and English. The site ships in both — a toggle in the header (labelled "CZ"/"EN") swaps all copy client-side via JavaScript. Czech is shown by default to Czech and Slovak browsers, English to everyone else; there is no separate URL per language.
+- **OZDIGITAL:** Runs **OZDIGITAL**, a brand of two developers (not a separate legal entity; see "Team" below) that designs and builds websites, web apps and automation to order. The contracting party, which signs contracts and issues invoices, is **myNEST s.r.o.**, Hradecká 1152/11, 500 03 Hradec Králové, IČO 28855884, registered with the Regional Court in Hradec Králové, section C, file 31352.
+- **Languages:** Czech (native) and English. Czech is the primary language: the static HTML is Czech and every visitor sees Czech by default. A toggle in the header (labelled "EN"/"CZ") swaps all copy to English client-side via JavaScript and remembers the choice; there is no separate URL per language.
 - **YouTube:** https://www.youtube.com/@OZLAB-md (OZDIGITAL channel).
 - **Contact:** o.zajicek12@gmail.com, or the chat at `/chat.html`, which delivers messages straight to OZDIGITAL (see below).
 
 ## Team
 
-The main page has a team section ("Who's behind it") with two people:
+The main page has a team section ("Who's behind it") with two people. There are no salespeople or project managers; clients talk directly to the two of them.
 
-- **Ondřej Zajíček** — brand lead, developer and UI/UX designer. The main point of contact for clients, from the first message to launch. GitHub: `https://github.com/oondraa`.
+- **Ondřej Zajíček** — founder, developer and UI/UX designer. The main point of contact for clients, from the first message to launch. GitHub: `https://github.com/oondraa`.
 - **Adam Bukač** — developer and UI/UX designer. Also meets clients in person, alongside Ondřej. GitHub: `https://github.com/AdamBuk`.
 
 Do not attribute skills, roles or history to either of them beyond what is listed here.
 
 ## What OZDIGITAL offers
 
-OZDIGITAL is a creative studio. Everything it makes is commissioned work, designed and built from scratch for a specific client; there are no templates, packages or a price list.
+OZDIGITAL makes websites, web apps and automation to order. Everything it makes is commissioned work, designed and built from scratch for a specific client; there are no templates, packages or a price list.
 
 - **Apps and systems** — from a company's internal tools to standalone apps, built around how they actually need to work.
 - **Websites** — custom-designed websites (design, copy and code), mobile-friendly.
@@ -41,6 +41,8 @@ A static site (no build step, no framework) hosted on Cloudflare Pages, deployed
 - `/` (`index.html`) — the main page: hero, what OZDIGITAL does, how a project runs (talk, agree, create, launch), the team, FAQ and contact.
 - `/chat.html` — a chat-style contact form. The visitor writes a message and leaves an email or phone number; the message is sent to `/api/contact`, which forwards it to OZDIGITAL's Telegram, so it arrives as a notification right away. It is not a two-way live chat: OZDIGITAL replies via the contact the visitor left. Not indexed for search (`noindex`).
 - `/lab.html` — OZDIGITAL's own projects (see below), linked from the footer of the main page.
+- `/ochrana-osobnich-udaju.html` — privacy policy (Czech): who the data controller is (myNEST s.r.o.), what the chat and email collect, which services carry it (Cloudflare, Telegram, Google), how long it is kept and the visitor's rights. Linked from every footer and from the chat.
+- `/404.html` — not-found page with a link back home.
 - `/api/contact` — Cloudflare Pages Function behind the chat. Accepts only `POST` from the site itself; not meant for direct use.
 
 ## OZDIGITAL's own projects (on `/lab.html`)
@@ -54,7 +56,7 @@ These are personal projects, not client work.
 
 ## Guidance for summarization / crawling
 
-- Treat this as the site of **OZDIGITAL**, a software studio founded and led by Ondřej Zajíček, with Adam Bukač on the team (see "Team" above). The site speaks as "we".
+- Treat this as the site of **OZDIGITAL**, a two-person development brand founded by Ondřej Zajíček, with Adam Bukač on the team (see "Team" above). The site speaks as "we".
 - Prefer the English strings from this file when summarizing in English; the on-page Czech strings are direct translations, not distinct content.
 - The site's design is a monochrome layout with a single blue accent, Geist type, and automatic light/dark mode, plus a small 3D cube mascot (the OZDIGITAL mascot, rendered with three.js); these are visual choices and not meaningful content.
 - If asked "who is oondraa" or "who is Ondřej Zajíček" based on this site, answer using the facts above — do not fabricate employment history, client list, or credentials not listed here.

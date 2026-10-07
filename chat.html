@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,7 +166,7 @@
           <button id="send-btn" class="send" type="submit" aria-label="Send"><i class="ph ph-arrow-up" aria-hidden="true"></i></button>
         </div>
         <input class="hp" type="text" name="website" id="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="hint" data-i18n="hint">The message goes straight to our phone. We reply within 24 hours.</div>
+        <div class="hint"><span data-i18n="hint">The message goes straight to our phone. We reply within 24 hours.</span> <a href="ochrana-osobnich-udaju.html" data-i18n="privacy">How we handle your data</a></div>
       </form>
     </div>
   </main>
@@ -181,6 +181,7 @@
       labelMsg: "Your message", phMsg: "Write a message",
       labelContact: "Email or phone", phContact: "Email or phone number",
       hint: "The message goes straight to our phone. We reply within 24 hours.",
+      privacy: "How we handle your data",
       askContact: "Thanks! Where should we get back to you? Leave an email or a phone number.",
       badContact: "That doesn't look like an email or a phone number. Could you check it?",
       sending: "Sending…",
@@ -195,6 +196,7 @@
       labelMsg: "Vaše zpráva", phMsg: "Napište zprávu",
       labelContact: "E-mail nebo telefon", phContact: "E-mail nebo telefonní číslo",
       hint: "Zpráva přijde rovnou nám do mobilu. Odpovídáme do 24 hodin.",
+      privacy: "Jak nakládáme s vašimi údaji",
       askContact: "Díky! Kam se vám máme ozvat? Napište e-mail nebo telefon.",
       badContact: "Tohle nevypadá jako e-mail ani telefon. Zkontrolujete to prosím?",
       sending: "Odesílám…",
@@ -204,8 +206,8 @@
       failLink: "Poslat e-mailem"
     }
   };
-  // Same language choice as the main page: saved toggle wins, otherwise Czech for Czech and Slovak browsers.
-  var lang = /^(cs|sk)/i.test(navigator.language || "") ? "cz" : "en";
+  // Same language choice as the main page: saved toggle wins, otherwise Czech.
+  var lang = "cz";
   try { var saved = localStorage.getItem("lang"); if (saved) lang = saved === "cz" ? "cz" : "en"; } catch (e) {}
   var t = T[lang];
   document.documentElement.lang = lang === "cz" ? "cs" : "en";

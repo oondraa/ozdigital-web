@@ -1,31 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root">
+<html lang="cs" id="html-root">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OZDIGITAL | Creative studio</title>
-<meta name="description" content="OZDIGITAL is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
+<title>Weby a aplikace na míru | OZDIGITAL</title>
+<meta name="description" content="Navrhujeme a programujeme weby, webové aplikace a automatizace na míru. Žádné šablony, cena písemně předem, odpověď do 24 hodin.">
 <meta name="author" content="Ondřej Zajíček (oondraa)">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://oondraa.pages.dev/">
-<link rel="alternate" hreflang="en" href="https://oondraa.pages.dev/">
-<link rel="alternate" hreflang="cs" href="https://oondraa.pages.dev/">
-<link rel="alternate" hreflang="x-default" href="https://oondraa.pages.dev/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OZDIGITAL">
-<meta property="og:title" content="OZDIGITAL | Creative studio">
-<meta property="og:description" content="OZDIGITAL is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
+<meta property="og:title" content="Weby a aplikace na míru | OZDIGITAL">
+<meta property="og:description" content="Navrhujeme a programujeme weby, webové aplikace a automatizace na míru. Žádné šablony, cena písemně předem, odpověď do 24 hodin.">
 <meta property="og:url" content="https://oondraa.pages.dev/">
 <meta property="og:image" content="https://oondraa.pages.dev/assets/og-ozdigital.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="OZDIGITAL logo">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:image:alt" content="Logo OZDIGITAL">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="OZDIGITAL | Creative studio">
-<meta name="twitter:description" content="OZDIGITAL is a creative studio. We design and build websites, apps and systems, each one made from scratch for a specific client.">
+<meta name="twitter:title" content="Weby a aplikace na míru | OZDIGITAL">
+<meta name="twitter:description" content="Navrhujeme a programujeme weby, webové aplikace a automatizace na míru. Žádné šablony, cena písemně předem, odpověď do 24 hodin.">
 <meta name="twitter:image" content="https://oondraa.pages.dev/assets/og-ozdigital.png">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -42,21 +39,32 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ondřej Zajíček",
-  "alternateName": "oondraa",
+  "@type": "ProfessionalService",
+  "name": "OZDIGITAL",
   "url": "https://oondraa.pages.dev/",
+  "logo": "https://oondraa.pages.dev/icon-512.png",
+  "image": "https://oondraa.pages.dev/assets/og-ozdigital.png",
+  "description": "Weby, webové aplikace a automatizace na míru.",
+  "email": "o.zajicek12@gmail.com",
+  "areaServed": "CZ",
+  "knowsLanguage": ["cs", "en"],
+  "founder": {
+    "@type": "Person",
+    "name": "Ondřej Zajíček",
+    "alternateName": "oondraa",
+    "sameAs": [
+      "https://github.com/oondraa",
+      "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/"
+    ]
+  },
+  "employee": [
+    { "@type": "Person", "name": "Ondřej Zajíček", "jobTitle": "Zakladatel, vývojář" },
+    { "@type": "Person", "name": "Adam Bukač", "jobTitle": "Vývojář", "sameAs": ["https://github.com/AdamBuk"] }
+  ],
   "sameAs": [
     "https://github.com/oondraa",
-    "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/",
     "https://www.youtube.com/@OZLAB-md"
-  ],
-  "jobTitle": "Founder, OZDIGITAL",
-  "affiliation": {
-    "@type": "Organization",
-    "name": "OZDIGITAL"
-  },
-  "knowsAbout": ["Python", "HTML", "CSS", "JavaScript", "C++", "C#", "Lua", "Node.js", "Linux"]
+  ]
 }
 </script>
 <script type="application/ld+json">
@@ -65,7 +73,7 @@
   "@type": "WebSite",
   "name": "OZDIGITAL",
   "url": "https://oondraa.pages.dev/",
-  "inLanguage": ["en", "cs"]
+  "inLanguage": ["cs", "en"]
 }
 </script>
 
@@ -406,6 +414,7 @@
   footer { padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
   .foot-brand { display: inline-flex; align-items: center; gap: 8px; }
   footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+  footer .legal { flex-basis: 100%; order: 3; }
 
   /* ---------- Dialogs ---------- */
   dialog {
@@ -542,12 +551,12 @@
     <div class="wrap">
       <a href="#about" class="brand" aria-label="OZDIGITAL"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/><path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">OZDIGITAL</span></a>
       <nav aria-label="Primary">
-        <a href="#services" data-i18n="tNavAbout">What we do</a>
-        <a href="#process" data-i18n="tNavProjects">How we work</a>
-        <a href="#team" data-i18n="tNavTeam">Team</a>
-        <a href="#connect" data-i18n="tNavConnect">Contact</a>
+        <a href="#services" data-i18n="tNavAbout">Co děláme</a>
+        <a href="#process" data-i18n="tNavProjects">Jak pracujeme</a>
+        <a href="#team" data-i18n="tNavTeam">Tým</a>
+        <a href="#connect" data-i18n="tNavConnect">Kontakt</a>
         <button id="theme-toggle" class="lang-btn theme-btn" type="button" aria-label="Switch to light mode"><i class="ph ph-sun" aria-hidden="true"></i></button>
-        <button id="lang-toggle" class="lang-btn" type="button" aria-label="Switch language">CZ</button>
+        <button id="lang-toggle" class="lang-btn" type="button" aria-label="Přepnout jazyk">EN</button>
       </nav>
     </div>
   </header>
@@ -555,41 +564,41 @@
   <main>
     <div class="hero" id="about">
       <div class="wrap">
-        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble" data-i18n="tHey">Got an idea? Let's make it.</span></div>
-        <h1 class="rise" style="--i:0"><span data-split data-i18n="tHeroA">A creative studio.</span> <em data-split data-i18n="tHeroB">Made to order.</em></h1>
-        <p class="rise" style="--i:1" data-i18n="tHeroSub">We design and build websites, apps and systems. No templates and no packages: every project is made from scratch for one client and their idea.</p>
+        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble" data-i18n="tHey">Máte nápad? Pojďme ho postavit.</span></div>
+        <h1 class="rise" style="--i:0"><span data-split data-i18n="tHeroA">Weby a aplikace</span> <em data-split data-i18n="tHeroB">na míru.</em></h1>
+        <p class="rise" style="--i:1" data-i18n="tHeroSub">Jsme dva vývojáři. Navrhujeme a programujeme weby, webové aplikace a automatizace, vždy od nuly a bez šablon.</p>
         <div class="ctas rise" style="--i:2">
-          <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Get in touch</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
-          <a href="#services" class="btn btn-ghost"><span data-i18n="tViewProjects">What we do</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
+          <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Napište nám</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          <a href="#services" class="btn btn-ghost"><span data-i18n="tViewProjects">Co děláme</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
         </div>
       </div>
     </div>
 
     <div class="marquee" aria-hidden="true">
-      <div class="mq-track"><div class="mq-group"><span data-i18n="tMq1">Websites</span><i class="ph ph-asterisk"></i><span data-i18n="tMq2">Apps</span><i class="ph ph-asterisk"></i><span data-i18n="tMq3">Systems</span><i class="ph ph-asterisk"></i><span data-i18n="tMq4">Automation</span><i class="ph ph-asterisk"></i><span>UI/UX</span><i class="ph ph-asterisk"></i><span data-i18n="tMq5">Made to order</span><i class="ph ph-asterisk"></i></div></div>
+      <div class="mq-track"><div class="mq-group"><span data-i18n="tMq1">Weby</span><i class="ph ph-asterisk"></i><span data-i18n="tMq2">Aplikace</span><i class="ph ph-asterisk"></i><span data-i18n="tMq3">Systémy</span><i class="ph ph-asterisk"></i><span data-i18n="tMq4">Automatizace</span><i class="ph ph-asterisk"></i><span>UI/UX</span><i class="ph ph-asterisk"></i><span data-i18n="tMq5">Na míru</span><i class="ph ph-asterisk"></i></div></div>
     </div>
 
     <section id="services">
       <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecServices">What we do</h2>
+        <h2 class="sec-head reveal" data-i18n="tSecServices">Co děláme</h2>
         <div class="services">
           <article class="svc svc-apps reveal" style="--i:0">
             <i class="ph ph-kanban ph-deco" aria-hidden="true"></i>
             <i class="ph ph-tree-structure ph-big" aria-hidden="true"></i>
-            <h3 data-i18n="tSvcApps">Apps and systems</h3>
-            <p data-i18n="tSvcAppsT">From a company's internal tools to standalone apps. Designed and built around how it actually needs to work, not squeezed into something off the shelf.</p>
+            <h3 data-i18n="tSvcApps">Aplikace a systémy</h3>
+            <p data-i18n="tSvcAppsT">Od interních nástrojů firmy po samostatné aplikace. Navržené a postavené podle toho, jak to má opravdu fungovat, ne naroubované na něco z krabice.</p>
           </article>
           <article class="svc svc-web reveal" style="--i:1">
             <i class="ph ph-browsers ph-deco" aria-hidden="true"></i>
             <i class="ph ph-browser ph-big" aria-hidden="true"></i>
-            <h3 data-i18n="tSvcWeb">Websites</h3>
-            <p data-i18n="tSvcWebT">Websites with a face of their own, not a template. Design, copy and code under one roof, and great on a phone.</p>
+            <h3 data-i18n="tSvcWeb">Weby</h3>
+            <p data-i18n="tSvcWebT">Weby s vlastní tváří, žádná šablona. Design, texty i vývoj pod jednou střechou a skvělé na mobilu.</p>
           </article>
           <article class="svc svc-tools reveal" style="--i:2">
             <i class="ph ph-gear-six ph-deco" aria-hidden="true"></i>
             <i class="ph ph-wrench ph-big" aria-hidden="true"></i>
-            <h3 data-i18n="tSvcTools">Automation and experiments</h3>
-            <p data-i18n="tSvcToolsT">Whatever gets done by hand over and over, we teach a computer to do. And if nobody has built it yet, we're happy to try.</p>
+            <h3 data-i18n="tSvcTools">Automatizace a experimenty</h3>
+            <p data-i18n="tSvcToolsT">Co se pořád dokola dělá ručně, to naučíme počítač. A když to ještě nikdo nepostavil, rádi to zkusíme.</p>
           </article>
         </div>
       </div>
@@ -598,29 +607,29 @@
     <section id="process" class="process">
       <div class="wrap">
         <div class="process-head">
-          <h2 class="sec-head reveal" data-i18n="tSecProcess">How we work</h2>
+          <h2 class="sec-head reveal" data-i18n="tSecProcess">Jak pracujeme</h2>
           <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
         </div>
         <ol class="steps">
           <li class="reveal" style="--i:0">
             <i class="ph ph-chats-circle" aria-hidden="true"></i>
-            <h3 data-i18n="tP1T">Talk</h3>
-            <p data-i18n="tP1">Tell us what you're coming with. We go through the idea, the goals and what you expect from it.</p>
+            <h3 data-i18n="tP1T">Rozhovor</h3>
+            <p data-i18n="tP1">Řeknete nám, s čím přicházíte. Projdeme nápad, cíle a co od toho čekáte.</p>
           </li>
           <li class="reveal" style="--i:1">
             <i class="ph ph-handshake" aria-hidden="true"></i>
-            <h3 data-i18n="tP2T">Agree</h3>
-            <p data-i18n="tP2">Scope, deadline and price are set for your project, not taken from a list. A standard contract and a proper invoice.</p>
+            <h3 data-i18n="tP2T">Dohoda</h3>
+            <p data-i18n="tP2">Rozsah, termín a cenu stanovíme pro váš projekt, ne podle ceníku. Klasická smlouva a řádná faktura.</p>
           </li>
           <li class="reveal" style="--i:2">
             <i class="ph ph-code" aria-hidden="true"></i>
-            <h3 data-i18n="tP3T">Create</h3>
-            <p data-i18n="tP3">We design and build. You see it take shape along the way and have your say.</p>
+            <h3 data-i18n="tP3T">Tvorba</h3>
+            <p data-i18n="tP3">Navrhujeme a stavíme. Průběžně vidíte, jak to vzniká, a můžete do toho mluvit.</p>
           </li>
           <li class="reveal" style="--i:3">
             <i class="ph ph-rocket-launch" aria-hidden="true"></i>
-            <h3 data-i18n="tP4T">Launch</h3>
-            <p data-i18n="tP4">We put it live, hand over everything that belongs to it and stay around afterwards.</p>
+            <h3 data-i18n="tP4T">Spuštění</h3>
+            <p data-i18n="tP4">Spustíme to, předáme vše, co k tomu patří, a zůstaneme po ruce.</p>
           </li>
         </ol>
       </div>
@@ -628,28 +637,28 @@
 
     <section id="team">
       <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecTeam">Who's behind it</h2>
-        <p class="sec-lede reveal" data-i18n="tTeamLede">A small team, no middlemen. These are the people you'll actually talk to and who build your project.</p>
+        <h2 class="sec-head reveal" data-i18n="tSecTeam">Kdo za tím stojí</h2>
+        <p class="sec-lede reveal" data-i18n="tTeamLede">Jsme dva. Nemáme obchodníky ani projektové manažery: mluvíte přímo s lidmi, kteří váš projekt navrhují a programují.</p>
         <div class="team">
           <article class="member reveal" style="--i:0">
-            <div class="avatar" aria-hidden="true"><img src="/assets/team-ondrej.png" alt="" width="152" height="152" loading="lazy"></div>
+            <div class="avatar"><img src="/assets/team-ondrej.png" alt="Ondřej Zajíček, zakladatel OZDIGITAL" data-i18n-alt="tAltOndrej" width="152" height="152" loading="lazy"></div>
             <div>
               <h3>Ondřej Zajíček</h3>
-              <div class="roles"><span class="role" data-i18n="tRoleLead">Brand lead</span><span class="role">Developer</span><span class="role">UI/UX designer</span></div>
+              <div class="roles"><span class="role" data-i18n="tRoleLead">Zakladatel</span><span class="role" data-i18n="tRoleDev">Vývojář</span><span class="role" data-i18n="tRoleUx">UI/UX designér</span></div>
             </div>
-            <p data-i18n="tM1">Leads OZDIGITAL and is your main point of contact. Designs, writes code and keeps you in the loop from the first message to launch.</p>
+            <p data-i18n="tM1">Založil OZDIGITAL a je vaším hlavním kontaktem. Navrhuje, programuje a je s vámi v kontaktu od první zprávy až po spuštění.</p>
             <div class="socials">
               <a href="https://github.com/oondraa" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
               <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph ph-linkedin-logo" aria-hidden="true"></i></a>
             </div>
           </article>
           <article class="member reveal" style="--i:1">
-            <div class="avatar" aria-hidden="true"><img src="/assets/team-adam.jpg" alt="" width="152" height="152" loading="lazy"></div>
+            <div class="avatar"><img src="/assets/team-adam.jpg" alt="Adam Bukač, vývojář OZDIGITAL" data-i18n-alt="tAltAdam" width="152" height="152" loading="lazy"></div>
             <div>
               <h3>Adam Bukač</h3>
-              <div class="roles"><span class="role">Developer</span><span class="role">UI/UX designer</span></div>
+              <div class="roles"><span class="role" data-i18n="tRoleDev">Vývojář</span><span class="role" data-i18n="tRoleUx">UI/UX designér</span></div>
             </div>
-            <p data-i18n="tM2">Designs interfaces and writes code. Comes along to client meetings, so you'll meet him in person too.</p>
+            <p data-i18n="tM2">Navrhuje rozhraní a programuje. Chodí s námi i na schůzky s klienty, takže se s ním potkáte osobně.</p>
             <div class="socials">
               <a href="https://github.com/AdamBuk" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
             </div>
@@ -660,31 +669,31 @@
 
     <section id="faq">
       <div class="wrap">
-        <h2 class="sec-head reveal" data-i18n="tSecFaq">Common questions</h2>
+        <h2 class="sec-head reveal" data-i18n="tSecFaq">Časté otázky</h2>
         <div class="faq reveal">
           <details>
-            <summary><span data-i18n="tQ1">How much does it cost?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA1">We don't have a price list, because no two projects are the same. We price it after the first conversation, based on what you need, and you get the price in writing before we start.</p>
+            <summary><span data-i18n="tQ1">Kolik to stojí?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA1">Ceník nemáme, protože žádné dva projekty nejsou stejné. Cenu stanovíme po prvním rozhovoru podle toho, co potřebujete, a dostanete ji písemně ještě před začátkem.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ2">How long will it take?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA2">It depends on the scope. We agree on the deadline up front, so you know it before we start.</p>
+            <summary><span data-i18n="tQ2">Jak dlouho to trvá?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA2">Záleží na rozsahu. Termín domluvíme předem, takže ho znáte dřív, než začneme.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ3">What do you need from me?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA3">Mostly the idea and some time for a conversation. Anything you already have (logo, photos, texts) helps; we'll take care of the rest.</p>
+            <summary><span data-i18n="tQ3">Co od vás budeme potřebovat?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA3">Hlavně nápad a chvíli času na rozhovor. Podklady, které už máte (logo, fotky, texty), se hodí, o zbytek se postaráme.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ4">Will I be able to make changes myself?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA4">Yes. Depending on the project we hand over an editor or show you how it works. If you'd rather not deal with it, we'll look after it for you.</p>
+            <summary><span data-i18n="tQ4">Budu si to moct upravovat sám?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA4">Ano. Podle projektu vám předáme editor, nebo vám ukážeme, jak na to. A když se s tím nechcete zabývat, postaráme se o to za vás.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ5">Who owns it afterwards?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA5">You do. The domain and the finished work are yours. Whether you run it yourself or we look after it is something we agree on per project.</p>
+            <summary><span data-i18n="tQ5">Komu to pak patří?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA5">Vám. Doména i hotové dílo jsou vaše. Jestli to budete provozovat sami, nebo se o to postaráme my, domluvíme podle projektu.</p>
           </details>
           <details>
-            <summary><span data-i18n="tQ6">Who am I actually dealing with?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
-            <p data-i18n="tA6">OZDIGITAL is a small creative studio. You talk directly to the people who design and build your project, with no middlemen. Contracts and invoices go through myNEST s.r.o., so everything is done properly.</p>
+            <summary><span data-i18n="tQ6">S kým vlastně jednám?</span><i class="ph ph-plus" aria-hidden="true"></i></summary>
+            <p data-i18n="tA6">S námi dvěma, Ondřejem Zajíčkem a Adamem Bukačem. Mluvíte přímo s lidmi, kteří váš projekt navrhují a programují. Smluvní stranou je myNEST s.r.o., která podepisuje smlouvu a vystavuje faktury; její úplné údaje najdete v patičce.</p>
           </details>
         </div>
       </div>
@@ -693,10 +702,10 @@
     <section id="connect">
       <div class="wrap connect">
         <div class="reveal">
-          <h2 data-i18n="tFreeTitle">Got an idea?</h2>
-          <p class="lede" data-i18n="tFree">Write a few sentences about what you'd like to make. We'll get back to you within 24 hours and talk it through.</p>
+          <h2 data-i18n="tFreeTitle">Máte nápad?</h2>
+          <p class="lede" data-i18n="tFree">Napište pár vět o tom, co byste chtěli vytvořit. Do 24 hodin se ozveme a probereme, jak na to.</p>
           <div class="ctas">
-            <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Get in touch</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+            <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Napište nám</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
             <a href="mailto:o.zajicek12@gmail.com" class="mail">o.zajicek12@gmail.com</a>
           </div>
         </div>
@@ -705,17 +714,17 @@
         <div class="links reveal" style="--i:1">
           <a href="https://github.com/oondraa" target="_blank" rel="noopener">
             <i class="ph ph-github-logo ph-logo" aria-hidden="true"></i>
-            <span class="txt"><strong>GitHub</strong><span data-i18n="tGh">Our code lives here</span></span>
+            <span class="txt"><strong>GitHub</strong><span data-i18n="tGh">Tady najdete náš kód</span></span>
             <i class="ph ph-arrow-up-right go" aria-hidden="true"></i>
           </a>
           <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener">
             <i class="ph ph-linkedin-logo ph-logo" aria-hidden="true"></i>
-            <span class="txt"><strong>LinkedIn</strong><span data-i18n="tLi">Let's get in touch</span></span>
+            <span class="txt"><strong>LinkedIn</strong><span data-i18n="tLi">Pojďme se spojit</span></span>
             <i class="ph ph-arrow-up-right go" aria-hidden="true"></i>
           </a>
           <a href="https://www.youtube.com/@OZLAB-md" target="_blank" rel="noopener">
             <i class="ph ph-youtube-logo ph-logo" aria-hidden="true"></i>
-            <span class="txt"><strong>YouTube</strong><span data-i18n="tYt">Watch what we build</span></span>
+            <span class="txt"><strong>YouTube</strong><span data-i18n="tYt">Podívejte se, co stavíme</span></span>
             <i class="ph ph-arrow-up-right go" aria-hidden="true"></i>
           </a>
         </div>
@@ -727,8 +736,9 @@
   <footer>
     <div class="wrap">
       <span class="foot-brand"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/><path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>© <span id="year">2026</span> OZDIGITAL</span></span>
-      <span><span data-i18n="tAbout3">OZDIGITAL is our own brand. Contracts and invoicing are handled by</span> myNEST s.r.o., <a href="https://ares.gov.cz/ekonomicke-subjekty?ico=28855884" target="_blank" rel="noopener"><span data-i18n="tIco">Company ID</span> 28855884</a>.</span>
-      <a href="lab.html" data-i18n="tLabLink">What else we're working on</a>
+      <span class="legal"><span data-i18n="tAbout3">OZDIGITAL je naše vlastní značka. Smlouvy a fakturaci zajišťuje</span> myNEST s.r.o., Hradecká 1152/11, 500 03 Hradec Králové, <a href="https://ares.gov.cz/ekonomicke-subjekty?ico=28855884" target="_blank" rel="noopener"><span data-i18n="tIco">IČO</span> 28855884</a>, <span data-i18n="tReg">zapsaná u Krajského soudu v Hradci Králové, oddíl C, vložka 31352</span>.</span>
+      <a href="ochrana-osobnich-udaju.html" data-i18n="tPrivacy">Ochrana osobních údajů</a>
+      <a href="lab.html" data-i18n="tLabLink">Na čem ještě pracujeme</a>
     </div>
   </footer>
 
@@ -736,8 +746,8 @@
 (function () {
   var EN = {
     tNavAbout: "What we do", tNavProjects: "How we work", tNavConnect: "Contact",
-    tHeroA: "A creative studio.", tHeroB: "Made to order.",
-    tHeroSub: "We design and build websites, apps and systems. No templates and no packages: every project is made from scratch for one client and their idea.",
+    tHeroA: "Websites and apps.", tHeroB: "Made to order.",
+    tHeroSub: "We're two developers. We design and build websites, web apps and automation, always from scratch and without templates.",
     tViewProjects: "What we do",
     tStart: "Get in touch", tHey: "Got an idea? Let's make it.",
     tAbout3: "OZDIGITAL is our own brand. Contracts and invoicing are handled by", tIco: "Company ID",
@@ -751,8 +761,8 @@
     tP3T: "Create", tP3: "We design and build. You see it take shape along the way and have your say.",
     tP4T: "Launch", tP4: "We put it live, hand over everything that belongs to it and stay around afterwards.",
     tNavTeam: "Team", tSecTeam: "Who's behind it",
-    tTeamLede: "A small team, no middlemen. These are the people you'll actually talk to and who build your project.",
-    tRoleLead: "Brand lead", tM1: "Leads OZDIGITAL and is your main point of contact. Designs, writes code and keeps you in the loop from the first message to launch.",
+    tTeamLede: "There are two of us. No salespeople, no project managers: you talk directly to the people who design and build your project.",
+    tRoleLead: "Founder", tM1: "Founded OZDIGITAL and is your main point of contact. Designs, writes code and keeps you in the loop from the first message to launch.",
     tM2: "Designs interfaces and writes code. Comes along to client meetings, so you'll meet him in person too.",
     tSecProjects: "From our workshop", tSecWorks: "What we're working on",
     tProjectsLede: "Besides client work we build our own software. A few things we've made for ourselves, so you can see what we're capable of.",
@@ -774,18 +784,24 @@
     tQ3: "What do you need from me?", tA3: "Mostly the idea and some time for a conversation. Anything you already have (logo, photos, texts) helps; we'll take care of the rest.",
     tQ4: "Will I be able to make changes myself?", tA4: "Yes. Depending on the project we hand over an editor or show you how it works. If you'd rather not deal with it, we'll look after it for you.",
     tQ5: "Who owns it afterwards?", tA5: "You do. The domain and the finished work are yours. Whether you run it yourself or we look after it is something we agree on per project.",
-    tQ6: "Who am I actually dealing with?", tA6: "OZDIGITAL is a small creative studio. You talk directly to the people who design and build your project, with no middlemen. Contracts and invoices go through myNEST s.r.o., so everything is done properly.",
+    tQ6: "Who am I actually dealing with?", tA6: "With the two of us, Ondřej Zajíček and Adam Bukač. You talk directly to the people who design and build your project. The contracting party is myNEST s.r.o., which signs the contract and issues the invoices; its full details are in the footer.",
     tFreeTitle: "Got an idea?",
     tFree: "Write a few sentences about what you'd like to make. We'll get back to you within 24 hours and talk it through.",
     tOpen: "Open project",
     tGh: "Our code lives here", tLi: "Let's get in touch", tYt: "Watch what we build",
     tLabLink: "What else we're working on",
-    tMq1: "Websites", tMq2: "Apps", tMq3: "Systems", tMq4: "Automation", tMq5: "Made to order"
+    tMq1: "Websites", tMq2: "Apps", tMq3: "Systems", tMq4: "Automation", tMq5: "Made to order",
+    tRoleDev: "Developer",
+    tRoleUx: "UI/UX designer",
+    tReg: "registered with the Regional Court in Hradec Králové, section C, file 31352",
+    tPrivacy: "Privacy policy",
+    tAltOndrej: "Ondřej Zajíček, founder of OZDIGITAL",
+    tAltAdam: "Adam Bukač, developer at OZDIGITAL"
   };
   var CZ = {
     tNavAbout: "Co děláme", tNavProjects: "Jak pracujeme", tNavConnect: "Kontakt",
-    tHeroA: "Kreativní studio.", tHeroB: "Všechno na zakázku.",
-    tHeroSub: "Navrhujeme a stavíme weby, aplikace a systémy. Žádné šablony ani balíčky: každý projekt děláme od nuly pro konkrétního klienta a jeho nápad.",
+    tHeroA: "Weby a aplikace", tHeroB: "na míru.",
+    tHeroSub: "Jsme dva vývojáři. Navrhujeme a programujeme weby, webové aplikace a automatizace, vždy od nuly a bez šablon.",
     tViewProjects: "Co děláme",
     tStart: "Napište nám", tHey: "Máte nápad? Pojďme ho postavit.",
     tAbout3: "OZDIGITAL je naše vlastní značka. Smlouvy a fakturaci zajišťuje", tIco: "IČO",
@@ -799,8 +815,8 @@
     tP3T: "Tvorba", tP3: "Navrhujeme a stavíme. Průběžně vidíte, jak to vzniká, a můžete do toho mluvit.",
     tP4T: "Spuštění", tP4: "Spustíme to, předáme vše, co k tomu patří, a zůstaneme po ruce.",
     tNavTeam: "Tým", tSecTeam: "Kdo za tím stojí",
-    tTeamLede: "Malý tým, žádní prostředníci. Tohle jsou lidé, se kterými budete mluvit a kteří váš projekt postaví.",
-    tRoleLead: "Vedoucí značky", tM1: "Vede OZDIGITAL a je vaším hlavním kontaktem. Navrhuje, programuje a je s vámi v kontaktu od první zprávy až po spuštění.",
+    tTeamLede: "Jsme dva. Nemáme obchodníky ani projektové manažery: mluvíte přímo s lidmi, kteří váš projekt navrhují a programují.",
+    tRoleLead: "Zakladatel", tM1: "Založil OZDIGITAL a je vaším hlavním kontaktem. Navrhuje, programuje a je s vámi v kontaktu od první zprávy až po spuštění.",
     tM2: "Navrhuje rozhraní a programuje. Chodí s námi i na schůzky s klienty, takže se s ním potkáte osobně.",
     tSecProjects: "Z naší dílny", tSecWorks: "Na čem pracujeme",
     tProjectsLede: "Kromě zakázek stavíme i vlastní software. Pár věcí, které jsme udělali pro sebe, ať vidíte, co umíme.",
@@ -822,19 +838,25 @@
     tQ3: "Co od vás budeme potřebovat?", tA3: "Hlavně nápad a chvíli času na rozhovor. Podklady, které už máte (logo, fotky, texty), se hodí, o zbytek se postaráme.",
     tQ4: "Budu si to moct upravovat sám?", tA4: "Ano. Podle projektu vám předáme editor, nebo vám ukážeme, jak na to. A když se s tím nechcete zabývat, postaráme se o to za vás.",
     tQ5: "Komu to pak patří?", tA5: "Vám. Doména i hotové dílo jsou vaše. Jestli to budete provozovat sami, nebo se o to postaráme my, domluvíme podle projektu.",
-    tQ6: "S kým vlastně jednám?", tA6: "OZDIGITAL je malé kreativní studio. Mluvíte přímo s lidmi, kteří váš projekt navrhují a staví, bez prostředníků. Smlouvy a faktury jdou přes myNEST s.r.o., takže je všechno řádně.",
+    tQ6: "S kým vlastně jednám?", tA6: "S námi dvěma, Ondřejem Zajíčkem a Adamem Bukačem. Mluvíte přímo s lidmi, kteří váš projekt navrhují a programují. Smluvní stranou je myNEST s.r.o., která podepisuje smlouvu a vystavuje faktury; její úplné údaje najdete v patičce.",
     tFreeTitle: "Máte nápad?",
     tFree: "Napište pár vět o tom, co byste chtěli vytvořit. Do 24 hodin se ozveme a probereme, jak na to.",
     tOpen: "Otevřít projekt",
     tGh: "Tady najdete náš kód", tLi: "Pojďme se spojit", tYt: "Podívejte se, co stavíme",
     tLabLink: "Na čem ještě pracujeme",
-    tMq1: "Weby", tMq2: "Aplikace", tMq3: "Systémy", tMq4: "Automatizace", tMq5: "Na míru"
+    tMq1: "Weby", tMq2: "Aplikace", tMq3: "Systémy", tMq4: "Automatizace", tMq5: "Na míru",
+    tRoleDev: "Vývojář",
+    tRoleUx: "UI/UX designér",
+    tReg: "zapsaná u Krajského soudu v Hradci Králové, oddíl C, vložka 31352",
+    tPrivacy: "Ochrana osobních údajů",
+    tAltOndrej: "Ondřej Zajíček, zakladatel OZDIGITAL",
+    tAltAdam: "Adam Bukač, vývojář OZDIGITAL"
   };
 
   var langBtn = document.getElementById("lang-toggle");
   var htmlRoot = document.getElementById("html-root");
-  // Czech by default for Czech and Slovak browsers; a saved choice from the toggle wins.
-  var cz = /^(cs|sk)/i.test(navigator.language || "");
+  // Czech by default (the static HTML is Czech too, for crawlers); a saved choice from the toggle wins.
+  var cz = true;
   try { var saved = localStorage.getItem("lang"); if (saved) cz = saved === "cz"; } catch (e) {}
 
   function applyLang() {
@@ -842,6 +864,10 @@
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var key = el.getAttribute("data-i18n");
       if (dict[key]) el.textContent = dict[key];
+    });
+    document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-alt");
+      if (dict[key]) el.alt = dict[key];
     });
     langBtn.textContent = cz ? "EN" : "CZ";
     htmlRoot.setAttribute("lang", cz ? "cs" : "en");
