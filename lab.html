@@ -315,10 +315,8 @@
     border: 1px solid var(--line); border-radius: var(--r-surface); overflow: hidden; cursor: pointer;
     transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
-  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
   .card .media { position: relative; background: #000; overflow: hidden; aspect-ratio: 16 / 9; }
   .card .media video, .card .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
-  .card:hover .media video { transform: scale(1.02); }
   .card .body { padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
   .card .head { display: flex; align-items: center; gap: 14px; }
   .card .icon { width: 48px; height: 48px; border-radius: var(--r-tile); flex-shrink: 0; }
@@ -443,8 +441,6 @@
   @keyframes sheetIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: no-preference) {
     .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms); }
-    .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
-    .js .reveal.in { opacity: 1; transform: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -536,6 +532,8 @@
     .nav nav a[href="/#services"] { display: none; }
   }
 </style>
+<link rel="stylesheet" href="/motion.css">
+<script src="/motion.js" defer></script>
 </head>
 <body>
 
@@ -555,7 +553,7 @@
   <main>
     <section id="lab" style="padding-bottom: 32px;">
       <div class="wrap">
-        <h1 class="lab-title rise" data-i18n="tLabTitle">OZDIGITAL</h1>
+        <h1 class="lab-title rise" data-split data-i18n="tLabTitle">OZDIGITAL</h1>
         <p class="sec-lede rise" style="--i:1; margin: 20px 0 0;" data-i18n="tLabLede">Since you're here, take a look at what we work on besides client projects. Our own things, built for the fun of it.</p>
       </div>
     </section>

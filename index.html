@@ -315,10 +315,8 @@
     border: 1px solid var(--line); border-radius: var(--r-surface); overflow: hidden; cursor: pointer;
     transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
-  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
   .card .media { position: relative; background: #000; overflow: hidden; aspect-ratio: 16 / 9; }
   .card .media video, .card .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
-  .card:hover .media video { transform: scale(1.02); }
   .card .body { padding: 24px 26px 26px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
   .card .head { display: flex; align-items: center; gap: 14px; }
   .card .icon { width: 48px; height: 48px; border-radius: var(--r-tile); flex-shrink: 0; }
@@ -438,8 +436,6 @@
   @keyframes sheetIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: no-preference) {
     .rise { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms); }
-    .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
-    .js .reveal.in { opacity: 1; transform: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -454,7 +450,6 @@
     background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-surface);
     transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
-  .member:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
   /* Avatars are often dark logos: a ring + soft lift keeps them off a dark card. */
   .member .avatar {
     width: 152px; height: 152px; border-radius: var(--r-surface); overflow: hidden; flex-shrink: 0;
@@ -538,6 +533,8 @@
     .nav nav a[href="#services"], .nav nav a[href="#team"] { display: none; }
   }
 </style>
+<link rel="stylesheet" href="/motion.css">
+<script src="/motion.js" defer></script>
 </head>
 <body>
 
@@ -559,13 +556,17 @@
     <div class="hero" id="about">
       <div class="wrap">
         <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble" data-i18n="tHey">Got an idea? Let's make it.</span></div>
-        <h1 class="rise" style="--i:0"><span data-i18n="tHeroA">A creative studio.</span> <em data-i18n="tHeroB">Made to order.</em></h1>
+        <h1 class="rise" style="--i:0"><span data-split data-i18n="tHeroA">A creative studio.</span> <em data-split data-i18n="tHeroB">Made to order.</em></h1>
         <p class="rise" style="--i:1" data-i18n="tHeroSub">We design and build websites, apps and systems. No templates and no packages: every project is made from scratch for one client and their idea.</p>
         <div class="ctas rise" style="--i:2">
           <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Get in touch</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
           <a href="#services" class="btn btn-ghost"><span data-i18n="tViewProjects">What we do</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
         </div>
       </div>
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="mq-track"><div class="mq-group"><span data-i18n="tMq1">Websites</span><i class="ph ph-asterisk"></i><span data-i18n="tMq2">Apps</span><i class="ph ph-asterisk"></i><span data-i18n="tMq3">Systems</span><i class="ph ph-asterisk"></i><span data-i18n="tMq4">Automation</span><i class="ph ph-asterisk"></i><span>UI/UX</span><i class="ph ph-asterisk"></i><span data-i18n="tMq5">Made to order</span><i class="ph ph-asterisk"></i></div></div>
     </div>
 
     <section id="services">
@@ -778,7 +779,8 @@
     tFree: "Write a few sentences about what you'd like to make. We'll get back to you within 24 hours and talk it through.",
     tOpen: "Open project",
     tGh: "Our code lives here", tLi: "Let's get in touch", tYt: "Watch what we build",
-    tLabLink: "What else we're working on"
+    tLabLink: "What else we're working on",
+    tMq1: "Websites", tMq2: "Apps", tMq3: "Systems", tMq4: "Automation", tMq5: "Made to order"
   };
   var CZ = {
     tNavAbout: "Co děláme", tNavProjects: "Jak pracujeme", tNavConnect: "Kontakt",
@@ -825,7 +827,8 @@
     tFree: "Napište pár vět o tom, co byste chtěli vytvořit. Do 24 hodin se ozveme a probereme, jak na to.",
     tOpen: "Otevřít projekt",
     tGh: "Tady najdete náš kód", tLi: "Pojďme se spojit", tYt: "Podívejte se, co stavíme",
-    tLabLink: "Na čem ještě pracujeme"
+    tLabLink: "Na čem ještě pracujeme",
+    tMq1: "Weby", tMq2: "Aplikace", tMq3: "Systémy", tMq4: "Automatizace", tMq5: "Na míru"
   };
 
   var langBtn = document.getElementById("lang-toggle");
