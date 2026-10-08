@@ -454,7 +454,7 @@
 
 
   /* Team: people cards, monogram tile stands in until there is a photo */
-  .team { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   .member {
     display: flex; flex-direction: column; gap: 18px; padding: 40px;
     background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-surface);
@@ -662,6 +662,16 @@
             <p data-i18n="tM2">Navrhuje rozhraní a programuje. Chodí s námi i na schůzky s klienty, takže se s ním potkáte osobně.</p>
             <div class="socials">
               <a href="https://github.com/AdamBuk" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
+            </div>
+          </article>
+          <article class="member reveal" style="--i:2">
+            <div class="avatar" aria-hidden="true">TD</div>
+            <div>
+              <h3>Tomáš Dotazuer</h3>
+              <div class="roles"><span class="role" data-i18n="tRoleDev">Vývojář</span><span class="role" data-i18n="tRoleUx">UI/UX designér</span></div>
+            </div>
+            <div class="socials">
+              <a href="#" onclick="event.preventDefault()" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
             </div>
           </article>
         </div>
