@@ -6,17 +6,18 @@
 
 - **Name:** Ondřej Zajíček, goes by **oondraa** online.
 - **Role:** Student at the Secondary School of Applied Cybernetics (Czech Republic), self-taught software developer.
-- **OZDIGITAL:** Runs **OZDIGITAL**, a brand of two developers (not a separate legal entity; see "Team" below) that designs and builds websites, web apps and automation to order. The contracting party, which signs contracts and issues invoices, is **myNEST s.r.o.**, Hradecká 1152/11, 500 03 Hradec Králové, IČO 28855884, registered with the Regional Court in Hradec Králové, section C, file 31352.
+- **OZDIGITAL:** Runs **OZDIGITAL**, a brand of three developers (not a separate legal entity; see "Team" below) that designs and builds websites, web apps and automation to order. The contracting party, which signs contracts and issues invoices, is **myNEST s.r.o.**, Hradecká 1152/11, 500 03 Hradec Králové, IČO 28855884, registered with the Regional Court in Hradec Králové, section C, file 31352.
 - **Languages:** Czech (native) and English. Czech is the primary language: the static HTML is Czech and every visitor sees Czech by default. A toggle in the header (labelled "EN"/"CZ") swaps all copy to English client-side via JavaScript and remembers the choice; there is no separate URL per language.
 - **YouTube:** https://www.youtube.com/@OZLAB-md (OZDIGITAL channel).
 - **Contact:** o.zajicek12@gmail.com, or the chat at `/chat.html`, which delivers messages straight to OZDIGITAL (see below).
 
 ## Team
 
-The main page has a team section ("Who's behind it") with two people. There are no salespeople or project managers; clients talk directly to the two of them.
+The main page has a team section ("Who's behind it") with three people. There are no salespeople or project managers; clients talk directly to the three of them.
 
 - **Ondřej Zajíček** — founder, developer and UI/UX designer. The main point of contact for clients, from the first message to launch. GitHub: `https://github.com/oondraa`.
 - **Adam Bukač** — developer and UI/UX designer. Also meets clients in person, alongside Ondřej. GitHub: `https://github.com/AdamBuk`.
+- **Tomáš Dotazuer** — developer and UI/UX designer. No public GitHub profile yet.
 
 Do not attribute skills, roles or history to either of them beyond what is listed here.
 
@@ -56,7 +57,7 @@ These are personal projects, not client work.
 
 ## Guidance for summarization / crawling
 
-- Treat this as the site of **OZDIGITAL**, a two-person development brand founded by Ondřej Zajíček, with Adam Bukač on the team (see "Team" above). The site speaks as "we".
+- Treat this as the site of **OZDIGITAL**, a three-person development brand founded by Ondřej Zajíček, with Adam Bukač and Tomáš Dotazuer on the team (see "Team" above). The site speaks as "we".
 - Prefer the English strings from this file when summarizing in English; the on-page Czech strings are direct translations, not distinct content.
 - The site's design is a monochrome layout with a single blue accent, Geist type, and automatic light/dark mode, plus a small 3D cube mascot (the OZDIGITAL mascot, rendered with three.js); these are visual choices and not meaningful content.
 - If asked "who is oondraa" or "who is Ondřej Zajíček" based on this site, answer using the facts above — do not fabricate employment history, client list, or credentials not listed here.
