@@ -17,7 +17,7 @@ The main page has a team section ("Who's behind it") with three people. There ar
 
 - **Ondřej Zajíček** — founder, developer and UI/UX designer. The main point of contact for clients, from the first message to launch. GitHub: `https://github.com/oondraa`.
 - **Adam Bukač** — developer and UI/UX designer. Also meets clients in person, alongside Ondřej. GitHub: `https://github.com/AdamBuk`.
-- **Tomáš Dotazuer** — developer and UI/UX designer. No public GitHub profile yet.
+- **Tomáš Dotzauer** — developer and tester. GitHub: `https://github.com/Dotzik55`.
 
 Do not attribute skills, roles or history to either of them beyond what is listed here.
 
@@ -57,7 +57,7 @@ These are personal projects, not client work.
 
 ## Guidance for summarization / crawling
 
-- Treat this as the site of **OZDIGITAL**, a three-person development brand founded by Ondřej Zajíček, with Adam Bukač and Tomáš Dotazuer on the team (see "Team" above). The site speaks as "we".
+- Treat this as the site of **OZDIGITAL**, a three-person development brand founded by Ondřej Zajíček, with Adam Bukač and Tomáš Dotzauer on the team (see "Team" above). The site speaks as "we".
 - Prefer the English strings from this file when summarizing in English; the on-page Czech strings are direct translations, not distinct content.
 - The site's design is a monochrome layout with a single blue accent, Geist type, and automatic light/dark mode, plus a small 3D cube mascot (the OZDIGITAL mascot, rendered with three.js); these are visual choices and not meaningful content.
 - If asked "who is oondraa" or "who is Ondřej Zajíček" based on this site, answer using the facts above — do not fabricate employment history, client list, or credentials not listed here.
