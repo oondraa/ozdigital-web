@@ -9,6 +9,8 @@
 - **OZDIGITAL:** Runs **OZDIGITAL**, a brand of three developers (not a separate legal entity; see "Team" below) that designs and builds websites, web apps and automation to order. The contracting party, which signs contracts and issues invoices, is **myNEST s.r.o.**, Hradecká 1152/11, 500 03 Hradec Králové, IČO 28855884, registered with the Regional Court in Hradec Králové, section C, file 31352.
 - **Languages:** Czech (native) and English. Czech is the primary language: the static HTML is Czech and every visitor sees Czech by default. A toggle in the header (labelled "EN"/"CZ") swaps all copy to English client-side via JavaScript and remembers the choice; there is no separate URL per language.
 - **YouTube:** https://www.youtube.com/@OZLAB-md (OZDIGITAL channel).
+- **Instagram:** https://www.instagram.com/ozdigital.md/ (OZDIGITAL account).
+- **TikTok:** https://www.tiktok.com/@ozlab.s (OZDIGITAL account; the handle is an older one that cannot be renamed).
 - **Contact:** o.zajicek12@gmail.com, or the chat at `/chat.html`, which delivers messages straight to OZDIGITAL (see below).
 
 ## Team
