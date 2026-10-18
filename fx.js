@@ -30,7 +30,7 @@
       var top = hash === "#about" ? 0 : target;
       var dist = Math.abs((top === 0 ? 0 : target.getBoundingClientRect().top + window.scrollY) - window.scrollY);
       lenis.scrollTo(top, {
-        offset: top === 0 ? 0 : -72,
+        offset: top === 0 ? 0 : -88,
         duration: Math.min(1.8, Math.max(0.8, dist / 2600)),
         easing: function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; },
         onComplete: function () {
