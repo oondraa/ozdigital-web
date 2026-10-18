@@ -547,7 +547,19 @@
   }
 </style>
 <link rel="stylesheet" href="/motion.css">
+<link rel="stylesheet" href="/fx.css">
+<script>
+  // Hold the hero title for fx.js's ink reveal; let it go anyway if the fx scripts never arrive.
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("fx-wait");
+    setTimeout(function () { document.documentElement.classList.remove("fx-wait"); }, 2500);
+  }
+</script>
 <script src="/motion.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" integrity="sha384-FKTX0CNJ8ngN1oGMBReVu7mvjTJyjFiD5etb1NKnYxc+8eFI2O0KWnksTN+oTFcu" crossorigin="anonymous" defer></script>
+<script src="/fx.js" defer></script>
 </head>
 <body>
 
