@@ -36,6 +36,24 @@
   });
   document.querySelectorAll(".hero h1, .lab-title").forEach(splitAll);
 
+  // ---------- Nav: mark the link of the section in the middle of the screen ----------
+  var navLinks = document.querySelectorAll('.nav nav a[href*="#"]');
+  if (navLinks.length && "IntersectionObserver" in window) {
+    var navIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.toggle("is-active", a.hash === "#" + en.target.id); });
+      });
+    }, { rootMargin: "-45% 0px -54% 0px" });
+    navLinks.forEach(function (a) {
+      var el = a.pathname === location.pathname && document.getElementById(a.hash.slice(1));
+      if (el) navIO.observe(el);
+    });
+    // The first block has no link, so reaching it clears the mark.
+    var first = document.querySelector("main > [id]");
+    if (first) navIO.observe(first);
+  }
+
   // ---------- Scroll progress bar ----------
   var bar = document.createElement("div");
   bar.className = "scroll-progress"; bar.setAttribute("aria-hidden", "true");
