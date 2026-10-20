@@ -5,8 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Weby a aplikace na míru | OZDIGITAL</title>
 <meta name="description" content="Navrhujeme a programujeme weby, webové aplikace a automatizace na míru. Žádné šablony, cena písemně předem, odpověď do 24 hodin.">
-<meta name="author" content="Ondřej Zajíček (oondraa)">
-<meta name="robots" content="index, follow">
+<meta name="author" content="Ondřej Zajíček (oondraa), Adam Bukač, Tomáš Dotzauer">
+<meta name="creator" content="Ondřej Zajíček (oondraa)">
+<meta name="publisher" content="OZDIGITAL">
+<meta name="keywords" content="OZDIGITAL, Ondřej Zajíček, oondraa, Adam Bukač, Tomáš Dotzauer, weby na míru, tvorba webových stránek, webové aplikace, aplikace na míru, automatizace, UI/UX design, Hradec Králové">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="bingbot" content="index, follow">
+<meta name="language" content="cs">
+<meta name="geo.region" content="CZ">
+<meta name="format-detection" content="telephone=no">
+<link rel="alternate" hreflang="cs" href="https://ozdigital.pages.dev/">
+<link rel="alternate" hreflang="x-default" href="https://ozdigital.pages.dev/">
+<link rel="author" href="/llms.txt">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta name="google-site-verification" content="_32wsVGGe5f-wQmV3JNHidjf2FFxtTUGBHmsqvZ1kDk">
 <link rel="canonical" href="https://ozdigital.pages.dev/">
 
@@ -40,44 +51,153 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "OZDIGITAL",
-  "url": "https://ozdigital.pages.dev/",
-  "logo": "https://ozdigital.pages.dev/icon-512.png",
-  "image": "https://ozdigital.pages.dev/assets/og-ozdigital.png",
-  "description": "Weby, webové aplikace a automatizace na míru.",
-  "email": "o.zajicek12@gmail.com",
-  "areaServed": "CZ",
-  "knowsLanguage": ["cs", "en"],
-  "founder": {
-    "@type": "Person",
-    "name": "Ondřej Zajíček",
-    "alternateName": "oondraa",
-    "sameAs": [
-      "https://github.com/oondraa",
-      "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/"
-    ]
-  },
-  "employee": [
-    { "@type": "Person", "name": "Ondřej Zajíček", "jobTitle": "Zakladatel, vývojář" },
-    { "@type": "Person", "name": "Adam Bukač", "jobTitle": "Vývojář", "sameAs": ["https://github.com/AdamBuk"] },
-    { "@type": "Person", "name": "Tomáš Dotzauer", "jobTitle": "Vývojář, tester", "sameAs": ["https://github.com/Dotzik55"] }
-  ],
-  "sameAs": [
-    "https://github.com/oondraa",
-    "https://www.youtube.com/@OZLAB-md",
-    "https://www.instagram.com/ozdigital.md/",
-    "https://www.tiktok.com/@ozlab.s"
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://ozdigital.pages.dev/#org",
+      "name": "OZDIGITAL",
+      "alternateName": ["OZ DIGITAL", "OZDIGITAL.md", "OZLAB"],
+      "url": "https://ozdigital.pages.dev/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://ozdigital.pages.dev/icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://ozdigital.pages.dev/assets/og-ozdigital.png",
+      "description": "Navrhujeme a programujeme weby, webové aplikace a automatizace na míru. Žádné šablony, cena písemně předem, odpověď do 24 hodin.",
+      "slogan": "Weby a aplikace na míru",
+      "email": "o.zajicek12@gmail.com",
+      "areaServed": { "@type": "Country", "name": "Česká republika" },
+      "knowsLanguage": ["cs", "en"],
+      "knowsAbout": ["Tvorba webových stránek", "Webové aplikace", "Automatizace", "UI/UX design", "Vývoj softwaru"],
+      "founder": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+      "employee": [
+        { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+        { "@id": "https://ozdigital.pages.dev/#adam-bukac" },
+        { "@id": "https://ozdigital.pages.dev/#tomas-dotzauer" }
+      ],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "myNEST s.r.o.",
+        "taxID": "28855884",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Hradecká 1152/11",
+          "addressLocality": "Hradec Králové",
+          "postalCode": "500 03",
+          "addressCountry": "CZ"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Služby OZDIGITAL",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aplikace a systémy na míru" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Weby na míru" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatizace a experimenty" } }
+        ]
+      },
+      "sameAs": [
+        "https://github.com/oondraa",
+        "https://www.youtube.com/@OZLAB-md",
+        "https://www.instagram.com/ozdigital.md/",
+        "https://www.tiktok.com/@ozlab.s"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ozdigital.pages.dev/#ondrej-zajicek",
+      "name": "Ondřej Zajíček",
+      "givenName": "Ondřej",
+      "familyName": "Zajíček",
+      "alternateName": ["oondraa", "Ondrej Zajicek", "Ondra Zajíček"],
+      "jobTitle": "Zakladatel, vývojář a UI/UX designér",
+      "description": "Zakladatel OZDIGITAL, vývojář a UI/UX designér. Online vystupuje jako oondraa.",
+      "image": "https://ozdigital.pages.dev/assets/team-ondrej.png",
+      "url": "https://ozdigital.pages.dev/#team",
+      "email": "o.zajicek12@gmail.com",
+      "nationality": { "@type": "Country", "name": "Česká republika" },
+      "worksFor": { "@id": "https://ozdigital.pages.dev/#org" },
+      "knowsLanguage": ["cs", "en"],
+      "knowsAbout": ["Vývoj webů", "UI/UX design", "Python", "JavaScript", "HTML", "CSS", "C#", "C++", "Rust", "Node.js", "Linux"],
+      "sameAs": [
+        "https://github.com/oondraa",
+        "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/",
+        "https://oondraa.github.io/OZBEAT/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ozdigital.pages.dev/#adam-bukac",
+      "name": "Adam Bukač",
+      "givenName": "Adam",
+      "familyName": "Bukač",
+      "alternateName": ["Adam Bukac", "AdamBuk"],
+      "jobTitle": "Vývojář a UI/UX designér",
+      "description": "Vývojář a UI/UX designér v OZDIGITAL. Chodí s klienty i na osobní schůzky.",
+      "image": "https://ozdigital.pages.dev/assets/team-adam.jpg",
+      "url": "https://ozdigital.pages.dev/#team",
+      "worksFor": { "@id": "https://ozdigital.pages.dev/#org" },
+      "colleague": [{ "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" }, { "@id": "https://ozdigital.pages.dev/#tomas-dotzauer" }],
+      "sameAs": ["https://github.com/AdamBuk"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ozdigital.pages.dev/#tomas-dotzauer",
+      "name": "Tomáš Dotzauer",
+      "givenName": "Tomáš",
+      "familyName": "Dotzauer",
+      "alternateName": ["Tomas Dotzauer", "Dotzik55"],
+      "jobTitle": "Vývojář a tester",
+      "url": "https://ozdigital.pages.dev/#team",
+      "worksFor": { "@id": "https://ozdigital.pages.dev/#org" },
+      "sameAs": ["https://github.com/Dotzik55"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ozdigital.pages.dev/#website",
+      "name": "OZDIGITAL",
+      "alternateName": "ozdigital.pages.dev",
+      "url": "https://ozdigital.pages.dev/",
+      "inLanguage": ["cs", "en"],
+      "publisher": { "@id": "https://ozdigital.pages.dev/#org" },
+      "creator": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://ozdigital.pages.dev/#webpage",
+      "url": "https://ozdigital.pages.dev/",
+      "name": "Weby a aplikace na míru | OZDIGITAL",
+      "description": "Navrhujeme a programujeme weby, webové aplikace a automatizace na míru. Žádné šablony, cena písemně předem, odpověď do 24 hodin.",
+      "inLanguage": "cs",
+      "isPartOf": { "@id": "https://ozdigital.pages.dev/#website" },
+      "about": { "@id": "https://ozdigital.pages.dev/#org" },
+      "author": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+      "mentions": [
+        { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+        { "@id": "https://ozdigital.pages.dev/#adam-bukac" },
+        { "@id": "https://ozdigital.pages.dev/#tomas-dotzauer" }
+      ],
+      "primaryImageOfPage": "https://ozdigital.pages.dev/assets/og-ozdigital.png",
+      "dateModified": "2026-10-20"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ozdigital.pages.dev/#faq",
+      "url": "https://ozdigital.pages.dev/#faq",
+      "inLanguage": "cs",
+      "isPartOf": { "@id": "https://ozdigital.pages.dev/#webpage" },
+      "mainEntity": [
+        { "@type": "Question", "name": "Kolik to stojí?", "acceptedAnswer": { "@type": "Answer", "text": "Ceník nemáme, protože žádné dva projekty nejsou stejné. Cenu stanovíme po prvním rozhovoru podle toho, co potřebujete, a dostanete ji písemně ještě před začátkem." } },
+        { "@type": "Question", "name": "Jak dlouho to trvá?", "acceptedAnswer": { "@type": "Answer", "text": "Záleží na rozsahu. Termín domluvíme předem, takže ho znáte dřív, než začneme." } },
+        { "@type": "Question", "name": "Co od vás budeme potřebovat?", "acceptedAnswer": { "@type": "Answer", "text": "Hlavně nápad a chvíli času na rozhovor. Podklady, které už máte (logo, fotky, texty), se hodí, o zbytek se postaráme." } },
+        { "@type": "Question", "name": "Budu si to moct upravovat sám?", "acceptedAnswer": { "@type": "Answer", "text": "Ano. Podle projektu vám předáme editor, nebo vám ukážeme, jak na to. A když se s tím nechcete zabývat, postaráme se o to za vás." } },
+        { "@type": "Question", "name": "Komu to pak patří?", "acceptedAnswer": { "@type": "Answer", "text": "Vám. Doména i hotové dílo jsou vaše. Jestli to budete provozovat sami, nebo se o to postaráme my, domluvíme podle projektu." } },
+        { "@type": "Question", "name": "S kým vlastně jednám?", "acceptedAnswer": { "@type": "Answer", "text": "S námi třemi, Ondřejem Zajíčkem, Adamem Bukačem a Tomášem Dotzauerem. Mluvíte přímo s lidmi, kteří váš projekt navrhují a programují. Smluvní stranou je myNEST s.r.o., která podepisuje smlouvu a vystavuje faktury; její úplné údaje najdete v patičce." } }
+      ]
+    }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "OZDIGITAL",
-  "url": "https://ozdigital.pages.dev/",
-  "inLanguage": ["cs", "en"]
 }
 </script>
 

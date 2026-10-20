@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://ozdigital.pages.dev/</loc>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ozdigital.pages.dev/assets/og-ozdigital.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://ozdigital.pages.dev/assets/team-ondrej.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://ozdigital.pages.dev/assets/team-adam.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://ozdigital.pages.dev/lab.html</loc>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://ozdigital.pages.dev/assets/ozbeat-icon.png</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://ozdigital.pages.dev/assets/slw-overview.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://ozdigital.pages.dev/assets/adc-app.png</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://ozdigital.pages.dev/ochrana-osobnich-udaju.html</loc>
+    <lastmod>2026-10-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>

@@ -1,6 +1,7 @@
 # ozdigital.pages.dev
 User-agent: *
 Allow: /
+Disallow: /api/
 
 Sitemap: https://ozdigital.pages.dev/sitemap.xml
 
