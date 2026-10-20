@@ -1,7 +1,0 @@
-.git
-.wrangler
-.dev.vars
-node_modules
-functions
-worker.js
-wrangler.jsonc
