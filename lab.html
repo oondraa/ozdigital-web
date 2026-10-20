@@ -6,8 +6,10 @@
 <title>OZDIGITAL | What else we're working on</title>
 <meta name="description" content="What else OZDIGITAL is working on: our own software projects, including OZBEAT, Spotify Live Wrapped, ADC (Access Date Changer) and an experimental neural network.">
 <meta name="author" content="Ondřej Zajíček (oondraa)">
-<meta name="robots" content="index, follow">
+<meta name="keywords" content="OZDIGITAL, Ondřej Zajíček, oondraa, OZBEAT, Spotify Live Wrapped, Access Date Changer, ADC, music visualizer">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <link rel="canonical" href="https://ozdigital.pages.dev/lab.html">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="OZDIGITAL">
@@ -39,32 +41,82 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ondřej Zajíček",
-  "alternateName": "oondraa",
-  "url": "https://ozdigital.pages.dev/",
-  "sameAs": [
-    "https://github.com/oondraa",
-    "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/",
-    "https://www.youtube.com/@OZLAB-md",
-    "https://www.instagram.com/ozdigital.md/",
-    "https://www.tiktok.com/@ozlab.s"
-  ],
-  "jobTitle": "Founder, OZDIGITAL",
-  "affiliation": {
-    "@type": "Organization",
-    "name": "OZDIGITAL"
-  },
-  "knowsAbout": ["Python", "HTML", "CSS", "JavaScript", "C++", "C#", "Lua", "Node.js", "Linux"]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "OZDIGITAL",
-  "url": "https://ozdigital.pages.dev/",
-  "inLanguage": ["en", "cs"]
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://ozdigital.pages.dev/#ondrej-zajicek",
+      "name": "Ondřej Zajíček",
+      "alternateName": ["oondraa", "Ondrej Zajicek"],
+      "url": "https://ozdigital.pages.dev/#team",
+      "image": "https://ozdigital.pages.dev/assets/team-ondrej.png",
+      "jobTitle": "Founder, OZDIGITAL",
+      "worksFor": { "@id": "https://ozdigital.pages.dev/#org" },
+      "knowsAbout": ["Python", "HTML", "CSS", "JavaScript", "C++", "C#", "Rust", "Lua", "Node.js", "Linux"],
+      "sameAs": [
+        "https://github.com/oondraa",
+        "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/"
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://ozdigital.pages.dev/#org",
+      "name": "OZDIGITAL",
+      "url": "https://ozdigital.pages.dev/",
+      "logo": "https://ozdigital.pages.dev/icon-512.png",
+      "founder": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+      "sameAs": [
+        "https://github.com/oondraa",
+        "https://www.youtube.com/@OZLAB-md",
+        "https://www.instagram.com/ozdigital.md/",
+        "https://www.tiktok.com/@ozlab.s"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ozdigital.pages.dev/#website",
+      "name": "OZDIGITAL",
+      "url": "https://ozdigital.pages.dev/",
+      "inLanguage": ["cs", "en"],
+      "publisher": { "@id": "https://ozdigital.pages.dev/#org" }
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://ozdigital.pages.dev/lab.html#webpage",
+      "url": "https://ozdigital.pages.dev/lab.html",
+      "name": "OZDIGITAL | What else we're working on",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://ozdigital.pages.dev/#website" },
+      "author": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "OZDIGITAL", "item": "https://ozdigital.pages.dev/" },
+          { "@type": "ListItem", "position": 2, "name": "Lab", "item": "https://ozdigital.pages.dev/lab.html" }
+        ]
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "item": {
+            "@type": "SoftwareApplication", "name": "OZBEAT", "operatingSystem": "Windows", "applicationCategory": "MultimediaApplication",
+            "description": "Music visualizer for Windows with cover art, artist photos, line-synced lyrics and audio-reactive visuals.",
+            "url": "https://oondraa.github.io/OZBEAT/", "image": "https://ozdigital.pages.dev/assets/ozbeat-icon.png",
+            "author": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" },
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" } } },
+          { "@type": "ListItem", "position": 2, "item": {
+            "@type": "SoftwareApplication", "name": "Spotify Live Wrapped", "operatingSystem": "Web", "applicationCategory": "MultimediaApplication",
+            "description": "Self-hosted app that keeps Spotify listening stats (top tracks, artists, genres) up to date year-round.",
+            "url": "https://oondraa.github.io/spotify-live-wrapped/", "image": "https://ozdigital.pages.dev/assets/spotify-live-wrapped-icon.png",
+            "author": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" } } },
+          { "@type": "ListItem", "position": 3, "item": {
+            "@type": "SoftwareApplication", "name": "ADC: Access Date Changer", "operatingSystem": "Windows", "applicationCategory": "UtilitiesApplication",
+            "description": "Windows utility to edit the creation, modification and access timestamps of Microsoft Access database files.",
+            "url": "https://github.com/oondraa/Access-date-changer", "image": "https://ozdigital.pages.dev/assets/adc-app.png",
+            "author": { "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" } } }
+        ]
+      }
+    }
+  ]
 }
 </script>
 
