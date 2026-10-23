@@ -122,6 +122,7 @@
       "knowsLanguage": ["cs", "en"],
       "knowsAbout": ["Vývoj webů", "UI/UX design", "Python", "JavaScript", "HTML", "CSS", "C#", "C++", "Rust", "Node.js", "Linux"],
       "sameAs": [
+        "https://oondraa.pages.dev/",
         "https://github.com/oondraa",
         "https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/",
         "https://oondraa.github.io/OZBEAT/"
@@ -140,7 +141,7 @@
       "url": "https://ozdigital.pages.dev/#team",
       "worksFor": { "@id": "https://ozdigital.pages.dev/#org" },
       "colleague": [{ "@id": "https://ozdigital.pages.dev/#ondrej-zajicek" }, { "@id": "https://ozdigital.pages.dev/#tomas-dotzauer" }],
-      "sameAs": ["https://github.com/AdamBuk"]
+      "sameAs": ["https://adambukac.pages.dev/", "https://github.com/AdamBuk"]
     },
     {
       "@type": "Person",
@@ -610,6 +611,27 @@
   }
   .member .socials a:hover { color: var(--accent); }
 
+  /* Numbered mono eyebrow over each section head, the same device as on oondraa.pages.dev. */
+  .eyebrow {
+    display: flex; align-items: center; gap: 12px; margin: 0 0 18px;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+  }
+  .eyebrow b { font-weight: 500; color: var(--accent); }
+  .eyebrow::after { content: ""; width: 48px; height: 1px; background: currentColor; opacity: 0.4; }
+  .process .eyebrow, .process .eyebrow b { color: rgba(255, 255, 255, 0.85); }
+
+  /* Concrete examples at the foot of each service card, so the tall cards carry some substance. */
+  .svc .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
+  .svc .tags li {
+    height: 30px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px;
+    font-size: 12.5px; letter-spacing: 0.02em; color: var(--text);
+    background: color-mix(in srgb, var(--surface) 70%, transparent); border: 1px solid var(--line);
+  }
+
+  .member .name-link { color: inherit; display: inline-flex; align-items: baseline; gap: 0.2em; }
+  .member .name-link .ph { font-size: 0.6em; color: var(--muted); transition: transform 0.25s var(--ease), color 0.2s var(--ease); }
+  .member .name-link:hover .ph { color: var(--accent); transform: translate(2px, -2px); }
+
   .sec-lede { margin: -24px 0 40px; max-width: 56ch; color: var(--muted); font-size: 18px; line-height: 1.6; text-wrap: pretty; }
 
   /* FAQ: native <details> */
@@ -716,6 +738,7 @@
 
     <section id="services">
       <div class="wrap">
+        <p class="eyebrow mono reveal"><b>01</b><span data-i18n="tEbServices">Služby</span></p>
         <h2 class="sec-head reveal" data-i18n="tSecServices">Co děláme</h2>
         <div class="services">
           <article class="svc svc-apps reveal" style="--i:0">
@@ -723,18 +746,21 @@
             <i class="ph ph-tree-structure ph-big" aria-hidden="true"></i>
             <h3 data-i18n="tSvcApps">Aplikace a systémy</h3>
             <p data-i18n="tSvcAppsT">Od interních nástrojů firmy po samostatné aplikace. Navržené a postavené podle toho, jak to má opravdu fungovat, ne naroubované na něco z krabice.</p>
+            <ul class="tags mono"><li data-i18n="tTg1">Interní systémy</li><li data-i18n="tTg2">Rezervace</li><li data-i18n="tTg3">Dashboardy</li><li data-i18n="tTg4">PWA</li></ul>
           </article>
           <article class="svc svc-web reveal" style="--i:1">
             <i class="ph ph-browsers ph-deco" aria-hidden="true"></i>
             <i class="ph ph-browser ph-big" aria-hidden="true"></i>
             <h3 data-i18n="tSvcWeb">Weby</h3>
             <p data-i18n="tSvcWebT">Weby s vlastní tváří, žádná šablona. Design, texty i vývoj pod jednou střechou a skvělé na mobilu.</p>
+            <ul class="tags mono"><li data-i18n="tTg5">Firemní weby</li><li data-i18n="tTg6">Landing pages</li><li data-i18n="tTg7">SEO</li></ul>
           </article>
           <article class="svc svc-tools reveal" style="--i:2">
             <i class="ph ph-gear-six ph-deco" aria-hidden="true"></i>
             <i class="ph ph-wrench ph-big" aria-hidden="true"></i>
             <h3 data-i18n="tSvcTools">Automatizace a experimenty</h3>
             <p data-i18n="tSvcToolsT">Co se pořád dokola dělá ručně, to naučíme počítač. A když to ještě nikdo nepostavil, rádi to zkusíme.</p>
+            <ul class="tags mono"><li data-i18n="tTg8">Napojení API</li><li data-i18n="tTg9">Skripty</li><li data-i18n="tTg10">Prototypy</li></ul>
           </article>
         </div>
       </div>
@@ -743,7 +769,10 @@
     <section id="process" class="process">
       <div class="wrap">
         <div class="process-head">
-          <h2 class="sec-head reveal" data-i18n="tSecProcess">Jak pracujeme</h2>
+          <div>
+            <p class="eyebrow mono reveal"><b>02</b><span data-i18n="tEbProcess">Proces</span></p>
+            <h2 class="sec-head reveal" data-i18n="tSecProcess">Jak pracujeme</h2>
+          </div>
           <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
         </div>
         <ol class="steps">
@@ -773,17 +802,19 @@
 
     <section id="team">
       <div class="wrap">
+        <p class="eyebrow mono reveal"><b>03</b><span data-i18n="tEbTeam">Tým</span></p>
         <h2 class="sec-head reveal" data-i18n="tSecTeam">Kdo za tím stojí</h2>
         <p class="sec-lede reveal" data-i18n="tTeamLede">Jsme tři. Nemáme obchodníky ani projektové manažery: mluvíte přímo s lidmi, kteří váš projekt navrhují a programují.</p>
         <div class="team">
           <article class="member reveal" style="--i:0">
             <div class="avatar"><img src="/assets/team-ondrej.png" alt="Ondřej Zajíček, zakladatel OZDIGITAL" data-i18n-alt="tAltOndrej" width="152" height="152" loading="lazy"></div>
             <div>
-              <h3>Ondřej Zajíček</h3>
+              <h3><a class="name-link" href="https://oondraa.pages.dev/" target="_blank" rel="noopener">Ondřej Zajíček<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></h3>
               <div class="roles"><span class="role" data-i18n="tRoleLead">Zakladatel</span><span class="role" data-i18n="tRoleDev">Vývojář</span><span class="role" data-i18n="tRoleUx">UI/UX designér</span></div>
             </div>
             <p data-i18n="tM1">Založil OZDIGITAL a je vaším hlavním kontaktem. Navrhuje, programuje a je s vámi v kontaktu od první zprávy až po spuštění.</p>
             <div class="socials">
+              <a href="https://oondraa.pages.dev/" target="_blank" rel="noopener" aria-label="Web: oondraa.pages.dev"><i class="ph ph-globe-simple" aria-hidden="true"></i></a>
               <a href="https://github.com/oondraa" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
               <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph ph-linkedin-logo" aria-hidden="true"></i></a>
             </div>
@@ -791,11 +822,12 @@
           <article class="member reveal" style="--i:1">
             <div class="avatar"><img src="/assets/team-adam.jpg" alt="Adam Bukač, vývojář OZDIGITAL" data-i18n-alt="tAltAdam" width="152" height="152" loading="lazy"></div>
             <div>
-              <h3>Adam Bukač</h3>
+              <h3><a class="name-link" href="https://adambukac.pages.dev/" target="_blank" rel="noopener">Adam Bukač<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></h3>
               <div class="roles"><span class="role" data-i18n="tRoleDev">Vývojář</span><span class="role" data-i18n="tRoleUx">UI/UX designér</span></div>
             </div>
             <p data-i18n="tM2">Navrhuje rozhraní a programuje. Chodí s námi i na schůzky s klienty, takže se s ním potkáte osobně.</p>
             <div class="socials">
+              <a href="https://adambukac.pages.dev/" target="_blank" rel="noopener" aria-label="Web: adambukac.pages.dev"><i class="ph ph-globe-simple" aria-hidden="true"></i></a>
               <a href="https://github.com/AdamBuk" target="_blank" rel="noopener" aria-label="GitHub"><i class="ph ph-github-logo" aria-hidden="true"></i></a>
             </div>
           </article>
@@ -816,6 +848,7 @@
 
     <section id="faq">
       <div class="wrap">
+        <p class="eyebrow mono reveal"><b>04</b><span data-i18n="tEbFaq">FAQ</span></p>
         <h2 class="sec-head reveal" data-i18n="tSecFaq">Časté otázky</h2>
         <div class="faq reveal">
           <details>
@@ -849,6 +882,7 @@
     <section id="connect">
       <div class="wrap connect">
         <div class="reveal">
+          <p class="eyebrow mono"><b>05</b><span data-i18n="tEbConnect">Kontakt</span></p>
           <h2 data-i18n="tFreeTitle">Máte nápad?</h2>
           <p class="lede" data-i18n="tFree">Napište pár vět o tom, co byste chtěli vytvořit. Do 24 hodin se ozveme a probereme, jak na to.</p>
           <div class="ctas">
@@ -956,7 +990,11 @@
     tReg: "registered with the Regional Court in Hradec Králové, section C, file 31352",
     tPrivacy: "Privacy policy",
     tAltOndrej: "Ondřej Zajíček, founder of OZDIGITAL",
-    tAltAdam: "Adam Bukač, developer at OZDIGITAL"
+    tAltAdam: "Adam Bukač, developer at OZDIGITAL",
+    tEbServices: "Services", tEbProcess: "Process", tEbTeam: "Team", tEbFaq: "FAQ", tEbConnect: "Contact",
+    tTg1: "Internal systems", tTg2: "Bookings", tTg3: "Dashboards", tTg4: "PWA",
+    tTg5: "Company websites", tTg6: "Landing pages", tTg7: "SEO",
+    tTg8: "API integrations", tTg9: "Scripts", tTg10: "Prototypes"
   };
   var CZ = {
     tNavAbout: "Co děláme", tNavProjects: "Jak pracujeme", tNavConnect: "Kontakt",
@@ -1013,7 +1051,11 @@
     tReg: "zapsaná u Krajského soudu v Hradci Králové, oddíl C, vložka 31352",
     tPrivacy: "Ochrana osobních údajů",
     tAltOndrej: "Ondřej Zajíček, zakladatel OZDIGITAL",
-    tAltAdam: "Adam Bukač, vývojář OZDIGITAL"
+    tAltAdam: "Adam Bukač, vývojář OZDIGITAL",
+    tEbServices: "Služby", tEbProcess: "Proces", tEbTeam: "Tým", tEbFaq: "FAQ", tEbConnect: "Kontakt",
+    tTg1: "Interní systémy", tTg2: "Rezervace", tTg3: "Dashboardy", tTg4: "PWA",
+    tTg5: "Firemní weby", tTg6: "Landing pages", tTg7: "SEO",
+    tTg8: "Napojení API", tTg9: "Skripty", tTg10: "Prototypy"
   };
 
   var langBtn = document.getElementById("lang-toggle");
