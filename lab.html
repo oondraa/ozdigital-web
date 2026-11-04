@@ -586,11 +586,13 @@
 </style>
 <link rel="stylesheet" href="/motion.css">
 <script src="/motion.js" defer></script>
+<link rel="stylesheet" href="/glass.css">
+<script src="/glass.js" defer></script>
 </head>
 <body>
 
   <header class="nav">
-    <div class="wrap">
+    <div class="wrap lg-glass" data-glass>
       <a href="/" class="brand" aria-label="OZDIGITAL"><svg class="mark" viewBox="94 94 172 172" aria-hidden="true"><path d="M187.5 108.9A71.5 71.5 0 1 0 251.1 172.5" fill="none" stroke="currentColor" stroke-width="28.6"/><circle cx="230" cy="129" r="17" fill="#2997FF"/><path d="M157 157H202.5L157 203H202.5" fill="none" stroke="#2997FF" stroke-width="18.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="wm">OZDIGITAL</span></a>
       <nav aria-label="Primary">
         <a href="/#services" data-i18n="tNavAbout">What we do</a>
@@ -712,7 +714,7 @@
 
     <section id="lab-cta" style="padding-top: 0;">
       <div class="wrap">
-        <a href="/" class="btn btn-ghost"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="tLabBack">Back to OZDIGITAL</span></a>
+        <a href="/" class="btn btn-ghost lg-glass" data-glass><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="tLabBack">Back to OZDIGITAL</span></a>
       </div>
     </section>
   </main>
@@ -726,7 +728,7 @@
   </footer>
 
   <dialog id="ozbeat-sheet" aria-labelledby="ozbeat-title">
-    <div class="sheet-head">
+    <div class="sheet-head lg-glass" data-glass>
       <img class="icon" src="assets/ozbeat-icon.png" alt="" width="44" height="44">
       <h2 id="ozbeat-title">OZBEAT</h2>
       <button class="close-btn" type="button" data-close-sheet aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>
@@ -735,7 +737,7 @@
       <p style="margin-top: 0;" data-i18n="tOzbLong">Play music the way you normally do and OZBEAT fills the screen with it: cover art and artist photos as a soft moving background, lyrics synced line by line, and visuals that swell with the sound. Works with Spotify, the browser, any app in the Windows media controls and BluOS speakers. Cover on one screen, lyrics on the other, and it also runs as a screensaver. Written in Rust, nothing to install, free for personal use.</p>
       <div style="display: flex; flex-wrap: wrap; gap: 12px;">
         <a href="https://oondraa.github.io/OZBEAT/" target="_blank" rel="noopener" class="btn btn-primary"><span data-i18n="tOpen">Open project</span><i class="ph ph-arrow-up-right" aria-hidden="true"></i></a>
-        <a href="https://github.com/oondraa/OZBEAT/releases/latest/download/OZBEAT.exe" class="btn btn-ghost"><i class="ph ph-download-simple" aria-hidden="true"></i><span data-i18n="tDownload">Download for Windows</span></a>
+        <a href="https://github.com/oondraa/OZBEAT/releases/latest/download/OZBEAT.exe" class="btn btn-ghost lg-glass" data-glass><i class="ph ph-download-simple" aria-hidden="true"></i><span data-i18n="tDownload">Download for Windows</span></a>
       </div>
       <video data-src="assets/ozbeat-promo.mp4" poster="assets/ozbeat-poster.jpg" controls muted loop playsinline preload="none"></video>
       <img src="assets/ozbeat-yzo.webp" alt="OZBEAT showing cover art and synced lyrics" loading="lazy" width="1600" height="900">
@@ -745,7 +747,7 @@
   </dialog>
 
   <dialog id="slw-sheet" aria-labelledby="slw-title">
-    <div class="sheet-head">
+    <div class="sheet-head lg-glass" data-glass>
       <img class="icon" src="assets/spotify-live-wrapped-icon.png" alt="" width="44" height="44">
       <h2 id="slw-title">Spotify Live Wrapped</h2>
       <button class="close-btn" type="button" data-close-sheet aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>
@@ -761,7 +763,7 @@
   </dialog>
 
   <dialog id="adc-sheet" aria-labelledby="adc-title">
-    <div class="sheet-head">
+    <div class="sheet-head lg-glass" data-glass>
       <div class="icon icon-adc"><i class="ph ph-database" aria-hidden="true"></i></div>
       <h2 id="adc-title">ADC: Access Date Changer</h2>
       <button class="close-btn" type="button" data-close-sheet aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>

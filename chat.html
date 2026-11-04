@@ -142,10 +142,12 @@
   @media (prefers-reduced-motion: reduce) { .bubble { animation: none; } }
   @media (max-width: 767px) { .wrap { padding: 0 16px; } main .wrap { padding-top: 24px; } }
 </style>
+<link rel="stylesheet" href="/glass.css">
+<script src="/glass.js" defer></script>
 </head>
 <body>
 
-  <header class="nav">
+  <header class="nav lg-glass" data-glass>
     <div class="wrap">
       <a class="back" href="index.html"><i class="ph ph-arrow-left" aria-hidden="true"></i><span data-i18n="back">Back</span></a>
       <span class="title" data-i18n="title">Chat with OZDIGITAL</span>

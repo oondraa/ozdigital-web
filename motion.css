@@ -26,6 +26,17 @@ html { scroll-padding-top: 88px; }
   box-shadow: inset 0 0 0 1px var(--line), 0 12px 32px -20px rgba(0, 0, 0, 0.55);
   -webkit-backdrop-filter: blur(16px) saturate(160%); backdrop-filter: blur(16px) saturate(160%);
 }
+/* Liquid glass (glass.js + glass.css): the pill bends what scrolls under it (Chromium; elsewhere frost
+   and the lit rim only). Light frost so the bend shows; the tint follows the page background. */
+.nav .wrap.lg-glass {
+  --lg-blur: 5px;
+  background-color: color-mix(in srgb, var(--bg) 62%, transparent);
+  background-image: var(--lg-rim, none); background-size: 100% 100%;
+  -webkit-backdrop-filter: blur(var(--lg-blur)) var(--lg-filter, saturate(1.5));
+  backdrop-filter: blur(var(--lg-blur)) var(--lg-filter, saturate(1.5));
+}
+/* Once glass.js paints the rim, it draws the edge line too. */
+.nav .wrap.lg-glass[data-rim] { box-shadow: 0 12px 32px -20px rgba(0, 0, 0, 0.55); }
 .brand { font-size: 16px; }
 .nav nav a { font-size: 14px; padding: 8px 10px; }
 .nav nav a:hover { background: none; }
