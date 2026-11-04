@@ -1,0 +1,85 @@
+/* Liquid glass panel for glass.js. Ported from Glisse v0.5.0 (MIT, Kelvin Zhang),
+   https://github.com/0kzh/glisse. Theme follows the site: data-theme on <html>,
+   otherwise the system's light or dark. */
+
+:root {
+  --lg-glass: rgb(255 255 255 / 0.6);
+  --lg-edge: rgb(0 0 0 / 0.08);
+  --lg-drop: rgb(0 0 0 / 0.06);
+  --lg-rim-shine: 0.3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --lg-glass: rgb(40 40 40 / 0.62);
+    --lg-edge: rgb(255 255 255 / 0.08);
+    --lg-drop: transparent;
+    --lg-rim-shine: 0.13;
+  }
+}
+:root[data-theme="dark"] {
+  --lg-glass: rgb(40 40 40 / 0.62);
+  --lg-edge: rgb(255 255 255 / 0.08);
+  --lg-drop: transparent;
+  --lg-rim-shine: 0.13;
+}
+
+/* No position here: the site's own rules keep theirs (sticky bars, the absolute bubble). */
+.lg-glass {
+  background-color: var(--lg-glass);
+  background-image: var(--lg-rim, none);
+  background-size: 100% 100%;
+  background-origin: border-box;
+  -webkit-backdrop-filter: blur(var(--lg-blur, 3px)) var(--lg-filter, saturate(1.5));
+  backdrop-filter: blur(var(--lg-blur, 3px)) var(--lg-filter, saturate(1.5));
+  box-shadow:
+    inset 0 0 0 0.5px var(--lg-edge),
+    0 1px 3px var(--lg-drop);
+}
+
+/* Glass that paints its rim (glass.js) draws its edge line there, under the
+   light, which an inset shadow would cover. */
+.lg-glass[data-rim] {
+  box-shadow: 0 1px 3px var(--lg-drop);
+}
+
+/* ---------- Site components ---------- */
+/* The rim and its edge line replace each component's 1px border once glass.js
+   has painted them ([data-rim]); until then, and without JS, the border stays. */
+
+/* Secondary buttons. */
+.btn-ghost.lg-glass,
+.btn-ghost.lg-glass:hover {
+  background-image: var(--lg-rim, none);
+  background-size: 100% 100%;
+  background-origin: border-box;
+}
+.btn-ghost.lg-glass { background-color: color-mix(in srgb, var(--surface) 55%, transparent); }
+.btn-ghost.lg-glass:hover { background-color: color-mix(in srgb, var(--surface-2) 75%, transparent); }
+.btn-ghost.lg-glass[data-rim] { border-color: transparent; }
+
+/* The hero mascot's speech bubble, over the ink. Its tail is cut to the half
+   outside the bubble, so the two translucent shapes don't overlap. */
+.bubble.lg-glass { background-color: color-mix(in srgb, var(--surface) 60%, transparent); }
+.bubble.lg-glass[data-rim] { border-color: transparent; box-shadow: var(--shadow); }
+.bubble.lg-glass::after {
+  right: -6px;
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+  border-color: var(--lg-edge);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  -webkit-backdrop-filter: blur(var(--lg-blur, 3px)) saturate(1.5);
+  backdrop-filter: blur(var(--lg-blur, 3px)) saturate(1.5);
+}
+@media (max-width: 767px) {
+  .bubble.lg-glass::after { right: auto; left: -6px; }
+}
+
+/* Project sheet headers: what the sheet scrolls passes under them. */
+.sheet-head.lg-glass { --lg-blur: 6px; background-color: color-mix(in srgb, var(--surface) 82%, transparent); }
+.sheet-head.lg-glass[data-rim] { border-bottom-color: transparent; }
+
+/* Full-width top bar (chat): the messages scroll under it. */
+header.nav.lg-glass {
+  --lg-blur: 5px;
+  background-color: color-mix(in srgb, var(--bg) 62%, transparent);
+}
+header.nav.lg-glass[data-rim] { border-bottom-color: transparent; box-shadow: none; }
