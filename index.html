@@ -202,21 +202,6 @@
 }
 </script>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.184.0/build/three.module.js"
-  },
-  "integrity": {
-    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
-    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT"
-  }
-}
-</script>
-<!-- Preload three.js and the mascot in the background. Must stay after the import map. -->
-<link rel="modulepreload" href="https://unpkg.com/three@0.184.0/build/three.module.js" fetchpriority="low">
-<link rel="modulepreload" href="https://unpkg.com/three@0.184.0/build/three.core.js" fetchpriority="low">
-<link rel="modulepreload" href="/mascot.js" fetchpriority="low">
 <script>document.documentElement.classList.add("js");</script>
 <script>
   // Apply saved theme before first paint to avoid a flash.
@@ -229,9 +214,10 @@
 
 <style>
   /* Design read: developer + freelancer portfolio for clients and recruiters,
-     monochrome with one electric-blue accent, Geist + Geist Mono, native CSS.
+     monochrome with one electric-blue accent, Geist, native CSS.
      Dials: DESIGN_VARIANCE 8 / MOTION_INTENSITY 7 / VISUAL_DENSITY 4.
-     Signature: the OZDIGITAL cube mascot (three.js, mascot.js) recurs in hero, process and contact.
+     Signature: the OZDIGITAL dot field (dots.js): dots rise out of a dot grid and morph between the OZ mark,
+     a website, an app and an automation graph in the hero; a globe in process, a chat bubble in contact.
      One deliberate color-block section (process) on the accent fill.
      Radius rule: surfaces and media 16px, icon tiles 12px, color-block section 32px, interactive controls full pill. */
 
@@ -244,18 +230,6 @@
   @font-face {
     font-family: "Geist";
     src: url("/fonts/geist-latin-ext-wght-normal.woff2") format("woff2");
-    font-weight: 100 900; font-display: swap;
-    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-  }
-  @font-face {
-    font-family: "Geist Mono";
-    src: url("/fonts/geist-mono-latin-wght-normal.woff2") format("woff2");
-    font-weight: 100 900; font-display: swap;
-    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-  }
-  @font-face {
-    font-family: "Geist Mono";
-    src: url("/fonts/geist-mono-latin-ext-wght-normal.woff2") format("woff2");
     font-weight: 100 900; font-display: swap;
     unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
   }
@@ -275,6 +249,8 @@
     --shadow: 0 1px 2px rgba(20, 24, 40, 0.06), 0 12px 32px -12px rgba(20, 24, 40, 0.18);
     --nav-bg: rgba(244, 244, 245, 0.78);
     --glow: rgba(23, 96, 240, 0.16);
+    --c-red: #e5484d;
+    --c-green: #2f9e5f;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     --r-surface: 16px;
     --r-tile: 12px;
@@ -295,6 +271,8 @@
       --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -16px rgba(0, 0, 0, 0.7);
       --nav-bg: rgba(11, 11, 13, 0.74);
       --glow: rgba(31, 102, 242, 0.4);
+      --c-red: #ff6369;
+      --c-green: #3dd68c;
       color-scheme: dark;
     }
   }
@@ -312,6 +290,8 @@
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 16px 40px -16px rgba(0, 0, 0, 0.7);
     --nav-bg: rgba(11, 11, 13, 0.74);
     --glow: rgba(31, 102, 242, 0.4);
+    --c-red: #ff6369;
+    --c-green: #3dd68c;
     color-scheme: dark;
   }
 
@@ -334,7 +314,6 @@
   a { color: var(--accent); text-decoration: none; }
   button { font: inherit; color: inherit; }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-  .mono { font-family: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; }
   .wrap { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
   /* ---------- Nav ---------- */
@@ -382,7 +361,7 @@
   .btn-ghost:hover { background: var(--surface-2); }
 
   /* ---------- Hero ---------- */
-  /* Manifesto hero: one giant statement, accent glow from the top edge, orb in the empty lower right. */
+  /* Manifesto hero: one giant statement, accent glow from the top edge, the dot field on the right. */
   .hero {
     position: relative; overflow-x: clip;
     min-height: min(860px, calc(100dvh - 64px)); display: grid; align-items: center; padding: 48px 0 72px;
@@ -392,7 +371,6 @@
     transform: translateX(-50%); pointer-events: none;
     background: radial-gradient(closest-side, var(--glow), transparent);
   }
-  .hero .wrap { position: relative; }
   .hero h1 {
     position: relative; z-index: 1; margin: 0;
     font-size: clamp(52px, 9vw, 128px); line-height: 0.98; font-weight: 650; letter-spacing: -0.05em;
@@ -405,38 +383,22 @@
     margin: 32px 0 0; max-width: 40ch; font-size: 20px; line-height: 1.55; color: var(--muted); text-wrap: pretty;
   }
   .hero .ctas { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-  .orb-hero { position: absolute; right: -2%; bottom: -150px; }
-  .orb-hero .orb { --s: clamp(220px, 22vw, 296px); transform-origin: 72% 28%; transition: transform 0.9s var(--ease); }
-  /* After 6 s on the first screen the hero mascot comes closer and talks (mascot.js toggles the classes). */
-  .orb-hero.is-near { z-index: 2; }
-  .orb-hero.is-near .orb { transform: scale(1.4); }
-  .bubble {
-    position: absolute; right: calc(100% + 20px); top: 34%;
-    padding: 12px 18px; border-radius: var(--r-surface); white-space: nowrap;
-    background: var(--surface); color: var(--text); border: 1px solid var(--line); box-shadow: var(--shadow);
-    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
-    opacity: 0; transform: translate(12px, 6px) scale(0.96); transform-origin: right center;
-    transition: opacity 0.35s ease-out, transform 0.5s var(--ease);
+  /* Dot field (dots.js). The stage spans the whole hero on desktop; its ::before is the dot grid the dots rise
+     out of (22px lattice, dot in the cell centre, the same lattice dots.js snaps to). */
+  .dots-stage { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .dots-stage::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle at 11px 11px, color-mix(in srgb, var(--text) 20%, transparent) 1px, transparent 1.6px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse 40% 58% at 72% 59%, #000 20%, transparent 100%);
+    mask-image: radial-gradient(ellipse 40% 58% at 72% 59%, #000 20%, transparent 100%);
   }
-  .bubble::after {
-    content: ""; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; margin-top: -6px;
-    background: inherit; border-top: 1px solid var(--line); border-right: 1px solid var(--line); transform: rotate(45deg);
-  }
-  .orb-hero.is-talking .bubble { opacity: 1; transform: none; }
-
-  /* Mascot slot. Stays empty until mascot.js has drawn the first frame (no placeholder, nothing flashes),
-     then the character slides in from the side. The slot keeps its size from the start, so nothing shifts. */
-  .orb-wrap { pointer-events: none; }
-  .orb { --s: 200px; --from: 70vw; width: var(--s); aspect-ratio: 1; font-size: calc(var(--s) / 10); }
-  .orb .mascot { width: 100%; height: 100%; display: block; opacity: 0; transform: translateX(var(--from)); }
-  .orb.is-3d .mascot {
-    opacity: 1; transform: none; filter: drop-shadow(0 1.1em 1.2em rgba(0, 0, 0, 0.32));
-    transition: transform 1.3s var(--ease), opacity 0.6s ease-out;
-  }
-  .orb-process .orb.is-3d .mascot { filter: drop-shadow(0 1.1em 1.2em rgba(6, 30, 90, 0.45)); }
+  .dots-cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  /* Single-shape fields in process and contact. */
+  .dots-mini { position: relative; width: var(--s, 200px); aspect-ratio: 1; flex-shrink: 0; }
 
   /* ---------- Sections ---------- */
-  main { overflow-x: clip; } /* the mascots slide in from off-screen */
+  main { overflow-x: clip; }
   section { padding: 96px 0; }
   .sec-head { margin: 0 0 40px; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; font-weight: 650; letter-spacing: -0.03em; }
 
@@ -490,7 +452,7 @@
     position: relative; isolation: isolate; overflow: hidden; min-height: 320px; padding: 28px;
     display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;
     border: 1px solid var(--line); border-radius: var(--r-surface);
-    background: radial-gradient(120% 100% at 100% 0%, color-mix(in srgb, var(--accent-fill) 26%, var(--surface)), var(--surface) 62%);
+    background: var(--surface);
   }
   .svc-apps { grid-row: span 2; min-height: 600px; }
   .svc-apps .ph-deco { font-size: 360px; top: -40px; right: -10px; }
@@ -506,8 +468,7 @@
   }
   .process-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
   .process .sec-head { margin: 0; max-width: 14ch; }
-  .orb-process { flex-shrink: 0; margin: -24px -8px -12px 0; }
-  .orb-process .orb { --s: clamp(140px, 14vw, 200px); }
+  .dots-process { --s: clamp(140px, 14vw, 200px); --dots-base: #fff; --dots-accent: #fff; margin: -24px -8px -12px 0; }
   .steps { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
   .steps li { border-top: 1px solid rgba(255, 255, 255, 0.4); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
   .steps .ph { font-size: 30px; }
@@ -516,8 +477,7 @@
 
   /* Connect */
   .connect-side { display: flex; flex-direction: column; }
-  .orb-connect { align-self: flex-end; margin-bottom: 8px; }
-  .orb-connect .orb { --s: clamp(150px, 15vw, 210px); }
+  .dots-connect { --s: clamp(150px, 15vw, 210px); --dots-base: var(--text); --dots-accent: var(--accent); align-self: flex-end; margin-bottom: 8px; }
   .connect { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
   .connect h2 { margin: 0; font-size: clamp(48px, 7.4vw, 104px); line-height: 0.98; font-weight: 650; letter-spacing: -0.05em; text-wrap: balance; }
   .connect .lede { margin: 24px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 52ch; text-wrap: pretty; }
@@ -577,30 +537,35 @@
   }
 
 
-  /* Team: people cards, monogram tile stands in until there is a photo */
+  /* Team: people cards, monogram tile stands in until there is a photo.
+     Each of us has a colour (--mc): Ondřej blue, which is why OZDIGITAL is blue, Adam red, Tomáš green.
+     It tints the card, the avatar ring, the role chips and the links. */
   .team { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
   .member {
+    --mc: var(--accent);
+    position: relative; overflow: hidden; isolation: isolate;
     display: flex; flex-direction: column; gap: 18px; padding: 40px;
-    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-surface);
+    background: radial-gradient(130% 70% at 0% 0%, color-mix(in srgb, var(--mc) 15%, var(--surface)), var(--surface) 62%);
+    border: 1px solid color-mix(in srgb, var(--mc) 26%, var(--line)); border-radius: var(--r-surface);
     transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
   /* Avatars are often dark logos: a ring + soft lift keeps them off a dark card. */
   .member .avatar {
     width: 152px; height: 152px; border-radius: var(--r-surface); overflow: hidden; flex-shrink: 0;
-    display: grid; place-items: center; background: var(--accent-fill); color: var(--on-accent);
+    display: grid; place-items: center; background: var(--mc); color: #fff;
     font-size: 48px; font-weight: 650; letter-spacing: -0.02em;
-    box-shadow: 0 0 0 1px var(--line), 0 0 0 5px color-mix(in srgb, var(--text) 6%, transparent), 0 14px 32px -12px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 0 0 1px var(--line), 0 0 0 5px color-mix(in srgb, var(--mc) 45%, transparent), 0 14px 32px -12px color-mix(in srgb, var(--mc) 55%, #000);
     transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
   }
   .member .avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .member:hover .avatar { transform: scale(1.03); box-shadow: 0 0 0 1px var(--line), 0 0 0 5px color-mix(in srgb, var(--accent) 35%, transparent), 0 18px 40px -12px rgba(0, 0, 0, 0.6); }
+  .member:hover .avatar { transform: scale(1.03); box-shadow: 0 0 0 1px var(--line), 0 0 0 7px color-mix(in srgb, var(--mc) 60%, transparent), 0 18px 40px -12px color-mix(in srgb, var(--mc) 60%, #000); }
   .member h3 { margin: 8px 0 0; font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; font-weight: 650; letter-spacing: -0.03em; }
   .member .roles { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
   .member .role {
     display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px;
     font-size: 16px; font-weight: 600; letter-spacing: -0.005em; white-space: nowrap;
-    background: color-mix(in srgb, var(--accent-fill) 14%, var(--surface-2)); color: var(--text);
-    border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    background: color-mix(in srgb, var(--mc) 14%, var(--surface-2)); color: var(--text);
+    border: 1px solid color-mix(in srgb, var(--mc) 34%, transparent);
   }
   .member p { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 44ch; text-wrap: pretty; }
   .member .socials { display: flex; gap: 8px; margin-top: auto; padding-top: 6px; }
@@ -609,9 +574,12 @@
     border: 1px solid var(--line); background: var(--surface-2); color: var(--text); font-size: 20px;
     transition: background 0.2s var(--ease), color 0.2s var(--ease);
   }
-  .member .socials a:hover { color: var(--accent); }
+  .member .socials a:hover { color: var(--mc); border-color: color-mix(in srgb, var(--mc) 45%, transparent); }
+  .member-blue { --mc: var(--accent); }
+  .member-red { --mc: var(--c-red); }
+  .member-green { --mc: var(--c-green); }
 
-  /* Numbered mono eyebrow over each section head, the same device as on oondraa.pages.dev. */
+  /* Numbered eyebrow over each section head, the same device as on oondraa.pages.dev. */
   .eyebrow {
     display: flex; align-items: center; gap: 12px; margin: 0 0 18px;
     font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
@@ -620,17 +588,32 @@
   .eyebrow::after { content: ""; width: 48px; height: 1px; background: currentColor; opacity: 0.4; }
   .process .eyebrow, .process .eyebrow b { color: rgba(255, 255, 255, 0.85); }
 
-  /* Concrete examples at the foot of each service card, so the tall cards carry some substance. */
-  .svc .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
-  .svc .tags li {
-    height: 30px; display: inline-flex; align-items: center; padding: 0 12px; border-radius: 999px;
-    font-size: 12.5px; letter-spacing: 0.02em; color: var(--text);
-    background: color-mix(in srgb, var(--surface) 70%, transparent); border: 1px solid var(--line);
+  /* Showcase in the Weby card: our own sites (not client work), filling the card's empty top. */
+  .svc-web { justify-content: flex-start; }
+  .svc-web .shots { margin-bottom: auto; padding-bottom: 28px; }
+  .shots-label { margin: 0 0 12px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .shots-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .shot { display: flex; flex-direction: column; gap: 8px; color: var(--text); min-width: 0; }
+  .shot-img {
+    display: block; aspect-ratio: 2 / 1; overflow: hidden; border-radius: var(--r-tile);
+    border: 1px solid var(--line); background: #000; box-shadow: var(--shadow);
   }
+  .shot-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 0.6s var(--ease); }
+  .shot:hover .shot-img img { transform: scale(1.04); }
+  .shot-name { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .shot-name .ph { color: var(--muted); transition: transform 0.25s var(--ease), color 0.2s var(--ease); }
+  .shot:hover .shot-name .ph { color: var(--accent); transform: translate(2px, -2px); }
+  @media (max-width: 960px) { .svc-web .shots-row { gap: 10px; } }
+  @media (max-width: 767px) {
+    .shots-row { grid-template-columns: minmax(0, 1fr); }
+    .shot { flex-direction: row; align-items: center; gap: 12px; }
+    .shot-img { width: 112px; flex-shrink: 0; }
+  }
+
 
   .member .name-link { color: inherit; display: inline-flex; align-items: baseline; gap: 0.2em; }
   .member .name-link .ph { font-size: 0.6em; color: var(--muted); transition: transform 0.25s var(--ease), color 0.2s var(--ease); }
-  .member .name-link:hover .ph { color: var(--accent); transform: translate(2px, -2px); }
+  .member .name-link:hover .ph { color: var(--mc); transform: translate(2px, -2px); }
 
   .sec-lede { margin: -24px 0 40px; max-width: 56ch; color: var(--muted); font-size: 18px; line-height: 1.6; text-wrap: pretty; }
 
@@ -660,14 +643,13 @@
     .wrap { padding: 0 16px; }
     .hero { min-height: 0; padding: 40px 0 56px; }
     .hero p { font-size: 17px; margin-top: 24px; }
-    .orb-hero { position: relative; right: auto; bottom: auto; width: max-content; margin: -12px 0 16px -16px; }
-    .orb-hero.is-near .orb { transform: none; }
-    .bubble { right: auto; left: calc(100% - 4px); top: 32%; font-size: 14px; padding: 9px 12px; transform-origin: left center; transform: translate(-12px, 6px) scale(0.96); }
-    .bubble::after { right: auto; left: -7px; transform: rotate(-135deg); }
-    .orb-hero .orb { --s: 144px; --from: -70vw; }
-    .orb-process { margin: -16px -12px -8px 0; }
-    .orb-process .orb { --s: 104px; }
-    .orb-connect { display: none; }
+    .dots-stage { position: relative; inset: auto; height: 320px; margin: 16px -16px 0; }
+    .dots-stage::before {
+      -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 20%, transparent 100%);
+      mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 20%, transparent 100%);
+    }
+    .dots-process { --s: 104px; margin: -16px -12px -8px 0; }
+    .dots-connect { display: none; }
     .process { margin: 0 8px; border-radius: 24px; }
     .process .sec-head { max-width: 10ch; }
     .steps { grid-template-columns: minmax(0, 1fr); gap: 28px; }
@@ -704,6 +686,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js" integrity="sha384-FKTX0CNJ8ngN1oGMBReVu7mvjTJyjFiD5etb1NKnYxc+8eFI2O0KWnksTN+oTFcu" crossorigin="anonymous" defer></script>
 <script src="/fx.js" defer></script>
+<script src="/dots.js" defer></script>
 </head>
 <body>
 
@@ -724,13 +707,13 @@
   <main>
     <div class="hero" id="about">
       <div class="wrap">
-        <div class="orb-wrap orb-hero rise" style="--i:1" aria-hidden="true" data-mascot data-approach data-zoom="1.4" data-face=">_" data-tone="white" data-yaw="-0.2"><div class="orb"></div><span class="bubble lg-glass" data-glass data-i18n="tHey">Máte nápad? Pojďme ho postavit.</span></div>
-        <h1 class="rise" style="--i:0"><span data-split data-i18n="tHeroA">Weby a aplikace</span> <em data-split data-i18n="tHeroB">na míru.</em></h1>
-        <p class="rise" style="--i:1" data-i18n="tHeroSub">Jsme tři vývojáři. Navrhujeme a programujeme weby, webové aplikace a automatizace, vždy od nuly a bez šablon.</p>
-        <div class="ctas rise" style="--i:2">
+        <h1 class="rise" style="--i:0"><span data-split data-dots-avoid data-i18n="tHeroA">Weby a aplikace</span> <em data-split data-dots-avoid data-i18n="tHeroB">na míru.</em></h1>
+        <p class="rise" style="--i:1" data-dots-avoid data-i18n="tHeroSub">Jsme tři vývojáři. Navrhujeme a programujeme weby, webové aplikace a automatizace, vždy od nuly a bez šablon.</p>
+        <div class="ctas rise" style="--i:2" data-dots-avoid>
           <a href="chat.html" class="btn btn-primary"><span data-i18n="tStart">Napište nám</span><i class="ph ph-arrow-right" aria-hidden="true"></i></a>
           <a href="#services" class="btn btn-ghost lg-glass" data-glass><span data-i18n="tViewProjects">Co děláme</span><i class="ph ph-arrow-down" aria-hidden="true"></i></a>
         </div>
+        <div class="dots-stage rise" style="--i:2" data-dots="hero" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -740,7 +723,7 @@
 
     <section id="services">
       <div class="wrap">
-        <p class="eyebrow mono reveal"><b>01</b><span data-i18n="tEbServices">Služby</span></p>
+        <p class="eyebrow reveal"><b>01</b><span data-i18n="tEbServices">Služby</span></p>
         <h2 class="sec-head reveal" data-i18n="tSecServices">Co děláme</h2>
         <div class="services">
           <article class="svc svc-apps reveal" style="--i:0">
@@ -748,21 +731,34 @@
             <i class="ph ph-tree-structure ph-big" aria-hidden="true"></i>
             <h3 data-i18n="tSvcApps">Aplikace a systémy</h3>
             <p data-i18n="tSvcAppsT">Od interních nástrojů firmy po samostatné aplikace. Navržené a postavené podle toho, jak to má opravdu fungovat, ne naroubované na něco z krabice.</p>
-            <ul class="tags mono"><li data-i18n="tTg1">Interní systémy</li><li data-i18n="tTg2">Rezervace</li><li data-i18n="tTg3">Dashboardy</li><li data-i18n="tTg4">PWA</li></ul>
           </article>
           <article class="svc svc-web reveal" style="--i:1">
-            <i class="ph ph-browsers ph-deco" aria-hidden="true"></i>
+            <div class="shots">
+              <p class="shots-label" data-i18n="tShots">Ukázky · naše vlastní weby</p>
+              <div class="shots-row">
+                <a class="shot" href="https://oondraa.github.io/OZBEAT/cs/" target="_blank" rel="noopener">
+                  <span class="shot-img"><img src="/assets/shot-ozbeat.webp" alt="Web OZBEAT" data-i18n-alt="tAltShot1" width="784" height="379" loading="lazy"></span>
+                  <span class="shot-name">OZBEAT<i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+                </a>
+                <a class="shot" href="https://adambukac.pages.dev/" target="_blank" rel="noopener">
+                  <span class="shot-img"><img src="/assets/shot-adambukac.webp" alt="Osobní web Adama Bukače" data-i18n-alt="tAltShot2" width="784" height="358" loading="lazy"></span>
+                  <span class="shot-name">adambukac.pages.dev<i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+                </a>
+                <a class="shot" href="https://oondraa.github.io/ClaudeHUD/" target="_blank" rel="noopener">
+                  <span class="shot-img"><img src="/assets/shot-claudehud.webp" alt="Web ClaudeHUD" data-i18n-alt="tAltShot3" width="784" height="358" loading="lazy"></span>
+                  <span class="shot-name">ClaudeHUD<i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
+                </a>
+              </div>
+            </div>
             <i class="ph ph-browser ph-big" aria-hidden="true"></i>
             <h3 data-i18n="tSvcWeb">Weby</h3>
             <p data-i18n="tSvcWebT">Weby s vlastní tváří, žádná šablona. Design, texty i vývoj pod jednou střechou a skvělé na mobilu.</p>
-            <ul class="tags mono"><li data-i18n="tTg5">Firemní weby</li><li data-i18n="tTg6">Landing pages</li><li data-i18n="tTg7">SEO</li></ul>
           </article>
           <article class="svc svc-tools reveal" style="--i:2">
             <i class="ph ph-gear-six ph-deco" aria-hidden="true"></i>
             <i class="ph ph-wrench ph-big" aria-hidden="true"></i>
             <h3 data-i18n="tSvcTools">Automatizace a experimenty</h3>
             <p data-i18n="tSvcToolsT">Co se pořád dokola dělá ručně, to naučíme počítač. A když to ještě nikdo nepostavil, rádi to zkusíme.</p>
-            <ul class="tags mono"><li data-i18n="tTg8">Napojení API</li><li data-i18n="tTg9">Skripty</li><li data-i18n="tTg10">Prototypy</li></ul>
           </article>
         </div>
       </div>
@@ -772,10 +768,10 @@
       <div class="wrap">
         <div class="process-head">
           <div>
-            <p class="eyebrow mono reveal"><b>02</b><span data-i18n="tEbProcess">Proces</span></p>
+            <p class="eyebrow reveal"><b>02</b><span data-i18n="tEbProcess">Proces</span></p>
             <h2 class="sec-head reveal" data-i18n="tSecProcess">Jak pracujeme</h2>
           </div>
-          <div class="orb-wrap orb-process" aria-hidden="true" data-mascot data-face="^_^" data-tone="white" data-yaw="-0.18"><div class="orb"></div></div>
+          <div class="dots-mini dots-process" data-dots="globe" aria-hidden="true"></div>
         </div>
         <ol class="steps">
           <li class="reveal" style="--i:0">
@@ -804,11 +800,11 @@
 
     <section id="team">
       <div class="wrap">
-        <p class="eyebrow mono reveal"><b>03</b><span data-i18n="tEbTeam">Tým</span></p>
+        <p class="eyebrow reveal"><b>03</b><span data-i18n="tEbTeam">Tým</span></p>
         <h2 class="sec-head reveal" data-i18n="tSecTeam">Kdo za tím stojí</h2>
         <p class="sec-lede reveal" data-i18n="tTeamLede">Jsme tři. Nemáme obchodníky ani projektové manažery: mluvíte přímo s lidmi, kteří váš projekt navrhují a programují.</p>
         <div class="team">
-          <article class="member reveal" style="--i:0">
+          <article class="member member-blue reveal" style="--i:0">
             <div class="avatar"><img src="/assets/team-ondrej.png" alt="Ondřej Zajíček, zakladatel OZDIGITAL" data-i18n-alt="tAltOndrej" width="152" height="152" loading="lazy"></div>
             <div>
               <h3><a class="name-link" href="https://oondraa.pages.dev/" target="_blank" rel="noopener">Ondřej Zajíček<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></h3>
@@ -821,7 +817,7 @@
               <a href="https://www.linkedin.com/in/ond%C5%99ej-zaj%C3%AD%C4%8Dek-5605893b8/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ph ph-linkedin-logo" aria-hidden="true"></i></a>
             </div>
           </article>
-          <article class="member reveal" style="--i:1">
+          <article class="member member-red reveal" style="--i:1">
             <div class="avatar"><img src="/assets/team-adam.jpg" alt="Adam Bukač, vývojář OZDIGITAL" data-i18n-alt="tAltAdam" width="152" height="152" loading="lazy"></div>
             <div>
               <h3><a class="name-link" href="https://adambukac.pages.dev/" target="_blank" rel="noopener">Adam Bukač<i class="ph ph-arrow-up-right" aria-hidden="true"></i></a></h3>
@@ -835,7 +831,7 @@
               <a href="https://www.instagram.com/adam.bukac/" target="_blank" rel="noopener" aria-label="Instagram"><i class="ph ph-instagram-logo" aria-hidden="true"></i></a>
             </div>
           </article>
-          <article class="member reveal" style="--i:2">
+          <article class="member member-green reveal" style="--i:2">
             <div class="avatar" aria-hidden="true">TD</div>
             <div>
               <h3>Tomáš Dotzauer</h3>
@@ -852,7 +848,7 @@
 
     <section id="faq">
       <div class="wrap">
-        <p class="eyebrow mono reveal"><b>04</b><span data-i18n="tEbFaq">FAQ</span></p>
+        <p class="eyebrow reveal"><b>04</b><span data-i18n="tEbFaq">FAQ</span></p>
         <h2 class="sec-head reveal" data-i18n="tSecFaq">Časté otázky</h2>
         <div class="faq reveal">
           <details>
@@ -886,7 +882,7 @@
     <section id="connect">
       <div class="wrap connect">
         <div class="reveal">
-          <p class="eyebrow mono"><b>05</b><span data-i18n="tEbConnect">Kontakt</span></p>
+          <p class="eyebrow"><b>05</b><span data-i18n="tEbConnect">Kontakt</span></p>
           <h2 data-i18n="tFreeTitle">Máte nápad?</h2>
           <p class="lede" data-i18n="tFree">Napište pár vět o tom, co byste chtěli vytvořit. Do 24 hodin se ozveme a probereme, jak na to.</p>
           <div class="ctas">
@@ -895,7 +891,7 @@
           </div>
         </div>
         <div class="connect-side">
-        <div class="orb-wrap orb-connect" aria-hidden="true" data-mascot data-face="o_o" data-tone="blue" data-yaw="-0.3"><div class="orb"></div></div>
+        <div class="dots-mini dots-connect" data-dots="chat" aria-hidden="true"></div>
         <div class="links reveal" style="--i:1">
           <a href="https://github.com/oondraa" target="_blank" rel="noopener">
             <i class="ph ph-github-logo ph-logo" aria-hidden="true"></i>
@@ -944,7 +940,7 @@
     tHeroA: "Websites and apps.", tHeroB: "Made to order.",
     tHeroSub: "We're three developers. We design and build websites, web apps and automation, always from scratch and without templates.",
     tViewProjects: "What we do",
-    tStart: "Get in touch", tHey: "Got an idea? Let's make it.",
+    tStart: "Get in touch",
     tAbout3: "OZDIGITAL is our own brand. Contracts and invoicing are handled by", tIco: "Company ID",
     tSecServices: "What we do",
     tSvcApps: "Apps and systems", tSvcAppsT: "From a company's internal tools to standalone apps. Designed and built around how it actually needs to work, not squeezed into something off the shelf.",
@@ -987,6 +983,7 @@
     tGh: "Our code lives here", tLi: "Let's get in touch", tYt: "Watch what we build",
     tIg: "What we're up to", tTt: "Short videos from development",
     tLabLink: "What else we're working on",
+    tShots: "Examples · our own sites", tAltShot1: "OZBEAT website", tAltShot2: "Adam Bukač's personal site", tAltShot3: "ClaudeHUD website",
     tMq1: "Websites", tMq2: "Apps", tMq3: "Systems", tMq4: "Automation", tMq5: "Made to order",
     tRoleDev: "Developer",
     tRoleUx: "UI/UX designer",
@@ -996,16 +993,13 @@
     tAltOndrej: "Ondřej Zajíček, founder of OZDIGITAL",
     tAltAdam: "Adam Bukač, developer at OZDIGITAL",
     tEbServices: "Services", tEbProcess: "Process", tEbTeam: "Team", tEbFaq: "FAQ", tEbConnect: "Contact",
-    tTg1: "Internal systems", tTg2: "Bookings", tTg3: "Dashboards", tTg4: "PWA",
-    tTg5: "Company websites", tTg6: "Landing pages", tTg7: "SEO",
-    tTg8: "API integrations", tTg9: "Scripts", tTg10: "Prototypes"
   };
   var CZ = {
     tNavAbout: "Co děláme", tNavProjects: "Jak pracujeme", tNavConnect: "Kontakt",
     tHeroA: "Weby a aplikace", tHeroB: "na míru.",
     tHeroSub: "Jsme tři vývojáři. Navrhujeme a programujeme weby, webové aplikace a automatizace, vždy od nuly a bez šablon.",
     tViewProjects: "Co děláme",
-    tStart: "Napište nám", tHey: "Máte nápad? Pojďme ho postavit.",
+    tStart: "Napište nám",
     tAbout3: "OZDIGITAL je naše vlastní značka. Smlouvy a fakturaci zajišťuje", tIco: "IČO",
     tSecServices: "Co děláme",
     tSvcApps: "Aplikace a systémy", tSvcAppsT: "Od interních nástrojů firmy po samostatné aplikace. Navržené a postavené podle toho, jak to má opravdu fungovat, ne naroubované na něco z krabice.",
@@ -1057,9 +1051,7 @@
     tAltOndrej: "Ondřej Zajíček, zakladatel OZDIGITAL",
     tAltAdam: "Adam Bukač, vývojář OZDIGITAL",
     tEbServices: "Služby", tEbProcess: "Proces", tEbTeam: "Tým", tEbFaq: "FAQ", tEbConnect: "Kontakt",
-    tTg1: "Interní systémy", tTg2: "Rezervace", tTg3: "Dashboardy", tTg4: "PWA",
-    tTg5: "Firemní weby", tTg6: "Landing pages", tTg7: "SEO",
-    tTg8: "Napojení API", tTg9: "Skripty", tTg10: "Prototypy"
+    tShots: "Ukázky · naše vlastní weby", tAltShot1: "Web OZBEAT", tAltShot2: "Osobní web Adama Bukače", tAltShot3: "Web ClaudeHUD"
   };
 
   var langBtn = document.getElementById("lang-toggle");
@@ -1161,16 +1153,6 @@
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
-
-  // 3D mascot: three.js is preloaded at low priority; the import waits for first paint so it never delays the page.
-  // If WebGL or the import fails, the slots simply stay empty.
-  (function () {
-    var c = navigator.connection;
-    if (c && c.saveData) return;
-    requestAnimationFrame(function () {
-      setTimeout(function () { import("/mascot.js").catch(function (e) { window.__mascotError = String(e); }); }, 0);
-    });
-  })();
 
   document.getElementById("year").textContent = new Date().getFullYear();
 })();

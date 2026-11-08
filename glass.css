@@ -23,7 +23,7 @@
   --lg-rim-shine: 0.13;
 }
 
-/* No position here: the site's own rules keep theirs (sticky bars, the absolute bubble). */
+/* No position here: the site's own rules keep theirs (sticky bars). */
 .lg-glass {
   background-color: var(--lg-glass);
   background-image: var(--lg-rim, none);
@@ -56,22 +56,6 @@
 .btn-ghost.lg-glass { background-color: color-mix(in srgb, var(--surface) 55%, transparent); }
 .btn-ghost.lg-glass:hover { background-color: color-mix(in srgb, var(--surface-2) 75%, transparent); }
 .btn-ghost.lg-glass[data-rim] { border-color: transparent; }
-
-/* The hero mascot's speech bubble, over the ink. Its tail is cut to the half
-   outside the bubble, so the two translucent shapes don't overlap. */
-.bubble.lg-glass { background-color: color-mix(in srgb, var(--surface) 60%, transparent); }
-.bubble.lg-glass[data-rim] { border-color: transparent; box-shadow: var(--shadow); }
-.bubble.lg-glass::after {
-  right: -6px;
-  background: color-mix(in srgb, var(--surface) 60%, transparent);
-  border-color: var(--lg-edge);
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
-  -webkit-backdrop-filter: blur(var(--lg-blur, 3px)) saturate(1.5);
-  backdrop-filter: blur(var(--lg-blur, 3px)) saturate(1.5);
-}
-@media (max-width: 767px) {
-  .bubble.lg-glass::after { right: auto; left: -6px; }
-}
 
 /* Project sheet headers: what the sheet scrolls passes under them. */
 .sheet-head.lg-glass { --lg-blur: 6px; background-color: color-mix(in srgb, var(--surface) 82%, transparent); }
