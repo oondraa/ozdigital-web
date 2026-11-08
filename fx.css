@@ -29,13 +29,3 @@ html.lenis, html.lenis body { height: auto; }
 @media (max-width: 767px) {
   .fx .fx-stack .svc { top: calc(76px + var(--k, 0) * 12px); min-height: min(420px, 62vh); }
 }
-
-/* ---------- Team deck ---------- */
-.fx .fx-deck .member {
-  --fx: 0px; --fy: 0px; --fr: 0deg;
-  translate: var(--fx) var(--fy); rotate: var(--fr);
-  box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.55);
-}
-.fx .fx-deck .member:nth-child(2) { z-index: 2; }
-.js .fx .fx-deck .member.tilt { transition: transform 0.7s var(--ease), box-shadow 0.4s var(--ease); }
-.js .fx .fx-deck .member.tilt.is-hover { transition: transform 0.14s linear, box-shadow 0.4s var(--ease); }
