@@ -13,9 +13,6 @@ html.lenis, html.lenis body { height: auto; }
 .fx .hero h1.rise, .fx-wait .hero h1.rise { animation: none; }
 .fx .split .w > span { animation: none; }
 
-/* ---------- Hero ink canvas, under the copy and the mascot ---------- */
-.hero-fluid { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
-
 /* ---------- Services stack ---------- */
 .fx .fx-stack.services { display: flex; flex-direction: column; gap: 24px; }
 .fx .fx-stack .svc {
@@ -26,10 +23,6 @@ html.lenis, html.lenis body { height: auto; }
   scale: calc(1 - var(--st) * 0.07);
 }
 .fx .fx-stack .svc-apps { grid-row: auto; }
-.svc-shade {
-  position: absolute; inset: 0; z-index: 4; border-radius: inherit; pointer-events: none;
-  background: var(--bg); opacity: calc(var(--st, 0) * 0.55);
-}
 /* Scroll-linked properties must not be eased by the tilt card transitions. */
 .js .fx .fx-stack .svc.tilt { transition: transform 0.7s var(--ease), box-shadow 0.4s var(--ease); }
 .js .fx .fx-stack .svc.tilt.is-hover { transition: transform 0.14s linear, box-shadow 0.4s var(--ease); }

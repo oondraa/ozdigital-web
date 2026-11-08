@@ -120,21 +120,6 @@
 }
 </script>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.184.0/build/three.module.js"
-  },
-  "integrity": {
-    "https://unpkg.com/three@0.184.0/build/three.module.js": "sha384-8FCZ1eVO6it4+pbec2aDtnTrwjWXZLJRC+MAGCIPDgsYnUrl/E0A2YlF8ioMKI/J",
-    "https://unpkg.com/three@0.184.0/build/three.core.js": "sha384-dw2ooPewaEIrAgl6oFDBmmBWCE9oW9LxRGcfwZ0hLvEprzo202wXl7vCYHRlSnOT"
-  }
-}
-</script>
-<!-- Preload three.js and the mascot in the background. Must stay after the import map. -->
-<link rel="modulepreload" href="https://unpkg.com/three@0.184.0/build/three.module.js" fetchpriority="low">
-<link rel="modulepreload" href="https://unpkg.com/three@0.184.0/build/three.core.js" fetchpriority="low">
-<link rel="modulepreload" href="/mascot.js" fetchpriority="low">
 <script>document.documentElement.classList.add("js");</script>
 <script>
   // Apply saved theme before first paint to avoid a flash.
@@ -149,7 +134,6 @@
   /* Design read: developer + freelancer portfolio for clients and recruiters,
      monochrome with one electric-blue accent, Geist + Geist Mono, native CSS.
      Dials: DESIGN_VARIANCE 8 / MOTION_INTENSITY 7 / VISUAL_DENSITY 4.
-     Signature: the OZDIGITAL cube mascot (three.js, mascot.js) recurs in hero, process and contact.
      One deliberate color-block section (process) on the accent fill.
      Radius rule: surfaces and media 16px, icon tiles 12px, color-block section 32px, interactive controls full pill. */
 
@@ -300,7 +284,7 @@
   .btn-ghost:hover { background: var(--surface-2); }
 
   /* ---------- Hero ---------- */
-  /* Manifesto hero: one giant statement, accent glow from the top edge, orb in the empty lower right. */
+  /* Manifesto hero: one giant statement, accent glow from the top edge. */
   .hero {
     position: relative; overflow-x: clip;
     min-height: min(860px, calc(100dvh - 64px)); display: grid; align-items: center; padding: 48px 0 72px;
@@ -323,38 +307,8 @@
     margin: 32px 0 0; max-width: 40ch; font-size: 20px; line-height: 1.55; color: var(--muted); text-wrap: pretty;
   }
   .hero .ctas { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
-  .orb-hero { position: absolute; right: -2%; bottom: -150px; }
-  .orb-hero .orb { --s: clamp(220px, 22vw, 296px); transform-origin: 72% 28%; transition: transform 0.9s var(--ease); }
-  /* After 6 s on the first screen the hero mascot comes closer and talks (mascot.js toggles the classes). */
-  .orb-hero.is-near { z-index: 2; }
-  .orb-hero.is-near .orb { transform: scale(1.4); }
-  .bubble {
-    position: absolute; right: calc(100% + 20px); top: 34%;
-    padding: 12px 18px; border-radius: var(--r-surface); white-space: nowrap;
-    background: var(--surface); color: var(--text); border: 1px solid var(--line); box-shadow: var(--shadow);
-    font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
-    opacity: 0; transform: translate(12px, 6px) scale(0.96); transform-origin: right center;
-    transition: opacity 0.35s ease-out, transform 0.5s var(--ease);
-  }
-  .bubble::after {
-    content: ""; position: absolute; right: -7px; top: 50%; width: 12px; height: 12px; margin-top: -6px;
-    background: inherit; border-top: 1px solid var(--line); border-right: 1px solid var(--line); transform: rotate(45deg);
-  }
-  .orb-hero.is-talking .bubble { opacity: 1; transform: none; }
-
-  /* Mascot slot. Stays empty until mascot.js has drawn the first frame (no placeholder, nothing flashes),
-     then the character slides in from the side. The slot keeps its size from the start, so nothing shifts. */
-  .orb-wrap { pointer-events: none; }
-  .orb { --s: 200px; --from: 70vw; width: var(--s); aspect-ratio: 1; font-size: calc(var(--s) / 10); }
-  .orb .mascot { width: 100%; height: 100%; display: block; opacity: 0; transform: translateX(var(--from)); }
-  .orb.is-3d .mascot {
-    opacity: 1; transform: none; filter: drop-shadow(0 1.1em 1.2em rgba(0, 0, 0, 0.32));
-    transition: transform 1.3s var(--ease), opacity 0.6s ease-out;
-  }
-  .orb-process .orb.is-3d .mascot { filter: drop-shadow(0 1.1em 1.2em rgba(6, 30, 90, 0.45)); }
-
   /* ---------- Sections ---------- */
-  main { overflow-x: clip; } /* the mascots slide in from off-screen */
+  main { overflow-x: clip; }
   section { padding: 96px 0; }
   .sec-head { margin: 0 0 40px; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; font-weight: 650; letter-spacing: -0.03em; }
 
@@ -429,8 +383,6 @@
   }
   .process-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
   .process .sec-head { margin: 0; max-width: 14ch; }
-  .orb-process { flex-shrink: 0; margin: -24px -8px -12px 0; }
-  .orb-process .orb { --s: clamp(140px, 14vw, 200px); }
   .steps { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; }
   .steps li { border-top: 1px solid rgba(255, 255, 255, 0.4); padding-top: 24px; display: flex; flex-direction: column; gap: 10px; }
   .steps .ph { font-size: 30px; }
@@ -439,8 +391,6 @@
 
   /* Connect */
   .connect-side { display: flex; flex-direction: column; }
-  .orb-connect { align-self: flex-end; margin-bottom: 8px; }
-  .orb-connect .orb { --s: clamp(150px, 15vw, 210px); }
   .connect { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: end; }
   .connect h2 { margin: 0; font-size: clamp(48px, 7.4vw, 104px); line-height: 0.98; font-weight: 650; letter-spacing: -0.05em; text-wrap: balance; }
   .connect .lede { margin: 24px 0 0; color: var(--muted); font-size: 18px; line-height: 1.6; max-width: 52ch; text-wrap: pretty; }
@@ -557,14 +507,6 @@
     .wrap { padding: 0 16px; }
     .hero { min-height: 0; padding: 40px 0 56px; }
     .hero p { font-size: 17px; margin-top: 24px; }
-    .orb-hero { position: relative; right: auto; bottom: auto; width: max-content; margin: -12px 0 16px -16px; }
-    .orb-hero.is-near .orb { transform: none; }
-    .bubble { right: auto; left: calc(100% - 4px); top: 32%; font-size: 14px; padding: 9px 12px; transform-origin: left center; transform: translate(-12px, 6px) scale(0.96); }
-    .bubble::after { right: auto; left: -7px; transform: rotate(-135deg); }
-    .orb-hero .orb { --s: 144px; --from: -70vw; }
-    .orb-process { margin: -16px -12px -8px 0; }
-    .orb-process .orb { --s: 104px; }
-    .orb-connect { display: none; }
     .process { margin: 0 8px; border-radius: 24px; }
     .process .sec-head { max-width: 10ch; }
     .steps { grid-template-columns: minmax(0, 1fr); gap: 28px; }
@@ -930,16 +872,6 @@
   } else {
     document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
   }
-
-  // 3D mascot: three.js is preloaded at low priority; the import waits for first paint so it never delays the page.
-  // If WebGL or the import fails, the slots simply stay empty.
-  (function () {
-    var c = navigator.connection;
-    if (c && c.saveData) return;
-    requestAnimationFrame(function () {
-      setTimeout(function () { import("/mascot.js").catch(function (e) { window.__mascotError = String(e); }); }, 0);
-    });
-  })();
 
   document.getElementById("year").textContent = new Date().getFullYear();
 })();

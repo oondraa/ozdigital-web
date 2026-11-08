@@ -4,8 +4,6 @@
    Reveals use the individual `translate` / `scale` properties, so `transform` stays free for the tilt.
    Everything that moves on its own sits behind prefers-reduced-motion: no-preference. */
 
-@property --gx { syntax: "<percentage>"; inherits: false; initial-value: 100%; }
-@property --gy { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
 
 :root { interpolate-size: allow-keywords; }
 .ph-deco, .work > .ph, .steps .ph, .svc .ph-big, .btn .ph, .faq summary .ph { display: inline-block; }
@@ -64,20 +62,16 @@ html { scroll-padding-top: 88px; }
   transform-origin: 0 50%; transform: scaleX(var(--sp, 0));
 }
 
-/* ---------- Tilt cards: 3D tilt, cursor spotlight and a light that runs along the border ---------- */
+/* ---------- Tilt cards: 3D tilt and a light that runs along the border ---------- */
 .tilt {
   --rx: 0deg; --ry: 0deg; --lift: 0px; --mx: 50%; --my: 50%; --px: 0; --py: 0;
   position: relative;
   transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lift));
 }
 .tilt.is-hover { --lift: -6px; box-shadow: var(--shadow); }
-.tilt::before, .tilt::after {
+.tilt::before {
   content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
   opacity: 0; transition: opacity 0.45s var(--ease);
-}
-.tilt::after {
-  z-index: 2;
-  background: radial-gradient(460px circle at var(--mx) var(--my), color-mix(in srgb, var(--accent) 14%, transparent), transparent 62%);
 }
 .tilt::before {
   z-index: 3; padding: 1px;
@@ -85,8 +79,7 @@ html { scroll-padding-top: 88px; }
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude;
 }
-.tilt.is-hover::before, .tilt.is-hover::after { opacity: 1; }
-.svc.tilt::after { z-index: -1; }
+.tilt.is-hover::before { opacity: 1; }
 
 /* ---------- Reveal ---------- */
 @media (prefers-reduced-motion: no-preference) {
@@ -171,17 +164,9 @@ html { scroll-padding-top: 88px; }
 @keyframes spin { to { rotate: 360deg; } }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(-5deg); } }
 @keyframes bobSmall { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
-@keyframes svcGlow {
-  0%   { --gx: 100%; --gy: 0%; }
-  50%  { --gx: 60%;  --gy: 30%; }
-  100% { --gx: 0%;   --gy: 10%; }
-}
 @keyframes redactScan { from { background-position: 100% 0; } to { background-position: -100% 0; } }
 @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-fill) 55%, transparent); } 100% { box-shadow: 0 0 0 12px transparent; } }
 
-.svc {
-  background: radial-gradient(120% 100% at var(--gx) var(--gy), color-mix(in srgb, var(--accent-fill) 26%, var(--surface)), var(--surface) 62%);
-}
 .svc .ph-deco { translate: calc(var(--px) * -28px) calc(var(--py) * -28px); transition: translate 0.8s var(--ease); }
 .svc .ph-big { translate: calc(var(--px) * 10px) calc(var(--py) * 10px); transition: translate 0.6s var(--ease), scale 0.4s var(--ease); }
 .svc.is-hover .ph-big { scale: 1.15; }
@@ -240,9 +225,6 @@ html { scroll-padding-top: 88px; }
 .process { scale: var(--ps, 1); border-radius: var(--pr, 32px); }
 
 @media (prefers-reduced-motion: no-preference) {
-  .svc { animation: svcGlow 14s ease-in-out infinite alternate; }
-  .svc:nth-child(2) { animation-delay: -5s; }
-  .svc:nth-child(3) { animation-delay: -9s; }
   .svc-apps .ph-deco, .svc-web .ph-deco { animation: bob 7s ease-in-out infinite; }
   .svc-web .ph-deco { animation-delay: -3s; }
   .svc-tools .ph-deco { animation: spin 26s linear infinite; }
