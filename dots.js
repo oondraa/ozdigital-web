@@ -180,6 +180,16 @@
         var h = bump(o.y - Math.sin(T * 0.9) * 0.95, 0.14); o.a = 0.5 + h * 0.5; o.s += h * 0.5;
       } };
     },
+    // Team: three dotted discs in the team colours (o.tint 0 blue, 1 red, 2 green) circling the centre, flat.
+    trio: function (n) {
+      var b = new Builder();
+      [0, 1, 2].forEach(function (k) { b.disc(0, 0, 0.21, { g: k, dz: 0 }); });
+      return { d: b.build(n, 71), sway: 0.0001, anim: function (o, T) {
+        var a = T * 1.3 + o.g * PI * 2 / 3;
+        o.x += Math.cos(a) * 0.25; o.y += Math.sin(a) * 0.25; o.z = 0;
+        o.a = 0.95; o.s = 1.05; o.tint = o.g;
+      } };
+    },
     // Contact: a speech bubble, three dots typing.
     chat: function (n) {
       var b = new Builder(), i;
@@ -193,10 +203,11 @@
   };
 
   // ---------- GL ----------
-  var VS = "attribute vec2 aP; attribute vec3 aA; uniform vec2 uRes; uniform float uDpr; varying float vA; varying float vH;\n" +
-    "void main() { vA = aA.y; vH = aA.z; gl_PointSize = aA.x * uDpr; vec2 c = aP / uRes * 2.0 - 1.0; gl_Position = vec4(c.x, -c.y, 0.0, 1.0); }";
-  var FS = "precision mediump float; uniform vec3 uBase; uniform vec3 uAcc; varying float vA; varying float vH;\n" +
-    "void main() { float d = length(gl_PointCoord - 0.5); float a = vA * (1.0 - smoothstep(0.3, 0.5, d)); if (a < 0.004) discard; gl_FragColor = vec4(mix(uBase, uAcc, vH) * a, a); }";
+  // Per point: position (css px), size + alpha, colour (mixed on the CPU, so a dot can carry a team colour).
+  var VS = "attribute vec2 aP; attribute vec2 aS; attribute vec3 aC; uniform vec2 uRes; uniform float uDpr; varying float vA; varying vec3 vC;\n" +
+    "void main() { vA = aS.y; vC = aC; gl_PointSize = aS.x * uDpr; vec2 c = aP / uRes * 2.0 - 1.0; gl_Position = vec4(c.x, -c.y, 0.0, 1.0); }";
+  var FS = "precision mediump float; varying float vA; varying vec3 vC;\n" +
+    "void main() { float d = length(gl_PointCoord - 0.5); float a = vA * (1.0 - smoothstep(0.3, 0.5, d)); if (a < 0.004) discard; gl_FragColor = vec4(vC * a, a); }";
 
   var probe = document.createElement("canvas").getContext("2d");
   function parseColor(str, fb) {
@@ -209,8 +220,8 @@
   }
 
   function Field(host) {
-    var kind = host.getAttribute("data-dots"), isHero = kind === "hero";
-    var seq = isHero ? ["logo", "web", "app", "flow"] : [kind];
+    var kind = host.getAttribute("data-dots"), isHero = kind === "hero", isTeam = kind === "team";
+    var seq = isHero ? ["logo", "web", "app", "flow"] : isTeam ? ["logo", "trio"] : [kind];
     if (!SHAPES[seq[0]]) return;
     var cv = document.createElement("canvas");
     cv.className = "dots-cv"; cv.setAttribute("aria-hidden", "true");
@@ -224,19 +235,26 @@
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) { host.removeChild(cv); return; }
     gl.useProgram(prog);
-    var U = {}; ["uRes", "uDpr", "uBase", "uAcc"].forEach(function (k) { U[k] = gl.getUniformLocation(prog, k); });
-    var aP = gl.getAttribLocation(prog, "aP"), aA = gl.getAttribLocation(prog, "aA");
+    var U = {}; ["uRes", "uDpr"].forEach(function (k) { U[k] = gl.getUniformLocation(prog, k); });
+    var aP = gl.getAttribLocation(prog, "aP"), aS = gl.getAttribLocation(prog, "aS"), aC = gl.getAttribLocation(prog, "aC");
     var buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.enableVertexAttribArray(aP); gl.enableVertexAttribArray(aA);
-    gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 20, 0);
-    gl.vertexAttribPointer(aA, 3, gl.FLOAT, false, 20, 8);
+    gl.enableVertexAttribArray(aP); gl.enableVertexAttribArray(aS); gl.enableVertexAttribArray(aC);
+    gl.vertexAttribPointer(aP, 2, gl.FLOAT, false, 28, 0);
+    gl.vertexAttribPointer(aS, 2, gl.FLOAT, false, 28, 8);
+    gl.vertexAttribPointer(aC, 3, gl.FLOAT, false, 28, 16);
     gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.clearColor(0, 0, 0, 0);
 
-    var n = isHero ? (mobileMQ.matches ? 1500 : 2600) : 900;
+    var n = isHero ? (mobileMQ.matches ? 1500 : 2600) : isTeam ? (mobileMQ.matches ? 1400 : 2400) : 900;
     var shapes = seq.map(function (k) { return SHAPES[k](n); });
-    var out = new Float32Array(n * 5);
+    if (isTeam) {
+      // Team scene: the big OZ mark, the three colours, then the mark again, faint, behind the cards.
+      var big = shapes[0];
+      big.sway = 0.12;
+      shapes.push({ d: big.d, sway: 0.12, anim: function (o, T) { big.anim(o, T); o.a *= 0.2; o.hi *= 0.6; } });
+    }
+    var out = new Float32Array(n * 7);
     gl.bufferData(gl.ARRAY_BUFFER, out.byteLength, gl.DYNAMIC_DRAW);
 
     // Per-point randoms: morph delay, swirl, a spot in the core the morph passes through, intro delay.
@@ -249,9 +267,12 @@
     var ox = new Float32Array(n), oy = new Float32Array(n), gx = null, gy = null;
 
     var W = 1, H = 1, dpr = 1, cx = 0, cy = 0, sc = 1, base = [0.07, 0.07, 0.08], acc = [0.09, 0.38, 0.94];
-    var G = 22, GRID_A = isHero ? 0.2 : 0, R_MOUSE = isHero ? 120 : 80, DOT = isHero ? 2.7 : 2.4;
-    var desktopHero = false, avoid = [], avoidEls = [], frameNo = 0;
-    if (isHero) avoidEls = Array.prototype.slice.call(document.querySelectorAll("[data-dots-avoid]"));
+    var pal = [[0.09, 0.38, 0.94], [0.9, 0.28, 0.3], [0.18, 0.62, 0.37]];
+    var G = 22, GRID_A = isHero ? 0.2 : 0, R_MOUSE = isHero || isTeam ? 120 : 80, DOT = isHero || isTeam ? 2.7 : 2.4;
+    var area = isHero ? (host.closest(".hero") || host) : isTeam ? (host.closest("section") || host) : host;
+    var useAvoid = false, avoid = [], frameNo = 0;
+    var avoidEls = Array.prototype.slice.call(area.querySelectorAll("[data-dots-avoid]"));
+    var cards = isTeam ? Array.prototype.slice.call(area.querySelectorAll(".member")) : [], cardOff = [];
 
     function layout() {
       var b = host.getBoundingClientRect();
@@ -259,33 +280,87 @@
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       gl.viewport(0, 0, cv.width, cv.height);
-      desktopHero = isHero && !mobileMQ.matches;
-      if (desktopHero) { cx = W * 0.72; cy = H * 0.59; sc = Math.min(W * 0.18, H * 0.29, 260); }
+      useAvoid = (isHero || isTeam) && !mobileMQ.matches;
+      if (isHero && useAvoid) { cx = W * 0.72; cy = H * 0.59; sc = Math.min(W * 0.18, H * 0.29, 260); }
+      else if (isTeam) { cx = W / 2; cy = H / 2; sc = Math.min(W * 0.3, H * 0.4, 420); }
       else { cx = W / 2; cy = H / 2; sc = Math.min(W, H) * (isHero ? 0.4 : 0.42); }
       gx = null;
       measure();
     }
-    // Tight boxes around the hero copy (per text line), so dots under it fade out.
+    // Tight boxes around the copy (per text line), so dots under it fade out. For the team scene also
+    // where each card sits at rest, measured with its fly-in offset taken off.
     var range = document.createRange();
     function measure() {
       avoid.length = 0;
-      if (!desktopHero) return;
       var b = host.getBoundingClientRect();
-      avoidEls.forEach(function (el) {
+      if (useAvoid) avoidEls.forEach(function (el) {
         range.selectNodeContents(el);
         var rs = range.getClientRects();
         for (var k = 0; k < rs.length; k++) if (rs[k].width > 2) avoid.push(rs[k].left - b.left, rs[k].top - b.top, rs[k].right - b.left, rs[k].bottom - b.top);
       });
+      if (isTeam && flying && !flown) {
+        cardOff = cards.map(function (c) {
+          var t = c.style.translate, s = c.style.scale;
+          c.style.translate = "none"; c.style.scale = "none";
+          var r = c.getBoundingClientRect();
+          c.style.translate = t; c.style.scale = s;
+          return [b.left + cx - (r.left + r.width / 2), b.top + cy - (r.top + r.height / 2)];
+        });
+      }
     }
     function readColors() {
       var cs = getComputedStyle(host);
       base = parseColor(cs.getPropertyValue("--dots-base").trim() || cs.color, base);
       acc = parseColor(cs.getPropertyValue("--dots-accent").trim(), acc);
+      pal = [parseColor(cs.getPropertyValue("--accent").trim(), pal[0]), parseColor(cs.getPropertyValue("--c-red").trim(), pal[1]), parseColor(cs.getPropertyValue("--c-green").trim(), pal[2])];
+    }
+
+    // Team scene: plays once when the section comes into view (wide screens). The mark contracts into the three
+    // colours, the cards fly out of them, the mark comes back faint behind the cards. No pinning, no scroll scrub.
+    var seqT = -1, flying = false, flown = false, FAN = [-6, 0, 6];
+    var wideMQ = window.matchMedia("(min-width: 961px)");
+    if (isTeam && wideMQ.matches && !reduce) {
+      flying = true;
+      cards.forEach(function (c) { c.classList.remove("reveal"); c.style.opacity = "0"; });
+    }
+    function placeCards(e) {
+      cards.forEach(function (c, k) {
+        var o = cardOff[k] || [0, 0];
+        c.style.translate = (o[0] * (1 - e)).toFixed(1) + "px " + (o[1] * (1 - e)).toFixed(1) + "px";
+        c.style.scale = (0.3 + 0.7 * e).toFixed(3);
+        c.style.rotate = (FAN[k % 3] * (1 - e)).toFixed(2) + "deg";
+      });
+    }
+    function flyCards() {
+      flown = true;
+      cards.forEach(function (c, k) {
+        c.style.transition = "translate 0.9s cubic-bezier(0.16, 1, 0.3, 1) " + k * 0.12 + "s, scale 0.9s cubic-bezier(0.16, 1, 0.3, 1) " + k * 0.12 + "s, rotate 0.9s cubic-bezier(0.16, 1, 0.3, 1) " + k * 0.12 + "s, opacity 0.4s ease-out " + k * 0.12 + "s";
+        c.style.opacity = "1";
+      });
+      placeCards(1);
+      setTimeout(function () { cards.forEach(function (c) { c.style.transition = c.style.translate = c.style.scale = c.style.rotate = ""; }); }, 1500);
+    }
+    function teamStep(dt) {
+      if (!isTeam) return;
+      if (!flying) { cur = to = 2; mT = -1; return; }
+      if (seqT < 0) {
+        var r = area.getBoundingClientRect();
+        if (r.top > window.innerHeight * 0.2) { cur = to = 0; mT = -1; return; }
+        seqT = 0; measure(); placeCards(0);
+      }
+      seqT += dt;
+      var t = seqT;
+      // 0-.5 mark | .5-1.6 contracts into the colours | 1.6-2.3 they circle | 2.1 cards fly | 2.4-3.6 mark back, faint
+      if (t < 0.5) { cur = to = 0; mT = -1; }
+      else if (t < 1.6) { cur = 0; to = 1; mT = (t - 0.5) / 1.1; }
+      else if (t < 2.4) { cur = to = 1; mT = -1; }
+      else if (t < 3.6) { cur = 1; to = 2; mT = (t - 2.4) / 1.2; }
+      else { cur = to = 2; mT = -1; }
+      if (t >= 2.1 && !flown) flyCards();
     }
 
     // Pointer: a smoothed position and strength; leaving the area lets the dots settle back.
     var mx = -1e4, my = -1e4, mOn = 0, mAmt = 0, tx = 0, ty = 0, ptx = 0, pty = 0;
-    var area = isHero ? (host.closest(".hero") || host) : host;
     window.addEventListener("pointermove", function (e) {
       var b = cv.getBoundingClientRect();
       mx = e.clientX - b.left; my = e.clientY - b.top;
@@ -303,7 +378,7 @@
     });
 
     // Timeline: hold a shape, then morph to the next. `clock` stops while paused, `wall` never does.
-    var HOLD = 5.4, MORPH = 1.9, cur = 0, to = 0, mT = -1, hold = 0, clock = 0, wall = 0, wake = reduce ? 1 : 0, paused = false, queued = -1;
+    var HOLD = 5.4, MORPH = 1.9, cur = 0, to = 0, mT = -1, hold = 0, clock = 0, wall = 0, wake = reduce || isTeam ? 1 : 0, paused = false, queued = -1;
     var cap = isHero ? document.querySelector("[data-dots-cap]") : null, labels = [], pauseBtn = null;
     if (cap) {
       labels = Array.prototype.slice.call(cap.querySelectorAll("[data-dots-go]"));
@@ -340,6 +415,7 @@
       tx += (ptx - tx) * Math.min(1, dt * 3); ty += (pty - ty) * Math.min(1, dt * 3);
       if (paused) return;
       clock += dt;
+      if (isTeam) { teamStep(dt); return; }
       if (mT >= 0) {
         mT += dt / MORPH;
         if (mT >= 1) { cur = to; mT = -1; hold = 0; if (queued >= 0) { var k = queued; queued = -1; go(k); } }
@@ -350,15 +426,20 @@
       if (labels[to]) labels[to].style.setProperty("--p", mT >= 0 ? 0 : Math.min(1, hold / HOLD).toFixed(3));
     }
 
-    var A = { x: 0, y: 0, z: 0, role: 0, t: 0, g: 0, a: 0, hi: 0, s: 1 }, B = { x: 0, y: 0, z: 0, role: 0, t: 0, g: 0, a: 0, hi: 0, s: 1 };
+    var A = { x: 0, y: 0, z: 0, role: 0, t: 0, g: 0, a: 0, hi: 0, s: 1, tint: -1 }, B = { x: 0, y: 0, z: 0, role: 0, t: 0, g: 0, a: 0, hi: 0, s: 1, tint: -1 };
     function load(o, d, j, shape, T) {
-      o.x = d[j]; o.y = d[j + 1]; o.z = d[j + 2]; o.role = d[j + 3]; o.t = d[j + 4]; o.g = d[j + 5];
+      o.x = d[j]; o.y = d[j + 1]; o.z = d[j + 2]; o.role = d[j + 3]; o.t = d[j + 4]; o.g = d[j + 5]; o.tint = -1;
       o.a = o.role === 0 ? 0.3 : o.role === 1 ? 0.8 : 1; o.hi = o.role === 2 ? 1 : 0; o.s = o.role === 0 ? 0.85 : o.role === 2 ? 1.15 : 1;
       shape.anim(o, T);
     }
+    // A point's own colour: its team colour, or body colour mixed toward the accent by `hi`.
+    function colOf(o, k) {
+      if (o.tint >= 0) return pal[o.tint][k];
+      return base[k] + (acc[k] - base[k]) * o.hi;
+    }
 
     // Spinning shapes turn all the way round; the rest sway. Wrapped so a morph between the two takes the short way.
-    function yawOf(shape, T) { return shape.spin ? wrapd(T * shape.spin / (2 * PI)) * 2 * PI : Math.sin(T * 0.3) * 0.42; }
+    function yawOf(shape, T) { return shape.spin ? wrapd(T * shape.spin / (2 * PI)) * 2 * PI : Math.sin(T * 0.3) * (shape.sway || 0.42); }
 
     function draw() {
       var T = clock, sa = shapes[cur], sb = shapes[to], da = sa.d, db = sb.d, morphing = mT >= 0;
@@ -368,23 +449,30 @@
       var first = !gx; if (first) { gx = new Float32Array(n); gy = new Float32Array(n); }
       var pAge = wall - pulse.t, pOn = pAge >= 0 && pAge < 1.4;
       var nav = avoid.length;
-      if (desktopHero && (++frameNo % 30 === 0)) measure();
+      if (useAvoid && (++frameNo % 30 === 0)) measure();
 
-      for (var i = 0, j = 0, w = 0; i < n; i++, j += 6, w += 5) {
+      for (var i = 0, j = 0, w = 0; i < n; i++, j += 6, w += 7) {
         load(A, da, j, sa, T);
-        var x = A.x, y = A.y, z = A.z, al = A.a, hi = A.hi, s = A.s;
+        var x = A.x, y = A.y, z = A.z, al = A.a, hi = 0, s = A.s;
+        var cr = colOf(A, 0), cg = colOf(A, 1), cb = colOf(A, 2);
         if (morphing) {
           load(B, db, j, sb, T);
-          var mi = clamp(m * 1.35 - rd[i] * 0.35, 0, 1); mi = mi * mi * (3 - 2 * mi);
-          var uu = 1 - mi, c3 = i * 3;
-          x = uu * uu * A.x + 2 * uu * mi * core[c3] + mi * mi * B.x;
-          y = uu * uu * A.y + 2 * uu * mi * core[c3 + 1] + mi * mi * B.y;
-          z = uu * uu * A.z + 2 * uu * mi * core[c3 + 2] + mi * mi * B.z;
-          var tw = Math.sin(mi * PI), sw = tw * tw * (2.2 + 2.2 * rz[i]), cs = Math.cos(sw), sn = Math.sin(sw);
-          var nx = cs * x + sn * z; z = cs * z - sn * x; x = nx;
-          var ex = 1 + 0.16 * Math.sin(Math.max(0, mi - 0.5) * 2 * PI); x *= ex; y *= ex; z *= ex;
-          var fl = tw * tw;
-          al = A.a + (B.a - A.a) * mi; hi = Math.max(A.hi + (B.hi - A.hi) * mi, fl * 0.85); s = (A.s + (B.s - A.s) * mi) * (1 + fl * 0.35);
+          var mi = clamp(m * (isTeam ? 1.15 : 1.35) - rd[i] * (isTeam ? 0.15 : 0.35), 0, 1); mi = mi * mi * (3 - 2 * mi);
+          var uu = 1 - mi, c3 = i * 3, tw = Math.sin(mi * PI), fl = 0;
+          if (isTeam) {
+            // Calm: every dot slides straight to its new place.
+            x = A.x + (B.x - A.x) * mi; y = A.y + (B.y - A.y) * mi; z = A.z + (B.z - A.z) * mi;
+          } else {
+            x = uu * uu * A.x + 2 * uu * mi * core[c3] + mi * mi * B.x;
+            y = uu * uu * A.y + 2 * uu * mi * core[c3 + 1] + mi * mi * B.y;
+            z = uu * uu * A.z + 2 * uu * mi * core[c3 + 2] + mi * mi * B.z;
+            var sw = tw * tw * (2.2 + 2.2 * rz[i]), cs = Math.cos(sw), sn = Math.sin(sw);
+            var nx = cs * x + sn * z; z = cs * z - sn * x; x = nx;
+            var ex = 1 + 0.16 * Math.sin(Math.max(0, mi - 0.5) * 2 * PI); x *= ex; y *= ex; z *= ex;
+            fl = tw * tw;
+          }
+          al = A.a + (B.a - A.a) * mi; hi = fl * 0.85; s = (A.s + (B.s - A.s) * mi) * (1 + fl * 0.35);
+          cr += (colOf(B, 0) - cr) * mi; cg += (colOf(B, 1) - cg) * mi; cb += (colOf(B, 2) - cb) * mi;
         }
         // Rotate, then perspective.
         var x1 = cyw * x + syw * z, z1 = -syw * x + cyw * z;
@@ -399,7 +487,8 @@
           if (first) { gx[i] = Math.round((X - G / 2) / G) * G + G / 2; gy[i] = Math.round((Y - G / 2) / G) * G + G / 2; }
           var wk = clamp(wake * 1.6 - wd[i] * 0.6, 0, 1); wk = 1 - Math.pow(1 - wk, 3);
           X = gx[i] + (X - gx[i]) * wk; Y = gy[i] + (Y - gy[i]) * wk;
-          size = 2.2 + (size - 2.2) * wk; al = GRID_A + (al - GRID_A) * wk; hi *= wk;
+          size = 2.2 + (size - 2.2) * wk; al = GRID_A + (al - GRID_A) * wk;
+          cr = base[0] + (cr - base[0]) * wk; cg = base[1] + (cg - base[1]) * wk; cb = base[2] + (cb - base[2]) * wk;
         }
 
         // Cursor pushes the dots away and swirls them around itself; they ease back when it leaves.
@@ -427,11 +516,13 @@
           al *= 1 - 0.9 * hide;
         }
 
-        out[w] = X; out[w + 1] = Y; out[w + 2] = size; out[w + 3] = clamp(al, 0, 1); out[w + 4] = clamp(hi, 0, 1);
+        // `hi` here is only the transient glow (morph flash, cursor, shock wave): it pulls the colour toward the accent.
+        hi = clamp(hi, 0, 1);
+        out[w] = X; out[w + 1] = Y; out[w + 2] = size; out[w + 3] = clamp(al, 0, 1);
+        out[w + 4] = cr + (acc[0] - cr) * hi; out[w + 5] = cg + (acc[1] - cg) * hi; out[w + 6] = cb + (acc[2] - cb) * hi;
       }
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(U.uRes, W, H); gl.uniform1f(U.uDpr, dpr);
-      gl.uniform3fv(U.uBase, base); gl.uniform3fv(U.uAcc, acc);
       gl.bufferSubData(gl.ARRAY_BUFFER, 0, out);
       gl.drawArrays(gl.POINTS, 0, n);
     }
@@ -452,6 +543,7 @@
     if (reduce) clock = 2.2;
 
     readColors(); layout();
+    if (isTeam) teamStep(0);
     new ResizeObserver(function () { layout(); if (reduce || !running) draw(); }).observe(host);
     new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }, { rootMargin: "80px" }).observe(host);
     document.addEventListener("visibilitychange", function () { if (!document.hidden) kick(); });

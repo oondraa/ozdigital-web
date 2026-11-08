@@ -15,6 +15,7 @@
   var lenis = null;
   if (window.Lenis) {
     lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 0.95 });
+    window.__lenis = lenis; // scrollbar.js drags through it
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -162,35 +163,6 @@
           invalidateOnRefresh: true
         }
       });
-    });
-  }
-
-  // ---------- Team: a stacked deck that fans out into the grid (wide screens) ----------
-  var team = document.querySelector(".team");
-  if (team) {
-    var members = Array.prototype.slice.call(team.querySelectorAll(".member"));
-    var fan = [{ r: -7, y: 14 }, { r: 2, y: -8 }, { r: 6.5, y: 18 }];
-    gsap.matchMedia().add("(min-width: 961px)", function () {
-      team.classList.add("fx-deck");
-      members.forEach(function (m) { m.classList.remove("reveal"); });
-      // Offset that puts each card on the middle of the grid.
-      function toCenter(m) {
-        var t = team.getBoundingClientRect(), r = m.getBoundingClientRect();
-        return (t.left + t.width / 2) - (r.left + r.width / 2);
-      }
-      var tl = gsap.timeline({
-        scrollTrigger: { trigger: team, start: "top 92%", end: "top 30%", scrub: 0.8, invalidateOnRefresh: true }
-      });
-      members.forEach(function (m, i) {
-        var f = fan[i % fan.length];
-        tl.fromTo(m,
-          { "--fx": function () { return toCenter(m) + "px"; }, "--fy": f.y + "px", "--fr": f.r + "deg" },
-          { "--fx": "0px", "--fy": "0px", "--fr": "0deg", ease: "power2.inOut" }, 0);
-      });
-      return function () {
-        team.classList.remove("fx-deck");
-        members.forEach(function (m) { m.classList.add("reveal", "in"); });
-      };
     });
   }
 })();
