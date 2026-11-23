@@ -49,45 +49,17 @@
     });
   }
 
-  // ---------- Ink reveal: text condenses out of a blurred blot (blur + alpha threshold) ----------
-  // Safari repaints SVG filters on HTML badly, so it gets a plain blur-in instead of the ink.
-  var SAFARI = /^Apple/.test(navigator.vendor || "");
-  var NS = "http://www.w3.org/2000/svg";
-  var defs = null, uid = 0;
-
+  // ---------- Ink reveal: text sharpens out of a soft blur ----------
+  // A plain CSS blur + opacity on its own compositor layer, so the GPU does the work. (The old SVG
+  // filter version re-rasterised the whole heading on the CPU every frame and made first load stutter.)
   function inkPrep(el) {
     if (el._ink) return el._ink;
     var size = parseFloat(getComputedStyle(el).fontSize) || 40;
-    var ink = { el: el, max: Math.max(10, Math.min(56, size * 0.42)), st: { b: 0, t: 1 }, tl: null, shown: false };
-    if (!SAFARI) {
-      if (!defs) {
-        defs = document.createElementNS(NS, "svg");
-        defs.setAttribute("aria-hidden", "true");
-        defs.style.cssText = "position:absolute;width:0;height:0;overflow:hidden;pointer-events:none";
-        document.body.insertBefore(defs, document.body.firstChild);
-      }
-      ink.id = "ink-" + (++uid);
-      var f = document.createElementNS(NS, "filter");
-      f.setAttribute("id", ink.id);
-      f.setAttribute("x", "-20%"); f.setAttribute("y", "-40%");
-      f.setAttribute("width", "140%"); f.setAttribute("height", "180%");
-      f.setAttribute("color-interpolation-filters", "sRGB");
-      f.innerHTML = '<feGaussianBlur in="SourceGraphic"/><feColorMatrix type="matrix"/>';
-      defs.appendChild(f);
-      ink.blur = f.firstChild; ink.mat = f.lastChild;
-    }
+    var ink = { el: el, max: Math.max(6, Math.min(18, size * 0.14)), tl: null, shown: false };
     el.classList.remove("reveal");
     el.style.opacity = "0";
     el._ink = ink;
     return ink;
-  }
-
-  function inkRender(ink) {
-    // Alpha row: a' = a * gain + off. At t=1 only the dense core of the blur survives (the blot);
-    // at t=0 it is the identity, so the text ends up exactly as authored.
-    var gain = 1 + 19 * ink.st.t, off = -8 * ink.st.t;
-    ink.blur.setAttribute("stdDeviation", ink.st.b.toFixed(2));
-    ink.mat.setAttribute("values", "1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 " + gain.toFixed(3) + " " + off.toFixed(3));
   }
 
   function inkReveal(el, opts) {
@@ -96,21 +68,12 @@
     if (ink.shown) return;
     ink.shown = true;
     if (ink.tl) ink.tl.kill();
-    var dur = opts.duration || (finePointer ? 1.2 : 0.8);
-    if (SAFARI) {
-      ink.tl = gsap.fromTo(el, { opacity: 0, filter: "blur(" + ink.max * 0.5 + "px)" },
-        { opacity: 1, filter: "blur(0px)", duration: dur, delay: opts.delay || 0, ease: "power3.out", clearProps: "filter" });
-      return;
-    }
-    ink.st.b = ink.max; ink.st.t = 1;
-    ink.tl = gsap.timeline({
-      delay: opts.delay || 0,
-      onStart: function () { inkRender(ink); el.style.filter = "url(#" + ink.id + ")"; el.style.opacity = "1"; },
-      onUpdate: function () { inkRender(ink); },
-      onComplete: function () { el.style.filter = ""; ink.tl = null; }
-    });
-    ink.tl.to(ink.st, { b: 0, duration: dur, ease: "power3.out" }, 0);
-    ink.tl.to(ink.st, { t: 0, duration: dur * 0.4, ease: "none" }, dur * 0.6);
+    var dur = opts.duration || (finePointer ? 1.1 : 0.8);
+    el.style.willChange = "filter, opacity, transform";
+    ink.tl = gsap.fromTo(el,
+      { opacity: 0, filter: "blur(" + ink.max + "px)", y: 12 },
+      { opacity: 1, filter: "blur(0px)", y: 0, duration: dur, delay: opts.delay || 0, ease: "power3.out", clearProps: "filter,transform,willChange",
+        onComplete: function () { ink.tl = null; } });
   }
 
   function inkHide(el) {
@@ -118,7 +81,7 @@
     if (!ink || !ink.shown) return;
     if (ink.tl) { ink.tl.kill(); ink.tl = null; }
     ink.shown = false;
-    el.style.filter = "";
+    gsap.set(el, { clearProps: "filter,transform,willChange" });
     el.style.opacity = "0";
   }
 
@@ -137,8 +100,8 @@
   if (heroTitle) {
     inkPrep(heroTitle);
     root.classList.remove("fx-wait");
-    var start = function () { inkReveal(heroTitle, { duration: 1.6, delay: 0.15 }); };
-    if (document.fonts && document.fonts.ready) Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 900); })]).then(start);
+    var start = function () { inkReveal(heroTitle, { duration: 1.2, delay: 0.05 }); };
+    if (document.fonts && document.fonts.ready) Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 500); })]).then(start);
     else start();
   }
   document.querySelectorAll(".sec-head, #connect h2").forEach(inkWatch);

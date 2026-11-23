@@ -17,7 +17,7 @@
 
 The main page has a team section ("Who's behind it") with three people. There are no salespeople or project managers; clients talk directly to the three of them.
 
-- **Ondřej Zajíček** — founder, developer and UI/UX designer. The main point of contact for clients, from the first message to launch. Personal site: `https://oondraa.pages.dev/`, GitHub: `https://github.com/oondraa`.
+- **Ondřej Zajíček** — founder, developer and UI/UX designer. The main point of contact for clients, from the first message to launch. Personal site: `https://oondraa.pages.dev/`, GitHub: `https://github.com/oondraa`, Instagram: `https://www.instagram.com/oondraa.md/`.
 - **Adam Bukač** — developer and UI/UX designer. Also meets clients in person, alongside Ondřej. Personal site: `https://adambukac.pages.dev/`, GitHub: `https://github.com/AdamBuk`.
 - **Tomáš Dotzauer** — developer and tester. GitHub: `https://github.com/Dotzik55`.
 
